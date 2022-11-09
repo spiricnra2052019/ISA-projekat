@@ -1,19 +1,17 @@
 package com.ftn.isa.repository;
 
-import java.util.Collection;
+import java.util.List;
 
-import com.ftn.isa.model.User;
+import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface UserRepository {
+import com.ftn.isa.model.RegisteredUser;
+
+public interface UserRepository extends JpaRepository<RegisteredUser, Long> {
 	
-	Collection<User> findAll();
-
-	User create(User user);
-
-	User findOne(Long id);
+	public RegisteredUser findOneByUsername(String username);
+		
+	public List<RegisteredUser> findAllByLastname(String lastname);
 	
-	User update(User user);
-
-	User delete(Long id);
-
+	public List<RegisteredUser> findByNameAndLastnameAllIgnoringCase(String firstname, String lastname);
+	
 }
