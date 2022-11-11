@@ -3,8 +3,6 @@ package com.ftn.isa.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.data.web.SpringDataWebProperties.Pageable;
-import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
 import com.ftn.isa.model.RegisteredUser;
@@ -37,6 +35,14 @@ public class UserService {
 	
 	public List<RegisteredUser> findByNameAndLastname(String firstName, String lastName) {
 		return userRepository.findByNameAndLastnameAllIgnoringCase(firstName, lastName);
+	}
+	
+	public RegisteredUser loginUser(String email, String password) throws Exception{
+		RegisteredUser registeredUser = userRepository.loginUser(email, password);
+		if(registeredUser == null) {
+			throw new Exception("Invalid login!");
+		}
+		return registeredUser;
 	}
 	
 }

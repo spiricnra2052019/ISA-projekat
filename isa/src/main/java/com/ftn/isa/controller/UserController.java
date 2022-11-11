@@ -8,10 +8,11 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.bind.annotation.RequestBody;
 
+import com.ftn.isa.dto.UserLoginDTO;
 import com.ftn.isa.model.RegisteredUser;
 import com.ftn.isa.service.UserService;
 
@@ -59,6 +60,26 @@ public class UserController {
 		}catch (Exception e) {
 			e.printStackTrace();
 			return new ResponseEntity<RegisteredUser>(savedUser, HttpStatus.CONFLICT);
+		}
+	}
+	
+	
+	@Operation(summary = "Login RegisteredUser", description = "Login RegisteredUser", method = "POST")
+	@ApiResponses(value = {
+			@ApiResponse(responseCode = "200", description = "OK",
+					content = { @Content(mediaType = "application/json", schema = @Schema(implementation = RegisteredUser.class)) }),
+			@ApiResponse(responseCode = "400", description = "Not possible to login user.",
+					content = @Content)
+	})
+	@PostMapping(value = "/login", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<RegisteredUser> validateUser(@RequestBody UserLoginDTO userLoginDTO){
+		RegisteredUser validUser = null;
+		try {
+			validUser = userService.loginUser(userLoginDTO.getEmail(), userLoginDTO.getPassword());
+			return new ResponseEntity<RegisteredUser>(validUser, HttpStatus.OK);
+		}catch (Exception e) {
+			e.printStackTrace();
+			return new ResponseEntity<RegisteredUser>(validUser, HttpStatus.BAD_REQUEST);
 		}
 	}
 	
