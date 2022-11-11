@@ -1,20 +1,55 @@
 package com.ftn.isa.model;
 
+import java.io.Serializable;
 import java.time.LocalDate;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
 import com.ftn.isa.enums.Role;
 
-public class User {
+@Entity
+public class RegisteredUser implements Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 121981367185596048L;
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id", unique=true, nullable = false)
 	private Long id;
+	
+	@Column(name = "name", nullable = false)
 	private String name;
+	
+	@Column(name = "lastname", nullable = true)
 	private String lastname;
+	
+	@Column(name = "username", nullable = false)
 	private String username;
+	
+	@Column(name = "password", nullable = false)
 	private String password;
+	
+	@Column(name = "birthday", nullable = true)
 	private LocalDate birthday;
+	
+	@Enumerated(EnumType.STRING)
+	@Column(name = "role", nullable = false)
 	private Role role;
 	
-	public User(Long id, String name, String lastname, String username, String password, LocalDate birthday, Role role) {
+	public RegisteredUser() {
+		super();
+	}
+	
+	public RegisteredUser(Long id, String name, String lastname, String username, String password, LocalDate birthday, Role role) {
 		super();
 		this.id = id;
 		this.name = name;
