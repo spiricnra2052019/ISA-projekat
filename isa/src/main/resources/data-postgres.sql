@@ -1,3 +1,3 @@
-insert into registered_user (name, lastname, username, password, birthday, role) values ('Pera', 'Peric', 'peraP', 'sifra123', '2000-03-19', 'Administrator');
-insert into registered_user (name, lastname, username, password, birthday, role) values ('Marko', 'Markovic', 'markoM', 'sifra123', '2000-03-19', 'RegisteredUser');
-insert into registered_user (name, lastname, username, password, birthday, role) values ('Mika', 'Mikic', 'mikaM', 'sifra123', '2000-03-19', 'Employee');
+insert into registered_user (name, lastname, username, password, birthday, role, email) values ('Pera', 'Peric', 'peraP', 'sifra123', '2000-03-19', 'Administrator', 'pera@test.com');
+insert into registered_user (name, lastname, username, password, birthday, role, email) values ('Marko', 'Markovic', 'markoM', 'sifra123', '2000-03-19', 'RegisteredUser', 'marko@test.com');
+insert into registered_user (name, lastname, username, password, birthday, role, email) values ('Mika', 'Mikic', 'mikaM', 'sifra123', '2000-03-19', 'Employee', 'mika@test.com');

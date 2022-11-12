@@ -35,6 +35,9 @@ public class RegisteredUser implements Serializable{
 	@Column(name = "username", nullable = false)
 	private String username;
 	
+	@Column(name = "email", nullable = false)
+	private String email;
+	
 	@Column(name = "password", nullable = false)
 	private String password;
 	
@@ -48,17 +51,20 @@ public class RegisteredUser implements Serializable{
 	public RegisteredUser() {
 		super();
 	}
-	
-	public RegisteredUser(Long id, String name, String lastname, String username, String password, LocalDate birthday, Role role) {
+
+	public RegisteredUser(Long id, String name, String lastname, String username, String email, String password,
+			LocalDate birthday, Role role) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.lastname = lastname;
 		this.username = username;
+		this.email = email;
 		this.password = password;
 		this.birthday = birthday;
 		this.role = role;
 	}
+
 
 	public Long getId() {
 		return id;
