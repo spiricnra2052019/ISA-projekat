@@ -15,6 +15,13 @@ public class UserService {
 	@Autowired
 	private UserRepository userRepository;
 	
+	
+	public List<RegisteredUser> searchUsers(String query) {
+	List<RegisteredUser> users = userRepository.searchUsers(query);
+	return users;
+	}
+
+	
 	public RegisteredUser findOne(Long id) {
 		return userRepository.findById(id).orElseGet(null);
 	}
