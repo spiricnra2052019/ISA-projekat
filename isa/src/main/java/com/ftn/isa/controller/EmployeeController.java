@@ -7,6 +7,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -37,5 +39,25 @@ public class EmployeeController {
 	public ResponseEntity<Collection<Employee>> getEmployers() {
 		Collection<Employee> employee = employeeService.findAll();
 		return new ResponseEntity<Collection<Employee>>(employee, HttpStatus.OK);
+	}
+	
+	@Operation(summary = "Create new Employee", description = "Create new Employee", method = "POST")
+	@ApiResponses(value = {
+			@ApiResponse(responseCode = "201", description = "Created",
+					content = { @Content(mediaType = "application/json", schema = @Schema(implementation = Employee.class)) }),
+			@ApiResponse(responseCode = "409", description = "Not possible to create new Employee when given id is not null",
+					content = @Content)
+	})
+	
+	@PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<Employee> createEmployee(@RequestBody Employee employee){
+		Employee savedEmployee = null;
+		try {
+			savedEmployee = employeeService.save(employee);
+			return new ResponseEntity<Employee>(savedEmployee, HttpStatus.CREATED);
+		}catch (Exception e) {
+			e.printStackTrace();
+			return new ResponseEntity<Employee>(savedEmployee, HttpStatus.CONFLICT);
+		}
 	}
 }

@@ -14,7 +14,9 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import com.ftn.isa.model.Administrator;
+import com.ftn.isa.model.Employee;
 import com.ftn.isa.service.AdministratorService;
+import com.ftn.isa.service.EmployeeService;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.ArraySchema;
@@ -30,6 +32,7 @@ public class AdministratorController {
 	
 	@Autowired
 	private AdministratorService administratorService;
+	private EmployeeService employeeService;
 	
 	@Operation(summary = "Get all admins", description = "Get all admins", method="GET")
 	@ApiResponses(value = {
@@ -83,25 +86,4 @@ public class AdministratorController {
 	}
 	*/
 	
-	/*
-	@Operation(summary = "Create new Centers Administrators", description = "Create new Centers Administrators", method = "POST")
-	@ApiResponses(value = {
-			@ApiResponse(responseCode = "201", description = "Created",
-					content = { @Content(mediaType = "application/json", schema = @Schema(implementation = Administrator.class)) }),
-			@ApiResponse(responseCode = "409", description = "Not possible to create new Centers Administrators when given id is not null",
-					content = @Content)
-	})
-	
-	@PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<CenterAdministrator> createCenterAdministrator(@RequestBody CenterAdministrator centerAdmin){
-		CenterAdministrator savedCenterAdmin = null;
-		try {
-			savedCenterAdmin = administratorService.save(centerAdmin);
-			return new ResponseEntity<CenterAdministrator>(savedCenterAdmin, HttpStatus.CREATED);
-		}catch (Exception e) {
-			e.printStackTrace();
-			return new ResponseEntity<CenterAdministrator>(savedCenterAdmin, HttpStatus.CONFLICT);
-		}
-	}
-	*/
 }
