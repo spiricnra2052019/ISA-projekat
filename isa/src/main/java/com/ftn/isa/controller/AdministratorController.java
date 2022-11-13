@@ -51,15 +51,57 @@ public class AdministratorController {
 					content = @Content)
 	})
 	@PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<Administrator> createUser(@RequestBody Administrator administrator){
-		Administrator savedUser = null;
+	public ResponseEntity<Administrator> createAdministrator(@RequestBody Administrator administrator){
+		Administrator savedAdministrator = null;
 		try {
-			savedUser = administratorService.save(administrator);
-			return new ResponseEntity<Administrator>(savedUser, HttpStatus.CREATED);
+			savedAdministrator = administratorService.save(administrator);
+			return new ResponseEntity<Administrator>(savedAdministrator, HttpStatus.CREATED);
 		}catch (Exception e) {
 			e.printStackTrace();
-			return new ResponseEntity<Administrator>(savedUser, HttpStatus.CONFLICT);
+			return new ResponseEntity<Administrator>(savedAdministrator, HttpStatus.CONFLICT);
 		}
 	}
 	
+	/*
+	@Operation(summary = "Create new Centers", description = "Create new Centers", method = "POST")
+	@ApiResponses(value = {
+			@ApiResponse(responseCode = "201", description = "Created",
+					content = { @Content(mediaType = "application/json", schema = @Schema(implementation = Administrator.class)) }),
+			@ApiResponse(responseCode = "409", description = "Not possible to create new Center when given id is not null",
+					content = @Content)
+	})
+	@PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<Center> createCenter(@RequestBody Center center){
+		Center savedCenter = null;
+		try {
+			savedCenter = administratorService.save(center);
+			return new ResponseEntity<Center>(savedCenter, HttpStatus.CREATED);
+		}catch (Exception e) {
+			e.printStackTrace();
+			return new ResponseEntity<Center>(savedCenter, HttpStatus.CONFLICT);
+		}
+	}
+	*/
+	
+	/*
+	@Operation(summary = "Create new Centers Administrators", description = "Create new Centers Administrators", method = "POST")
+	@ApiResponses(value = {
+			@ApiResponse(responseCode = "201", description = "Created",
+					content = { @Content(mediaType = "application/json", schema = @Schema(implementation = Administrator.class)) }),
+			@ApiResponse(responseCode = "409", description = "Not possible to create new Centers Administrators when given id is not null",
+					content = @Content)
+	})
+	
+	@PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<CenterAdministrator> createCenterAdministrator(@RequestBody CenterAdministrator centerAdmin){
+		CenterAdministrator savedCenterAdmin = null;
+		try {
+			savedCenterAdmin = administratorService.save(centerAdmin);
+			return new ResponseEntity<CenterAdministrator>(savedCenterAdmin, HttpStatus.CREATED);
+		}catch (Exception e) {
+			e.printStackTrace();
+			return new ResponseEntity<CenterAdministrator>(savedCenterAdmin, HttpStatus.CONFLICT);
+		}
+	}
+	*/
 }
