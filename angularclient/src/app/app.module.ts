@@ -10,6 +10,9 @@ import { RegisteredUserService } from './registered-user.service';
 import { UserLoginComponent } from './user-login/user-login.component';
 import { BloodCenterListComponent } from './blood-center-list/blood-center-list.component';
 import { QueryFormComponent } from './query-form/query-form.component';
+import { MatTableModule } from '@angular/material/table'
+import { MatSortModule } from '@angular/material/sort';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -24,7 +27,10 @@ import { QueryFormComponent } from './query-form/query-form.component';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    MatSortModule,
+    MatTableModule,
+    BrowserAnimationsModule
   ],
   providers: [RegisteredUserService],
   bootstrap: [AppComponent]
