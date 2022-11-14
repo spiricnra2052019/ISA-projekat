@@ -69,6 +69,7 @@ public class UserController {
 	@GetMapping("/search")
 	public ResponseEntity<List<RegisteredUser>> searchUsers(@RequestParam("query") String query){
 		return ResponseEntity.ok(userService.searchUsers(query));
+	}
 	
 	@Operation(summary = "Login RegisteredUser", description = "Login RegisteredUser", method = "POST")
 	@ApiResponses(value = {
