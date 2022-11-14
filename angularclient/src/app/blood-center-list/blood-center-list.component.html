@@ -1,1 +1,44 @@
-<p>blood-center-list works!</p>
+<table mat-table [dataSource]="centers" matSort (matSortChange)="announceSortChange($event)" class="mat-elevation-z8">
+  <!-- Position Column -->
+  <ng-container matColumnDef="averageRate">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by number">
+      Average rate
+    </th>
+    <td mat-cell *matCellDef="let element"> {{element.averageRate}} </td>
+  </ng-container>
+
+  <!-- Name Column -->
+  <ng-container matColumnDef="description">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by description">
+      Description
+    </th>
+    <td mat-cell *matCellDef="let element"> {{element.description}} </td>
+  </ng-container>
+
+  <!-- Weight Column -->
+  <ng-container matColumnDef="name">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by name">
+      Name
+    </th>
+    <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+  </ng-container>
+
+  <!-- Symbol Column -->
+  <ng-container matColumnDef="address.city">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by city">
+      City
+    </th>
+    <td mat-cell *matCellDef="let element"> {{element.address.city}} </td>
+  </ng-container>
+
+  <!-- Symbol Column -->
+  <ng-container matColumnDef="address.street">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by street">
+      City
+    </th>
+    <td mat-cell *matCellDef="let element"> {{element.address.street}} </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>

@@ -1,1 +1,22 @@
-<p>query-form works!</p>
+<div class="card my-5">
+    <div class="card-body">
+        <form #userForm="ngForm">
+            <div class="row col-12" *ngFor="let query of queries">
+                <h6>{{query.description}}</h6>
+                <div class="form-check mb-4">
+                    <input class="form-check-input" type="radio" name="exampleForm" id="radioExample1" />
+                    <label class="form-check-label" for="radioExample1">
+                        Yes
+                    </label>
+                </div>
+                <div class="form-check mb-4">
+                    <input class="form-check-input" type="radio" name="exampleForm" id="radioExample2" />
+                    <label class="form-check-label" for="radioExample2">
+                        No
+                    </label>
+                </div>
+            </div>
+            <button class="btn btn-info">Submit</button>
+        </form>
+    </div>
+</div>

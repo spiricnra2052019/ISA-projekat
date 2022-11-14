@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { PatientQuery } from '../patient-query';
+import { QueryService } from '../query.service';
 
 @Component({
   selector: 'app-query-form',
@@ -6,10 +8,15 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./query-form.component.css']
 })
 export class QueryFormComponent implements OnInit {
+  queries: PatientQuery[] = [];
 
-  constructor() { }
+
+  constructor(private queryService: QueryService) { }
 
   ngOnInit(): void {
+    this.queryService.findAll().subscribe(data => {
+      this.queries = data;
+    })
   }
 
 }
