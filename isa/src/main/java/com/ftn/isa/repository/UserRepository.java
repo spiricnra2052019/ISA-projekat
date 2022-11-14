@@ -18,8 +18,8 @@ public interface UserRepository extends JpaRepository<RegisteredUser, Long> {
 	public List<RegisteredUser> findByNameAndLastnameAllIgnoringCase(String firstname, String lastname);
 	
 	@Query("SELECT u FROM RegisteredUser u WHERE " +
-			"u.name LIKE CONCAT('%' , :query, '%')" + 
-			"Or u.lastname LIKE CONCAT('%' , :query, '%')")
+			"UPPER(u.name) LIKE CONCAT('%' , :query, '%')" + 
+			"Or UPPER(u.lastname) LIKE CONCAT('%' , :query, '%')")
 	public List<RegisteredUser> searchUsers(String query);
 	
 }
