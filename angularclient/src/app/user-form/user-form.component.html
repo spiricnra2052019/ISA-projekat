@@ -44,23 +44,23 @@
             <ng-template [ngIf]="showAddress">
                 <div class="form-group">
                     <label for="street">Street</label>
-                    <input type="text" [(ngModel)]="user.address.street" class="form-control" id="street"
-                        name="birthday" required #address.street="ngModel">
+                    <input type="text" [(ngModel)]="address.street" class="form-control" id="street" name="birthday"
+                        required #street="ngModel">
                 </div>
                 <div class="form-group">
                     <label for="street-number">StreetNumber</label>
-                    <input type="text" [(ngModel)]="user.address.streetNumber" class="form-control" id="streetNumber"
-                        name="birthday" required #address.streetNumber="ngModel">
+                    <input type="text" [(ngModel)]="address.streetNumber" class="form-control" id="streetNumber"
+                        name="birthday" required #streetNumber="ngModel">
                 </div>
                 <div class="form-group">
                     <label for="city">City</label>
-                    <input type="text" [(ngModel)]="user.address.city" class="form-control" id="city" name="birthday"
-                        required #address.city="ngModel">
+                    <input type="text" [(ngModel)]="address.city" class="form-control" id="city" name="birthday"
+                        required #city="ngModel">
                 </div>
                 <div class="form-group">
                     <label for="country">Country</label>
-                    <input type="text" [(ngModel)]="user.address.country" class="form-control" id="country"
-                        name="birthday" required #address.country="ngModel">
+                    <input type="text" [(ngModel)]="address.country" class="form-control" id="country" name="birthday"
+                        required #country="ngModel">
                 </div>
             </ng-template>
 

@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ftn.isa.dto.UserLoginDTO;
+import com.ftn.isa.enums.Role;
 import com.ftn.isa.model.RegisteredUser;
 import com.ftn.isa.service.UserService;
 
@@ -33,7 +34,7 @@ public class UserController {
 	
 	@Autowired
 	private UserService userService;
-		
+	
 	@Operation(summary = "Get all users", description = "Get all users", method="GET")
 	@ApiResponses(value = {
 			@ApiResponse(responseCode = "200", description = "successful operation",
@@ -56,6 +57,7 @@ public class UserController {
 	@PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<RegisteredUser> createUser(@RequestBody RegisteredUser registeredUser){
 		RegisteredUser savedUser = null;
+		registeredUser.setRole(Role.RegisteredUser);
 		try {
 			savedUser = userService.save(registeredUser);
 			return new ResponseEntity<RegisteredUser>(savedUser, HttpStatus.CREATED);

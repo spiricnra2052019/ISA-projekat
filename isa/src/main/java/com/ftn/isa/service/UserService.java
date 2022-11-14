@@ -5,7 +5,9 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.ftn.isa.model.Address;
 import com.ftn.isa.model.RegisteredUser;
+import com.ftn.isa.repository.AddressRepository;
 import com.ftn.isa.repository.UserRepository;
 
 @Service
@@ -13,6 +15,8 @@ public class UserService {
 	@Autowired
 	private UserRepository userRepository;
 	
+	@Autowired
+	private AddressRepository addressRepository;
 	
 	public List<RegisteredUser> searchUsers(String query) {
 	List<RegisteredUser> users = userRepository.searchUsers(query);
@@ -29,6 +33,10 @@ public class UserService {
 	}
 	
 	public RegisteredUser save(RegisteredUser RegisteredUser) {
+		System.out.println("00000000000000000000000000000000000000000000000000000000");
+		System.out.println(RegisteredUser.getAddress());
+		Address address = addressRepository.save(RegisteredUser.getAddress());
+		RegisteredUser.setAddress(address);
 		return userRepository.save(RegisteredUser);
 	}
 	

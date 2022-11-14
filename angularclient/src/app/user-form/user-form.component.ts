@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Address } from '../address';
 import { RegisteredUser } from '../registered-user';
 import { RegisteredUserService } from '../registered-user.service';
 
@@ -13,15 +14,18 @@ export class UserFormComponent {
   user: RegisteredUser;
   showAddress: boolean;
   confirmPassword: string;
+  address: Address;
 
   constructor(
     private route: ActivatedRoute,
     private router: Router,
     private userService: RegisteredUserService) {
     this.user = new RegisteredUser();
+    this.address = new Address();
   }
   addUser() {
     if (this.confirmPassword === this.user.password) {
+      this.user.address = this.address;
       this.userService.save(this.user).subscribe(result => this.gotoUserList());
     } else {
       this.confirmPassword = "";
