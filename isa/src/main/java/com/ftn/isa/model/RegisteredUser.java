@@ -7,9 +7,12 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 
 import com.ftn.isa.enums.Role;
 
@@ -48,12 +51,17 @@ public class RegisteredUser implements Serializable{
 	@Column(name = "role", nullable = false)
 	private Role role;
 	
+	@OneToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "address_id")
+	private Address address;
+	
+	
 	public RegisteredUser() {
 		super();
 	}
 
 	public RegisteredUser(Long id, String name, String lastname, String username, String email, String password,
-			LocalDate birthday, Role role) {
+			LocalDate birthday, Role role, Address address) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -63,8 +71,17 @@ public class RegisteredUser implements Serializable{
 		this.password = password;
 		this.birthday = birthday;
 		this.role = role;
+		this.address = address;
 	}
 
+
+	public Address getAddress() {
+		return address;
+	}
+
+	public void setAddress(Address address) {
+		this.address = address;
+	}
 
 	public Long getId() {
 		return id;
@@ -120,6 +137,14 @@ public class RegisteredUser implements Serializable{
 
 	public void setRole(Role role) {
 		this.role = role;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
 	}
 	
 	

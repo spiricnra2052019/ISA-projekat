@@ -33,7 +33,7 @@ public class UserController {
 	
 	@Autowired
 	private UserService userService;
-	
+		
 	@Operation(summary = "Get all users", description = "Get all users", method="GET")
 	@ApiResponses(value = {
 			@ApiResponse(responseCode = "200", description = "successful operation",
