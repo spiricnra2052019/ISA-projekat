@@ -13,6 +13,7 @@ import { QueryFormComponent } from './query-form/query-form.component';
 import { MatTableModule } from '@angular/material/table'
 import { MatSortModule } from '@angular/material/sort';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { NikolaTestComponent } from './nikola-test/nikola-test.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     UserFormComponent,
     UserLoginComponent,
     BloodCenterListComponent,
-    QueryFormComponent
+    QueryFormComponent,
+    NikolaTestComponent
   ],
   imports: [
     BrowserModule,

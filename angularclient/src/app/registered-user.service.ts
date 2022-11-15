@@ -3,14 +3,19 @@ import { Observable } from 'rxjs/internal/Observable';
 import { RegisteredUser } from './registered-user';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
+
+
 @Injectable({
   providedIn: 'root'
 })
 export class RegisteredUserService {
   private usersUrl: string;
+  private searchUrl: string;
+
 
   constructor(private http: HttpClient) {
     this.usersUrl = 'http://localhost:8080/users';
+    this.searchUrl = 'http://localhost:8080/users/search?query=';
   }
 
   public findAll(): Observable<RegisteredUser[]> {
@@ -21,5 +26,8 @@ export class RegisteredUserService {
     return this.http.post<RegisteredUser>(this.usersUrl, user);
   }
 
+  public findAllAndSearch(searchProperty): Observable<RegisteredUser[]> {
+    return this.http.get<RegisteredUser[]>(this.searchUrl.concat(searchProperty));
+  }
 }
 
