@@ -1,3 +1,13 @@
+<form class="form-inline md-form mr-auto mb-4">
+  <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search"
+    (keyup)="searchFun($event.target)">
+</form>
+<ng-template [ngIf]="showFilter">
+  <form class="form-inline md-form mr-auto mb-2">
+    <input class="form-control mr-sm-2" type="text" placeholder="Filter By" aria-label="Search"
+      (keyup)="filterFun($event.target)">
+  </form>
+</ng-template>
 <table mat-table [dataSource]="centers" matSort (matSortChange)="announceSortChange($event)" class="mat-elevation-z8">
   <!-- Position Column -->
   <ng-container matColumnDef="averageRate">
@@ -34,9 +44,16 @@
   <!-- Symbol Column -->
   <ng-container matColumnDef="address.street">
     <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by street">
-      City
+      Street
     </th>
     <td mat-cell *matCellDef="let element"> {{element.address.street}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="address.streetNumber">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by streetNumber">
+      Street Number
+    </th>
+    <td mat-cell *matCellDef="let element"> {{element.address.streetNumber}} </td>
   </ng-container>
 
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

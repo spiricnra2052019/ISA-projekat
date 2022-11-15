@@ -12,13 +12,14 @@ import { ObjectType } from 'typescript';
   styleUrls: ['./blood-center-list.component.css']
 })
 
-//   export interface IIndexable {
-//   [key: string]: any;
-// }
 
 export class BloodCenterListComponent implements OnInit {
-  displayedColumns: string[] = ['averageRate', 'description', 'name', 'address.city', 'address.street'];
+  displayedColumns: string[] = ['averageRate', 'description', 'name', 'address.city', 'address.street', 'address.streetNumber'];
   centers: MatTableDataSource<BloodCenter> = new MatTableDataSource<BloodCenter>();
+  searchProperty = '';
+  filterProperty = '';
+  searchAndFilter = {};
+  showFilter = false;
 
   constructor(private bloodCenterService: BloodCenterService, private _liveAnnouncer: LiveAnnouncer) { }
 
@@ -31,11 +32,32 @@ export class BloodCenterListComponent implements OnInit {
         switch (property) {
           case 'address.city': return item.address.city;
           case 'address.street': return item.address.street;
+          case 'address.streetNumber': return item.address.streetNumber;
           default: return item[property];
         }
       };
       this.centers.sort = this.sort;
     })
+  }
+  filterFun(searchValue) {
+    this.filterProperty = searchValue.value;
+
+    this.searchAndFilter = {
+      "searchProperty": this.searchProperty.toUpperCase(),
+      "filterProperty": this.filterProperty.toUpperCase()
+    };
+    this.bloodCenterService.findAllAndFilter(this.searchAndFilter).subscribe(res => {
+      this.centers = new MatTableDataSource(res);
+    });
+  }
+
+  searchFun(searchValue) {
+    this.searchProperty = searchValue.value;
+    this.showFilter = this.searchProperty != "";
+
+    this.bloodCenterService.findAllAndSearch(this.searchProperty.toUpperCase()).subscribe(res => {
+      this.centers = new MatTableDataSource(res);
+    });
   }
 
   /** Announce the change in sort state for assistive technology. */

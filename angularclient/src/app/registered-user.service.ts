@@ -29,5 +29,13 @@ export class RegisteredUserService {
   public findAllAndSearch(searchProperty): Observable<RegisteredUser[]> {
     return this.http.get<RegisteredUser[]>(this.searchUrl.concat(searchProperty));
   }
+
+  public findById(id) {
+    return this.http.get<RegisteredUser>(this.usersUrl + "/" + id);
+  }
+
+  public update(user) {
+    return this.http.put<RegisteredUser>(this.usersUrl, user);
+  }
 }
 
