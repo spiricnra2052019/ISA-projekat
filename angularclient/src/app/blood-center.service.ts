@@ -17,4 +17,8 @@ export class BloodCenterService {
     return this.http.get<BloodCenter[]>(this.bloodCentersUrl);
   }
 
+  public save(center: BloodCenter) {
+    return this.http.post<BloodCenter>(this.bloodCentersUrl, center);
+  }
+
 }

@@ -6,6 +6,7 @@ export class BloodCenter {
     averageRate: string;
     description: string;
     name: string;
+    city: string;
     address: Address;
     bloodAmount: BloodAmount;
 }
