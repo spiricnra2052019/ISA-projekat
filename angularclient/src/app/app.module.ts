@@ -14,6 +14,7 @@ import { MatTableModule } from '@angular/material/table'
 import { MatSortModule } from '@angular/material/sort';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NikolaTestComponent } from './nikola-test/nikola-test.component';
+import { EditUserFormComponent } from './edit-user-form/edit-user-form.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { NikolaTestComponent } from './nikola-test/nikola-test.component';
     UserLoginComponent,
     BloodCenterListComponent,
     QueryFormComponent,
-    NikolaTestComponent
+    NikolaTestComponent,
+    EditUserFormComponent
   ],
   imports: [
     BrowserModule,

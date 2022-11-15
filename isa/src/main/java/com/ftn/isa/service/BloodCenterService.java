@@ -29,4 +29,14 @@ public class BloodCenterService {
 	public List<BloodCenter> findAll(){
 		return bloodCenterRepository.findAll();
 	}
+	
+	public List<BloodCenter> searchCenters(String query){
+		List<BloodCenter> bloodCenters = bloodCenterRepository.searchCenters(query);
+		return bloodCenters;
+	}
+	
+	public List<BloodCenter> filterCenters(String searchQuery, float filterQuery){
+		List<BloodCenter> bloodCenters = bloodCenterRepository.filterCenters(searchQuery, filterQuery);
+		return bloodCenters;
+	}
 }
