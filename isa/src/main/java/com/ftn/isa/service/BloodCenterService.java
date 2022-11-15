@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.ftn.isa.model.Address;
+import com.ftn.isa.model.BloodAmount;
 import com.ftn.isa.model.BloodCenter;
 import com.ftn.isa.model.RegisteredUser;
 import com.ftn.isa.repository.AddressRepository;
@@ -33,7 +34,9 @@ public class BloodCenterService {
 	
 	public BloodCenter save(BloodCenter BloodCenter) {
 		Address address = addressRepository.save(BloodCenter.getAddress());
+		BloodAmount blood = bloodAmountRepository.save(BloodCenter.getBloodAmount());
 		BloodCenter.setAddress(address);
+		BloodCenter.setBloodAmount(blood);
 		return bloodCenterRepository.save(BloodCenter);
 	}
 	

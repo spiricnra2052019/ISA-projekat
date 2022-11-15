@@ -2,11 +2,10 @@ import { Address } from "./address";
 import { BloodAmount } from "./blood-amount";
 
 export class BloodCenter {
-    id: string;
-    averageRate: string;
+    id: number;
+    averageRate: number;
     description: string;
     name: string;
-    city: string;
     address: Address;
     bloodAmount: BloodAmount;
 }

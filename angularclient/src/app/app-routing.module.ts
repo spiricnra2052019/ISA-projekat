@@ -10,7 +10,7 @@ import { AddNewCentersComponent } from './add-new-centers/add-new-centers.compon
 const routes: Routes = [
   { path: 'users', component: UserListComponent },
   { path: 'adduser', component: UserFormComponent },
-  { path: 'blood-center', component: BloodCenterListComponent },
+  { path: 'blood-centers', component: BloodCenterListComponent },
   { path: 'query', component: QueryFormComponent },
   { path: 'nikola', component: NikolaTestComponent },
   { path: 'add-blood-center', component: AddNewCentersComponent }

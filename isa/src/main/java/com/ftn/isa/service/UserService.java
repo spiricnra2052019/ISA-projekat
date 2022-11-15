@@ -33,8 +33,6 @@ public class UserService {
 	}
 	
 	public RegisteredUser save(RegisteredUser RegisteredUser) {
-		System.out.println("00000000000000000000000000000000000000000000000000000000");
-		System.out.println(RegisteredUser.getAddress());
 		Address address = addressRepository.save(RegisteredUser.getAddress());
 		RegisteredUser.setAddress(address);
 		return userRepository.save(RegisteredUser);
