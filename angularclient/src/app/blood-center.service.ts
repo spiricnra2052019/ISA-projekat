@@ -33,5 +33,11 @@ export class BloodCenterService {
     return this.http.get<BloodCenter[]>(this.filterUrl.concat(searchAndFilter.searchProperty).concat('&filterQuery=')
       .concat(searchAndFilter.filterProperty));
   }
+  public findById(id){
+    return this.http.get<BloodCenter>(this.bloodCentersUrl + "/" + id);
+  }
+  public edit(bloodCenter){
+    return this.http.put<BloodCenter>(this.bloodCentersUrl, bloodCenter);
+  }
 
 }

@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.ftn.isa.model.Address;
 import com.ftn.isa.model.BloodAmount;
 import com.ftn.isa.model.BloodCenter;
+import com.ftn.isa.model.Employee;
 import com.ftn.isa.model.RegisteredUser;
 import com.ftn.isa.repository.AddressRepository;
 import com.ftn.isa.repository.BloodAmountRepository;

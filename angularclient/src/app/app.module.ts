@@ -15,7 +15,6 @@ import { MatSortModule } from '@angular/material/sort';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NikolaTestComponent } from './administrator-search/nikola-test.component';
 import { AddNewCentersComponent } from './add-new-centers/add-new-centers.component';
-import { NikolaTestComponent } from './nikola-test/nikola-test.component';
 import { EditUserFormComponent } from './edit-user-form/edit-user-form.component';
 import { EditCenterComponent } from './edit-center/edit-center.component';
 import { EditEmployeeComponent } from './edit-employee/edit-employee.component';
@@ -29,7 +28,7 @@ import { EditEmployeeComponent } from './edit-employee/edit-employee.component';
     BloodCenterListComponent,
     QueryFormComponent,
     NikolaTestComponent,
-    AddNewCentersComponent
+    AddNewCentersComponent,
     EditUserFormComponent,
     EditCenterComponent,
     EditEmployeeComponent
