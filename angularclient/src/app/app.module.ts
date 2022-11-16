@@ -15,6 +15,8 @@ import { MatSortModule } from '@angular/material/sort';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NikolaTestComponent } from './nikola-test/nikola-test.component';
 import { EditUserFormComponent } from './edit-user-form/edit-user-form.component';
+import { EditCenterComponent } from './edit-center/edit-center.component';
+import { EditEmployeeComponent } from './edit-employee/edit-employee.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +27,9 @@ import { EditUserFormComponent } from './edit-user-form/edit-user-form.component
     BloodCenterListComponent,
     QueryFormComponent,
     NikolaTestComponent,
-    EditUserFormComponent
+    EditUserFormComponent,
+    EditCenterComponent,
+    EditEmployeeComponent
   ],
   imports: [
     BrowserModule,
