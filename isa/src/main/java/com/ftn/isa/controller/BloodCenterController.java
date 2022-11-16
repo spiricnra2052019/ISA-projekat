@@ -73,4 +73,16 @@ public class BloodCenterController {
 		return ResponseEntity.ok(bloodCenterService.filterCenters(searchQuery, filterQuery));
 	}
 	
+	@PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<BloodCenter> editBloodCenter(@RequestBody BloodCenter bloodCenter){
+		BloodCenter savedBC = null;
+		try {
+			savedBC = bloodCenterService.edit(bloodCenter);
+			return new ResponseEntity<BloodCenter>(savedBC, HttpStatus.OK);
+		}catch (Exception e) {
+			e.printStackTrace();
+			return new ResponseEntity<BloodCenter>(savedBC, HttpStatus.BAD_REQUEST);			
+		}
+	}
+	
 }

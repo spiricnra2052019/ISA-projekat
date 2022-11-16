@@ -49,4 +49,10 @@ public class BloodCenterService {
 		List<BloodCenter> bloodCenters = bloodCenterRepository.filterCenters(searchQuery, filterQuery);
 		return bloodCenters;
 	}
+	
+	public BloodCenter edit(BloodCenter bloodCenter) {
+		Address address = addressRepository.save(bloodCenter.getAddress());
+		bloodCenter.setAddress(address);
+		return bloodCenterRepository.save(bloodCenter);
+	}
 }
