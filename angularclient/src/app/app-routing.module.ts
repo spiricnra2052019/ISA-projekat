@@ -6,6 +6,10 @@ import { UserFormComponent } from './user-form/user-form.component';
 import { UserListComponent } from './user-list/user-list.component';
 import { NikolaTestComponent } from './administrator-search/nikola-test.component';
 import { AddNewCentersComponent } from './add-new-centers/add-new-centers.component';
+import { NikolaTestComponent } from './nikola-test/nikola-test.component';
+import { EditUserFormComponent } from './edit-user-form/edit-user-form.component';
+import { EditCenterComponent } from './edit-center/edit-center.component';
+import { EditEmployeeComponent } from './edit-employee/edit-employee.component';
 
 const routes: Routes = [
   { path: 'users', component: UserListComponent },
@@ -14,6 +18,10 @@ const routes: Routes = [
   { path: 'query', component: QueryFormComponent },
   { path: 'nikola', component: NikolaTestComponent },
   { path: 'add-blood-center', component: AddNewCentersComponent }
+  { path: 'edituser', component: EditUserFormComponent },
+  { path: 'edit-center', component: EditCenterComponent},
+  {path: 'editemployee', component: EditEmployeeComponent}
+
 ];
 
 @NgModule({

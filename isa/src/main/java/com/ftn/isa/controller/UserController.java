@@ -8,7 +8,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -20,6 +22,7 @@ import com.ftn.isa.model.RegisteredUser;
 import com.ftn.isa.service.UserService;
 
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.ArraySchema;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -67,6 +70,25 @@ public class UserController {
 		}
 	}
 	
+	@Operation(summary = "Edit RegisteredUser", description = "Edit RegisteredUser", method = "POST")
+	@ApiResponses(value = {
+			@ApiResponse(responseCode = "204", description = "Edited",
+					content = { @Content(mediaType = "application/json", schema = @Schema(implementation = RegisteredUser.class)) }),
+			@ApiResponse(responseCode = "400", description = "Bad request",
+					content = @Content)
+	})
+	@PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<RegisteredUser> editUser(@RequestBody RegisteredUser registeredUser){
+		RegisteredUser savedUser = null;
+		try {
+			savedUser = userService.save(registeredUser);
+			return new ResponseEntity<RegisteredUser>(savedUser, HttpStatus.OK);
+		}catch (Exception e) {
+			e.printStackTrace();
+			return new ResponseEntity<RegisteredUser>(savedUser, HttpStatus.BAD_REQUEST);
+		}
+	}
+	
 
 	@GetMapping("/search")
 	public ResponseEntity<List<RegisteredUser>> searchUsers(@RequestParam("query") String query){
@@ -91,5 +113,19 @@ public class UserController {
 			return new ResponseEntity<RegisteredUser>(validUser, HttpStatus.BAD_REQUEST);
 		}
 	}
+	
+	@Operation(summary = "Get user", description = "Get user", method="GET")
+	@ApiResponses(value = {
+			@ApiResponse(responseCode = "200", description = "OK",
+					content = { @Content(mediaType = "application/json", schema = @Schema(implementation = RegisteredUser.class)) }),
+			@ApiResponse(responseCode = "400", description = "Not possible to get user.",
+					content = @Content)
+	})
+	@GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<RegisteredUser> getUserById(@Parameter(name="id", description = "ID of user", required = true) @PathVariable("id") Long id) {
+		RegisteredUser user = userService.findOne(id);
+		return new ResponseEntity<RegisteredUser>(user, HttpStatus.OK);
+	}
+	
 	
 }

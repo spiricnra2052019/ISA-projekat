@@ -31,7 +31,7 @@ public class BloodCenterService {
 	public List<BloodCenter> findAll(){
 		return bloodCenterRepository.findAll();
 	}
-	
+
 	public BloodCenter save(BloodCenter BloodCenter) {
 		Address address = addressRepository.save(BloodCenter.getAddress());
 		BloodAmount blood = bloodAmountRepository.save(BloodCenter.getBloodAmount());
@@ -40,4 +40,13 @@ public class BloodCenterService {
 		return bloodCenterRepository.save(BloodCenter);
 	}
 	
+	public List<BloodCenter> searchCenters(String query){
+		List<BloodCenter> bloodCenters = bloodCenterRepository.searchCenters(query);
+		return bloodCenters;
+	}
+	
+	public List<BloodCenter> filterCenters(String searchQuery, float filterQuery){
+		List<BloodCenter> bloodCenters = bloodCenterRepository.filterCenters(searchQuery, filterQuery);
+		return bloodCenters;
+	}
 }
