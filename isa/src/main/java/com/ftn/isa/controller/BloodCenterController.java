@@ -62,6 +62,7 @@ public class BloodCenterController {
 			e.printStackTrace();
 			return new ResponseEntity<BloodCenter>(savedBloodCenter, HttpStatus.CONFLICT);
 		}
+	}
 
 	@GetMapping("/search")
 	public ResponseEntity<List<BloodCenter>> searchUsers(@RequestParam("query") String query){
