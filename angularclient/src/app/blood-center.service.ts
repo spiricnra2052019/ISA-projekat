@@ -21,6 +21,10 @@ export class BloodCenterService {
     return this.http.get<BloodCenter[]>(this.bloodCentersUrl);
   }
 
+  public save(center: BloodCenter) {
+    return this.http.post<BloodCenter>(this.bloodCentersUrl, center);
+  }
+
   public findAllAndSearch(searchProperty): Observable<BloodCenter[]> {
     return this.http.get<BloodCenter[]>(this.searchUrl.concat(searchProperty));
   }
@@ -29,6 +33,5 @@ export class BloodCenterService {
     return this.http.get<BloodCenter[]>(this.filterUrl.concat(searchAndFilter.searchProperty).concat('&filterQuery=')
       .concat(searchAndFilter.filterProperty));
   }
-
 
 }

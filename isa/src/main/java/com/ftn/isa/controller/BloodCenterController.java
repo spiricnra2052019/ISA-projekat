@@ -8,12 +8,13 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.ftn.isa.enums.Role;
 import com.ftn.isa.model.BloodCenter;
 import com.ftn.isa.model.RegisteredUser;
 import com.ftn.isa.service.BloodCenterService;
@@ -44,6 +45,23 @@ public class BloodCenterController {
 		return new ResponseEntity<Collection<BloodCenter>>(bloodCenters, HttpStatus.OK);
 	}
 	
+	@Operation(summary = "Create new Centers", description = "Create new Centers", method = "POST")
+	@ApiResponses(value = {
+			@ApiResponse(responseCode = "201", description = "Created",
+					content = { @Content(mediaType = "application/json", schema = @Schema(implementation = BloodCenter.class)) }),
+			@ApiResponse(responseCode = "409", description = "Not possible to create new Centers when given id is not null",
+					content = @Content)
+	})
+	@PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<BloodCenter> createBloodCenter(@RequestBody BloodCenter bloodCenter){
+		BloodCenter savedBloodCenter = null;
+		try {
+			savedBloodCenter = bloodCenterService.save(bloodCenter);
+			return new ResponseEntity<BloodCenter>(savedBloodCenter, HttpStatus.CREATED);
+		}catch (Exception e) {
+			e.printStackTrace();
+			return new ResponseEntity<BloodCenter>(savedBloodCenter, HttpStatus.CONFLICT);
+		}
 
 	@GetMapping("/search")
 	public ResponseEntity<List<BloodCenter>> searchUsers(@RequestParam("query") String query){

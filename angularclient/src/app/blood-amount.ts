@@ -1,7 +1,7 @@
 export class BloodAmount {
-    id: string;
-    a: string;
-    b: string;
-    ab: string;
-    zero: string;
+    id: number;
+    a: number;
+    b: number;
+    ab: number;
+    zero: number;
 }
