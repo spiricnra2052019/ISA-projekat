@@ -7,15 +7,19 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ftn.isa.model.Employee;
+import com.ftn.isa.model.RegisteredUser;
 import com.ftn.isa.service.EmployeeService;
 
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.ArraySchema;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -60,4 +64,23 @@ public class EmployeeController {
 			return new ResponseEntity<Employee>(savedEmployee, HttpStatus.CONFLICT);
 		}
 	}
+	
+	@PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<Employee> editEmployee(@RequestBody Employee employee){
+		Employee savedE = null;
+		try {
+			savedE = employeeService.edit(employee);
+			return new ResponseEntity<Employee>(savedE, HttpStatus.OK);
+		}catch (Exception e) {
+			e.printStackTrace();
+			return new ResponseEntity<Employee>(savedE, HttpStatus.BAD_REQUEST);
+		}
+	}
+	
+	@GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<Employee> getEmployeeById(@Parameter(name="id", description = "ID of user", required = true) @PathVariable("id") Long id) {
+		Employee employee = employeeService.findOne(id);
+		return new ResponseEntity<Employee>(employee, HttpStatus.OK);
+	}
+	
 }

@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.ftn.isa.model.Address;
 import com.ftn.isa.model.BloodCenter;
 import com.ftn.isa.model.RegisteredUser;
 import com.ftn.isa.repository.AddressRepository;
@@ -38,5 +39,11 @@ public class BloodCenterService {
 	public List<BloodCenter> filterCenters(String searchQuery, float filterQuery){
 		List<BloodCenter> bloodCenters = bloodCenterRepository.filterCenters(searchQuery, filterQuery);
 		return bloodCenters;
+	}
+	
+	public BloodCenter edit(BloodCenter bloodCenter) {
+		Address address = addressRepository.save(bloodCenter.getAddress());
+		bloodCenter.setAddress(address);
+		return bloodCenterRepository.save(bloodCenter);
 	}
 }

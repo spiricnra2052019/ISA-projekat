@@ -8,6 +8,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -51,6 +53,18 @@ public class BloodCenterController {
 	@GetMapping("/filter")
 	public ResponseEntity<List<BloodCenter>> filterUsers(@RequestParam("searchQuery") String searchQuery, @RequestParam("filterQuery") float filterQuery){
 		return ResponseEntity.ok(bloodCenterService.filterCenters(searchQuery, filterQuery));
+	}
+	
+	@PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<BloodCenter> editBloodCenter(@RequestBody BloodCenter bloodCenter){
+		BloodCenter savedBC = null;
+		try {
+			savedBC = bloodCenterService.edit(bloodCenter);
+			return new ResponseEntity<BloodCenter>(savedBC, HttpStatus.OK);
+		}catch (Exception e) {
+			e.printStackTrace();
+			return new ResponseEntity<BloodCenter>(savedBC, HttpStatus.BAD_REQUEST);			
+		}
 	}
 	
 }

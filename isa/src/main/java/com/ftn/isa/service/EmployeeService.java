@@ -37,4 +37,12 @@ public class EmployeeService {
 	public List<Employee> findByNameAndLastname(String firstName, String lastName) {
 		return employeeRepository.findByNameAndLastnameAllIgnoringCase(firstName, lastName);
 	}
+	
+	public Employee edit(Employee employee) {
+		return employeeRepository.save(employee);
+	}
+	
+	public Employee findOne(Long id) {
+		return employeeRepository.findById(id).orElseGet(null);
+	}
 }

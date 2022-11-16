@@ -20,3 +20,5 @@ insert into patient_question(description) values ('Do you have a dangerous occup
 insert into patient_question(description) values ('Do you take any medications regularly (daily)?');
 insert into patient_question(description) values ('Have you taken any medicines (eg Brufen, Cafetin, Analgin...) in the last 2-3 days?');
 insert into patient_question(description) values ('Do you regularly take Aspirin (Cardiopirin)? Have you taken it in the last 5 days?');
+
+insert into employee(name, lastname, username, password, birthday) values ('Mile', 'Veliki', 'milecar', '1312', '2000-05-03');
