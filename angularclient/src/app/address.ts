@@ -1,7 +1,7 @@
 export class Address {
-    id: string;
+    id: number;
     street: string;
-    streetNumber: string;
+    streetNumber: number;
     city: string;
     country: string;
 }
