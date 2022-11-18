@@ -5,6 +5,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { MatSort, Sort } from '@angular/material/sort';
 import { LiveAnnouncer } from '@angular/cdk/a11y';
 import { ObjectType } from 'typescript';
+import { BloodCenterAdminService } from '../blood-center-admin-service.service';
 
 @Component({
   selector: 'app-blood-center-list',
@@ -21,7 +22,7 @@ export class BloodCenterListComponent implements OnInit {
   searchAndFilter = {};
   showFilter = false;
 
-  constructor(private bloodCenterService: BloodCenterService, private _liveAnnouncer: LiveAnnouncer) { }
+  constructor(private bloodCenterService: BloodCenterService, private _liveAnnouncer: LiveAnnouncer, private bloodCenterAdminService: BloodCenterAdminService) { }
 
   @ViewChild(MatSort) sort: MatSort;
 

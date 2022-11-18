@@ -4,6 +4,8 @@ import { Router } from '@angular/router';
 import { BloodCenter } from '../blood-center';
 import { Address } from '../address';
 import { BloodAmount } from '../blood-amount';
+import { BloodCenterAdmin } from '../../app/blood-center-admin/blood-center-admin.component'
+import { BloodCenterAdminService } from '../blood-center-admin-service.service';
 
 @Component({
   selector: 'app-add-new-centers',
@@ -17,18 +19,26 @@ export class AddNewCentersComponent {
   showAddress: boolean;
   bloodAmount: BloodAmount;
   showBloodAmount: boolean;
+  bloodCenterAdmin: BloodCenterAdmin;
+  showBloodCenterAdmin: boolean;
 
   constructor(
     private router: Router,
-    private bloodCenterService: BloodCenterService) {
+    private bloodCenterService: BloodCenterService,
+    private bloodCenterAdminService: BloodCenterAdminService
+  ) {
     this.bloodCenter = new BloodCenter();
     this.address = new Address();
     this.bloodAmount = new BloodAmount();
+    this.bloodCenterAdmin = new BloodCenterAdmin();
   }
 
   addCenter() {
     this.bloodCenter.address = this.address;
     this.bloodCenter.bloodAmount = this.bloodAmount;
+    this.bloodCenter.bloodCenterAdmin = this.bloodCenterAdmin;
+    console.log(this.bloodCenter.bloodCenterAdmin);
+    this.bloodCenterAdminService.save(this.bloodCenter.bloodCenterAdmin).subscribe(result => this.gotoUserList())
     this.bloodCenterService.save(this.bloodCenter).subscribe(result => this.gotoUserList());
   }
 
@@ -42,5 +52,9 @@ export class AddNewCentersComponent {
 
   addBloodAmount() {
     this.showBloodAmount = !this.showBloodAmount;
+  }
+
+  addBloodCenterAdmin() {
+    this.showBloodCenterAdmin = !this.showBloodCenterAdmin;
   }
 }

@@ -39,12 +39,16 @@ public class BloodCenter {
 	@JoinColumn(name = "bloodAmount_id")
 	private BloodAmount bloodAmount;
 	
+	@OneToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "blood_center_administrator_id")
+	private BloodCenterAdministrator bloodCenterAdministrator;
+	
 	public BloodCenter() {
 		super();
 	}
 
 	public BloodCenter(Long id, String name, String description, float averageRate, Address address,
-			BloodAmount bloodAmount) {
+			BloodAmount bloodAmount, BloodCenterAdministrator bloodCenterAdministrator) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -52,6 +56,7 @@ public class BloodCenter {
 		this.averageRate = averageRate;
 		this.address = address;
 		this.bloodAmount = bloodAmount;
+		this.bloodCenterAdministrator = bloodCenterAdministrator;
 	}
 
 	public Long getId() {
@@ -92,6 +97,14 @@ public class BloodCenter {
 
 	public void setAddress(Address address) {
 		this.address = address;
+	}
+	
+	public BloodCenterAdministrator getBloodCenterAdministrator() {
+		return bloodCenterAdministrator;
+	}
+	
+	public void setBloodCenterAdministrator(BloodCenterAdministrator bloodCenterAdministrator) {
+		this.bloodCenterAdministrator = bloodCenterAdministrator;
 	}
 
 	public BloodAmount getBloodAmount() {

@@ -57,6 +57,15 @@
     <td mat-cell *matCellDef="let element"> {{element.address.streetNumber}} </td>
   </ng-container>
 
+  <!-- Bobane pomagaj ispisuj mi admine ovde,jer je bas tesko snaci se sta je sta ovde , ali mislim da sam na dobrom putu ovde dole. -->
+
+  <ng-container matColumnDef="blood_center_administrator.name">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by name">
+      Administrator name
+    </th>
+    <td mat-cell *matCellDef="let element"> {{element.blood_center_administrator.name}} </td>
+  </ng-container>
+
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
   <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 </table>
