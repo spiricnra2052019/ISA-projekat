@@ -37,7 +37,7 @@ export class AddNewCentersComponent {
     this.bloodCenter.address = this.address;
     this.bloodCenter.bloodAmount = this.bloodAmount;
     this.bloodCenter.bloodCenterAdmin = this.bloodCenterAdmin;
-    console.log(this.bloodCenter.bloodCenterAdmin);
+
     this.bloodCenterAdminService.save(this.bloodCenter.bloodCenterAdmin).subscribe(result => this.gotoUserList())
     this.bloodCenterService.save(this.bloodCenter).subscribe(result => this.gotoUserList());
   }

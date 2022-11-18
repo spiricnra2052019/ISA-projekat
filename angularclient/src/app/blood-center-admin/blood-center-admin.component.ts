@@ -8,5 +8,4 @@ export class BloodCenterAdmin {
   email: string;
   password: string;
   birthday: string;
-  address: Address;
 }

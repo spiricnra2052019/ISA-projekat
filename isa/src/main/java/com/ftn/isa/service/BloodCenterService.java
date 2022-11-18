@@ -8,11 +8,8 @@ import org.springframework.stereotype.Service;
 import com.ftn.isa.model.Address;
 import com.ftn.isa.model.BloodAmount;
 import com.ftn.isa.model.BloodCenter;
-<<<<<<< Updated upstream
 import com.ftn.isa.model.RegisteredUser;
-=======
 import com.ftn.isa.model.BloodCenterAdministrator;
->>>>>>> Stashed changes
 import com.ftn.isa.repository.AddressRepository;
 import com.ftn.isa.repository.BloodAmountRepository;
 import com.ftn.isa.repository.BloodCenterAdministratorRepository;
@@ -40,14 +37,14 @@ public class BloodCenterService {
 		return bloodCenterRepository.findAll();
 	}
 
-	public BloodCenter save(BloodCenter BloodCenter) {
-		Address address = addressRepository.save(BloodCenter.getAddress());
-		BloodAmount blood = bloodAmountRepository.save(BloodCenter.getBloodAmount());
-		BloodCenterAdministrator bloodCenterAdministrator = bloodCenterAdministratorRepository.save(BloodCenter.getBloodCenterAdministrator());
-		BloodCenter.setAddress(address);
-		BloodCenter.setBloodAmount(blood);
-		BloodCenter.setBloodCenterAdministrator(bloodCenterAdministrator);
-		return bloodCenterRepository.save(BloodCenter);
+	public BloodCenter save(BloodCenter bloodCenter) {
+		Address address = addressRepository.save(bloodCenter.getAddress());
+		BloodAmount blood = bloodAmountRepository.save(bloodCenter.getBloodAmount());
+		BloodCenterAdministrator bloodCenterAdministrator = bloodCenterAdministratorRepository.save(bloodCenter.getBloodCenterAdministrator());
+		bloodCenter.setAddress(address);
+		bloodCenter.setBloodAmount(blood);
+		bloodCenter.setBloodCenterAdministrator(bloodCenterAdministrator);
+		return bloodCenterRepository.save(bloodCenter);
 	}
 	
 	public List<BloodCenter> searchCenters(String query){
