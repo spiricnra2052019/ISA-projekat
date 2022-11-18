@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { BloodCenter } from '../blood-center';
 import { Address } from '../address';
 import { BloodAmount } from '../blood-amount';
-import { BloodCenterAdmin } from '../../app/blood-center-admin/blood-center-admin.component'
+import { BloodCenterAdministrator } from '../../app/blood-center-admin/blood-center-admin.component'
 import { BloodCenterAdminService } from '../blood-center-admin-service.service';
 
 @Component({
@@ -19,7 +19,7 @@ export class AddNewCentersComponent {
   showAddress: boolean;
   bloodAmount: BloodAmount;
   showBloodAmount: boolean;
-  bloodCenterAdmin: BloodCenterAdmin;
+  bloodCenterAdministrator: BloodCenterAdministrator;
   showBloodCenterAdmin: boolean;
 
   constructor(
@@ -30,15 +30,15 @@ export class AddNewCentersComponent {
     this.bloodCenter = new BloodCenter();
     this.address = new Address();
     this.bloodAmount = new BloodAmount();
-    this.bloodCenterAdmin = new BloodCenterAdmin();
+    this.bloodCenterAdministrator = new BloodCenterAdministrator();
   }
 
   addCenter() {
     this.bloodCenter.address = this.address;
     this.bloodCenter.bloodAmount = this.bloodAmount;
-    this.bloodCenter.bloodCenterAdmin = this.bloodCenterAdmin;
+    this.bloodCenter.bloodCenterAdministrator = this.bloodCenterAdministrator;
 
-    this.bloodCenterAdminService.save(this.bloodCenter.bloodCenterAdmin).subscribe(result => this.gotoUserList())
+    this.bloodCenterAdminService.save(this.bloodCenter.bloodCenterAdministrator).subscribe(result => this.gotoUserList())
     this.bloodCenterService.save(this.bloodCenter).subscribe(result => this.gotoUserList());
   }
 

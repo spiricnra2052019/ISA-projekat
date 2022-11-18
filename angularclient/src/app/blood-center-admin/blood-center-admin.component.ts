@@ -1,6 +1,6 @@
 import { Address } from "../address";
 
-export class BloodCenterAdmin {
+export class BloodCenterAdministrator {
   id: string;
   name: string;
   lastname: string;
