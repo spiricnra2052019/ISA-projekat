@@ -25,6 +25,10 @@ insert into patient_question(description) values ('Do you take any medications r
 insert into patient_question(description) values ('Have you taken any medicines (eg Brufen, Cafetin, Analgin...) in the last 2-3 days?');
 insert into patient_question(description) values ('Do you regularly take Aspirin (Cardiopirin)? Have you taken it in the last 5 days?');
 
+
 insert into administrator (name, lastname, username, password, birthday) values ('Pera', 'Peric', 'peraP', 'sifra123', '2000-03-19');
 insert into administrator (name, lastname, username, password, birthday) values ('Marko', 'Markovic', 'markoM', 'sifra123', '2000-03-19');
 insert into administrator (name, lastname, username, password, birthday) values ('Mika', 'Mikic', 'mikaM', 'sifra123', '2000-03-19');
+
+insert into employee(name, lastname, username, password, birthday) values ('Mile', 'Veliki', 'milecar', '1312', '2000-05-03');
+

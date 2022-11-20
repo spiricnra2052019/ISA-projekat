@@ -23,7 +23,7 @@ export class EditEmployeeComponent implements OnInit {
   })
   }
   editEmployee(): void {
-    if (this.confirmPassword == this.employee.password && this.employee.password !=""){
+    if (this.confirmPassword == this.employee.password && this.employee.password.length>3){
       this.employeeService.edit(this.employee).subscribe(res => this.gotoUserList());
     }
     else {
