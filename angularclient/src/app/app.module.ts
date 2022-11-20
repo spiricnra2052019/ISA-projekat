@@ -18,6 +18,7 @@ import { AddNewCentersComponent } from './add-new-centers/add-new-centers.compon
 import { EditUserFormComponent } from './edit-user-form/edit-user-form.component';
 import { EditCenterComponent } from './edit-center/edit-center.component';
 import { EditEmployeeComponent } from './edit-employee/edit-employee.component';
+import { BloodCenterAdministrator } from './/blood-center-admin/blood-center-admin.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,7 @@ import { EditEmployeeComponent } from './edit-employee/edit-employee.component';
     AddNewCentersComponent,
     EditUserFormComponent,
     EditCenterComponent,
-    EditEmployeeComponent
+    EditEmployeeComponent,
   ],
   imports: [
     BrowserModule,

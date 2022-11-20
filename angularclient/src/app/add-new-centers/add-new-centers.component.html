@@ -24,22 +24,22 @@
             <ng-template [ngIf]="showAddress">
                 <div class="form-group">
                     <label for="street">Street</label>
-                    <input type="text" [(ngModel)]="address.street" class="form-control" id="street" name="birthday"
+                    <input type="text" [(ngModel)]="address.street" class="form-control" id="street" name="street"
                         required #street="ngModel">
                 </div>
                 <div class="form-group">
-                    <label for="street-number">StreetNumber</label>
+                    <label for="streetNumber">StreetNumber</label>
                     <input type="text" [(ngModel)]="address.streetNumber" class="form-control" id="streetNumber"
-                        name="birthday" required #streetNumber="ngModel">
+                        name="streetNumber" required #streetNumber="ngModel">
                 </div>
                 <div class="form-group">
                     <label for="city">City</label>
-                    <input type="text" [(ngModel)]="address.city" class="form-control" id="city" name="birthday"
-                        required #city="ngModel">
+                    <input type="text" [(ngModel)]="address.city" class="form-control" id="city" name="city" required
+                        #city="ngModel">
                 </div>
                 <div class="form-group">
                     <label for="country">Country</label>
-                    <input type="text" [(ngModel)]="address.country" class="form-control" id="country" name="birthday"
+                    <input type="text" [(ngModel)]="address.country" class="form-control" id="country" name="country"
                         required #country="ngModel">
                 </div>
             </ng-template>
@@ -50,26 +50,64 @@
 
             <ng-template [ngIf]="showBloodAmount">
                 <div class="form-group">
-                    <label for="street">A</label>
+                    <label for="a">A</label>
                     <input type="text" [(ngModel)]="bloodAmount.a" class="form-control" id="a" name="a" required
                         #a="ngModel">
                 </div>
                 <div class="form-group">
-                    <label for="street-number">B</label>
+                    <label for="b">B</label>
                     <input type="text" [(ngModel)]="bloodAmount.b" class="form-control" id="b" name="b" required
                         #b="ngModel">
                 </div>
                 <div class="form-group">
-                    <label for="city">AB</label>
+                    <label for="ab">AB</label>
                     <input type="text" [(ngModel)]="bloodAmount.ab" class="form-control" id="ab" name="ab" required
                         #ab="ngModel">
                 </div>
                 <div class="form-group">
-                    <label for="country">ZERO</label>
+                    <label for="zero">ZERO</label>
                     <input type="text" [(ngModel)]="bloodAmount.zero" class="form-control" id="zero" name="zero"
                         required #zero="ngModel">
                 </div>
             </ng-template>
+
+            <div class="form-group">
+                <button (click)="addBloodCenterAdmin()" class="btn btn-info">Add blood center admin</button>
+            </div>
+
+            <ng-template [ngIf]="showBloodCenterAdmin">
+                <div class="form-group">
+                    <label for="adminName">Name</label>
+                    <input type="text" [(ngModel)]="bloodCenterAdministrator.name" class="form-control" id="adminName"
+                        name="adminName" required #adminName="ngModel">
+                </div>
+                <div class="form-group">
+                    <label for="lastname">Lastname</label>
+                    <input type="text" [(ngModel)]="bloodCenterAdministrator.lastname" class="form-control"
+                        id="lastname" name="lastname" required #lastname="ngModel">
+                </div>
+                <div class="form-group">
+                    <label for="username">Username</label>
+                    <input type="text" [(ngModel)]="bloodCenterAdministrator.username" class="form-control"
+                        id="username" name="username" required #username="ngModel">
+                </div>
+                <div class="form-group">
+                    <label for="email">E-mail</label>
+                    <input type="text" [(ngModel)]="bloodCenterAdministrator.email" class="form-control" id="email"
+                        name="email" required #email="ngModel">
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="text" [(ngModel)]="bloodCenterAdministrator.password" class="form-control"
+                        id="password" name="password" required #password="ngModel">
+                </div>
+                <div class="form-group">
+                    <label for="birthday">Birtday</label>
+                    <input type="text" [(ngModel)]="bloodCenterAdministrator.birthday" class="form-control"
+                        id="birthday" name="birthday" required #birthday="ngModel">
+                </div>
+            </ng-template>
+
             <button (click)="addCenter()" class="btn btn-info">Submit</button>
         </form>
     </div>

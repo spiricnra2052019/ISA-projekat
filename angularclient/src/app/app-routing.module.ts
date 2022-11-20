@@ -18,8 +18,8 @@ const routes: Routes = [
   { path: 'nikola', component: NikolaTestComponent },
   { path: 'add-blood-center', component: AddNewCentersComponent },
   { path: 'edituser', component: EditUserFormComponent },
-  { path: 'edit-center', component: EditCenterComponent},
-  {path: 'editemployee', component: EditEmployeeComponent}
+  { path: 'edit-center', component: EditCenterComponent },
+  { path: 'editemployee', component: EditEmployeeComponent }
 
 ];
 
