@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { BloodCenterAdmin } from './blood-center-admin/blood-center-admin.component';
+import { BloodCenterAdministrator } from './blood-center-admin/blood-center-admin.component';
 
 @Injectable({
   providedIn: 'root'
@@ -14,11 +14,11 @@ export class BloodCenterAdminService {
     this.bloodCenterAdminsUrl = 'http://localhost:8080/blood-center-administrators';
   }
 
-  public findAll(): Observable<BloodCenterAdmin[]> {
-    return this.http.get<BloodCenterAdmin[]>(this.bloodCenterAdminsUrl);
+  public findAll(): Observable<BloodCenterAdministrator[]> {
+    return this.http.get<BloodCenterAdministrator[]>(this.bloodCenterAdminsUrl);
   }
 
-  public save(center: BloodCenterAdmin) {
-    return this.http.post<BloodCenterAdmin>(this.bloodCenterAdminsUrl, center);
+  public save(center: BloodCenterAdministrator) {
+    return this.http.post<BloodCenterAdministrator>(this.bloodCenterAdminsUrl, center);
   }
 }
