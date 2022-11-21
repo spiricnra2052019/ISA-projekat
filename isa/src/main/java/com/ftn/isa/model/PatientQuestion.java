@@ -19,15 +19,26 @@ public class PatientQuestion {
 	
 	@Column(name = "description", nullable=false)
 	private String description;
-	
+
+	@Column(name = "answer", nullable = false)
+	private boolean answer;
+
+
 	public PatientQuestion() {
 		super();
 	}
 
 	public PatientQuestion(Long id, String description) {
-		super();
 		this.id = id;
 		this.description = description;
+	}
+
+	public boolean isAnswer() {
+		return answer;
+	}
+
+	public void setAnswer(boolean answer) {
+		this.answer = answer;
 	}
 
 	public Long getId() {
