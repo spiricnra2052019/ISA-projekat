@@ -1,20 +1,27 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { PatientQuery } from './patient-query';
+import { PatientAnswer } from './patient-answer';
+import {RegisteredUser} from "./registered-user";
+import {QueryQuestion} from "./query-question";
 
 @Injectable({
   providedIn: 'root'
 })
 export class QueryService {
-  private patientQueryUrl: string;
+  private queryQuestionsUrl: string;
+  private queryAnswersUrl: string;
 
   constructor(private http: HttpClient) {
-    this.patientQueryUrl = 'http://localhost:8080/query'
+    this.queryQuestionsUrl = 'http://localhost:8080/query'
+    this.queryAnswersUrl = 'http://localhost:8080/query-answer'
   }
 
-  public findAll(): Observable<PatientQuery[]> {
-    return this.http.get<PatientQuery[]>(this.patientQueryUrl);
+  public findAll(): Observable<QueryQuestion[]> {
+    return this.http.get<QueryQuestion[]>(this.queryQuestionsUrl);
   }
 
+  public save(queryAnswer: PatientAnswer){
+    return this.http.post<PatientAnswer>(this.queryAnswersUrl, queryAnswer);
+  }
 }

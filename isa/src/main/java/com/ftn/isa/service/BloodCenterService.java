@@ -1,8 +1,10 @@
 package com.ftn.isa.service;
 
+import java.util.Collection;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import com.ftn.isa.model.Address;
@@ -33,10 +35,14 @@ public class BloodCenterService {
 	public BloodCenter findOne(Long id) {
 		return bloodCenterRepository.findById(id).orElseGet(null);
 	}
-	
+
+	public List<BloodCenter> findAll(Sort by) {
+		return bloodCenterRepository.findAll(by);
+	}
 	public List<BloodCenter> findAll(){
 		return bloodCenterRepository.findAll();
 	}
+
 
 	public BloodCenter save(BloodCenter bloodCenter) {
 		Address address = addressRepository.save(bloodCenter.getAddress());
@@ -63,4 +69,6 @@ public class BloodCenterService {
 		bloodCenter.setAddress(address);
 		return bloodCenterRepository.save(bloodCenter);
 	}
+
+
 }

@@ -42,5 +42,4 @@ public class PatientQuestionController {
 		Collection<PatientQuestion> patientQuery = patientQuestionService.findAll();
 		return new ResponseEntity<Collection<PatientQuestion>>(patientQuery, HttpStatus.OK);
 	}
-
 }

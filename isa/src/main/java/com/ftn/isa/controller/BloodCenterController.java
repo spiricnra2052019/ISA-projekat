@@ -4,6 +4,7 @@ import java.util.Collection;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -95,5 +96,18 @@ public class BloodCenterController {
 		BloodCenter bloodCenter = bloodCenterService.findOne(id);
 		return new ResponseEntity<BloodCenter>(bloodCenter, HttpStatus.OK);
 	}
-	
+
+	@Operation(summary = "Get sorted centers", description = "Get all centers", method="GET")
+	@ApiResponses(value = {
+			@ApiResponse(responseCode = "200", description = "successful operation",
+					content = @Content(mediaType = "application/json",
+							array = @ArraySchema(schema = @Schema(implementation = BloodCenter.class))))
+	})
+	@GetMapping(value="/sort", produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<Collection<BloodCenter>> getSortedBloodCenters(@RequestParam("sortBy") String sortBy) {
+		Collection<BloodCenter> bloodCenters= bloodCenterService.findAll(Sort.by(Sort.Direction.ASC, sortBy));
+
+		return new ResponseEntity<Collection<BloodCenter>>(bloodCenters, HttpStatus.OK);
+	}
+
 }
