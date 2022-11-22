@@ -11,6 +11,31 @@
                 <input type="text" [(ngModel)]="bloodCenter.description" class="form-control" id="description"
                     name="description" required #description="ngModel">
             </div>
+            <div class="form-group">
+                <label for="averageRate">Avarage rate</label>
+                <input type="text" [(ngModel)]="bloodCenter.averageRate" class="form-control" id="averageRate"
+                    name="averageRate" required #averageRate="ngModel" disabled>
+            </div>
+            <div class="form-group">
+                <label for="street">Street</label>
+                <input type="text" [(ngModel)]="address.street" class="form-control" id="street" name="street"
+                    required #street="ngModel">
+            </div>
+            <div class="form-group">
+                <label for="streetNumber">StreetNumber</label>
+                <input type="text" [(ngModel)]="address.streetNumber" class="form-control" id="streetNumber"
+                    name="streetNumber" required #streetNumber="ngModel">
+            </div>
+            <div class="form-group">
+                <label for="city">City</label>
+                <input type="text" [(ngModel)]="address.city" class="form-control" id="city" name="city" required
+                    #city="ngModel">
+            </div>
+            <div class="form-group">
+                <label for="country">Country</label>
+                <input type="text" [(ngModel)]="address.country" class="form-control" id="country" name="country"
+                    required #country="ngModel">
+            </div>
                 <div class="form-group">
                     <label for="street">A</label>
                     <input type="text" [(ngModel)]="bloodCenter.bloodAmount.a" class="form-control" id="a" name="a" required

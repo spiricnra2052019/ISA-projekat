@@ -16,15 +16,18 @@ export class EditCenterComponent implements OnInit {
 
   bloodAmount: BloodAmount;
   showAddress : boolean;
+  address : Address;
 
   constructor(private router: Router,private bloodCenterService: BloodCenterService) { 
     this.bloodAmount = new BloodAmount();
     this.bloodCenter = new BloodCenter();
+    this.address = new Address();
   }
 
   ngOnInit(): void {
     this.bloodCenterService.findById(1).subscribe(data =>{
       this.bloodCenter = data;
+      this.address = data.address;
       console.log(this.bloodCenter);
       console.log(this.bloodCenter.address.street);
     })
@@ -39,6 +42,7 @@ export class EditCenterComponent implements OnInit {
   }
 
   editCenter(): void{
+    this.bloodCenter.address = this.address;
     this.bloodCenterService.edit(this.bloodCenter).subscribe(result => this.gotoCenterList());
   }
 }
