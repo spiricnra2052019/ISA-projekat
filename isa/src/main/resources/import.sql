@@ -2,13 +2,20 @@ insert into address (city, country, street, street_number) values ('Beograd', 'S
 insert into address (city, country, street, street_number) values ('Novi Sad', 'Serbia', 'Djordja Jovanovica', 15);
 insert into address (city, country, street, street_number) values ('Novi Sad', 'Serbia', 'Filipa Visnjica', 15);
 
-insert into blood_center_administrator(name, lastname, username, password, birthday, email) values ('Sima', 'Simic', 'simaS', 'sifra123', '2000-08-30', 'sima@test.com');
-insert into blood_center_administrator(name, lastname, username, password, birthday, email) values ('Bora', 'Boroje', 'boraB', 'bora123', '2000-04-22', 'bora@test.com');
+insert into base_user(name, lastname, username, password, birthday, email, role) values ('Sima', 'Simic', 'simaS', 'sifra123', '2000-08-30', 'sima@test.com', 4);
+insert into base_user(name, lastname, username, password, birthday, email, role) values ('Bora', 'Boroje', 'boraB', 'bora123', '2000-04-22', 'bora@test.com', 4);
 
 
-insert into registered_user (name, lastname, username, password, birthday, role, email, address_id) values ('Pera', 'Peric', 'peraP', 'sifra123', '2000-03-19', 'Administrator', 'pera@test.com', 1);
-insert into registered_user (name, lastname, username, password, birthday, role, email, address_id) values ('Marko', 'Markovic', 'markoM', 'sifra123', '2000-03-19', 'RegisteredUser', 'marko@test.com', 2);
-insert into registered_user (name, lastname, username, password, birthday, role, email, address_id) values ('Mika', 'Mikic', 'mikaM', 'sifra123', '2000-03-19', 'Employee', 'mika@test.com', 3);
+insert into base_user (name, lastname, username, password, birthday, email, address_id, role) values ('Pera', 'Peric', 'peraP', 'sifra123', '2000-03-19', 'pera@test.com', 1, 1);
+insert into base_user (name, lastname, username, password, birthday, email, address_id, role) values ('Marko', 'Markovic', 'markoM', 'sifra123', '2000-03-19', 'marko@test.com', 2, 1);
+insert into base_user (name, lastname, username, password, birthday, email, address_id, role) values ('Mika', 'Mikic', 'mikaM', 'sifra123', '2000-03-19', 'mika@test.com', 3, 1);
+
+
+insert into base_user (name, lastname, username, email, password, birthday, role) values ('Pera', 'Peric', 'peraP', 'mika@test.com', 'sifra123', '2000-03-19', 3);
+insert into base_user (name, lastname, username, email, password, birthday, role) values ('Marko', 'Markovic', 'markoM', 'mika@test.com', 'sifra123', '2000-03-19', 3);
+insert into base_user (name, lastname, username, email, password, birthday, role) values ('Mika', 'Mikic', 'mikaM', 'mika@test.com', 'sifra123', '2000-03-19', 3);
+
+insert into base_user (name, lastname, username, email, password, birthday, role) values ('Mile', 'Veliki', 'milecar','mile@gmail.com', '1312', '2000-05-03', 2);
 
 insert into blood_amount(a, b, ab, zero) values (10, 11, 12, 9);
 insert into blood_amount(a, b, ab, zero) values (16, 21, 12, 9);
@@ -26,9 +33,5 @@ insert into patient_question(description, answer) values ('Have you taken any me
 insert into patient_question(description, answer) values ('Do you regularly take Aspirin (Cardiopirin)? Have you taken it in the last 5 days?', false);
 
 
-insert into administrator (name, lastname, username, password, birthday) values ('Pera', 'Peric', 'peraP', 'sifra123', '2000-03-19');
-insert into administrator (name, lastname, username, password, birthday) values ('Marko', 'Markovic', 'markoM', 'sifra123', '2000-03-19');
-insert into administrator (name, lastname, username, password, birthday) values ('Mika', 'Mikic', 'mikaM', 'sifra123', '2000-03-19');
 
-insert into employee(name, lastname, username, password, birthday) values ('Mile', 'Veliki', 'milecar', '1312', '2000-05-03');
 

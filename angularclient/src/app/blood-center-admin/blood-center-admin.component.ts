@@ -1,4 +1,4 @@
-import { Address } from "../address";
+
 
 export class BloodCenterAdministrator {
   id: string;
