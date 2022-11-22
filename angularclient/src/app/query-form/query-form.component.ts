@@ -24,7 +24,7 @@ export class QueryFormComponent implements OnInit {
   ngOnInit(): void {
     this.queryService.findAll().subscribe(data => {
       this.questions = data;
-      this.userService.findById(1).subscribe((response) => this.patient = response);
+      this.userService.findById(3).subscribe((response) => this.patient = response);
     })
     this.questions.forEach((x, i) => x.answer=false);
   }
