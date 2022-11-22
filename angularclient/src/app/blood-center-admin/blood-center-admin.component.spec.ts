@@ -1,7 +1,7 @@
-import { BloodCenterAdmin } from "./blood-center-admin.component"
+import { BloodCenterAdministrator } from "./blood-center-admin.component"
 
 describe('BloodCenterAdmin', () => {
   it('should create an instance', () => {
-    expect(new BloodCenterAdmin()).toBeTruthy();
+    expect(new BloodCenterAdministrator()).toBeTruthy();
   });
 });
