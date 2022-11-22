@@ -28,6 +28,7 @@ export class EditCenterComponent implements OnInit {
     this.bloodCenterService.findById(1).subscribe(data => {
       this.bloodCenter = data;
       this.address = data.address;
+      this.bloodAmount = data.bloodAmount;
       console.log(this.bloodCenter);
       console.log(this.bloodCenter.address.street);
     })
