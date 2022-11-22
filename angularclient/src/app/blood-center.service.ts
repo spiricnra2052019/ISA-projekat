@@ -10,11 +10,13 @@ export class BloodCenterService {
   private bloodCentersUrl: string;
   private searchUrl: string;
   private filterUrl: string;
+  private sortUrl: string;
 
   constructor(private http: HttpClient) {
     this.bloodCentersUrl = 'http://localhost:8080/blood-centers';
     this.searchUrl = 'http://localhost:8080/blood-centers/search?query=';
     this.filterUrl = 'http://localhost:8080/blood-centers/filter?searchQuery=';
+    this.sortUrl = 'http://localhost:8080/blood-centers/sort?sortBy=';
   }
 
   public findAll(): Observable<BloodCenter[]> {
@@ -39,5 +41,7 @@ export class BloodCenterService {
   public edit(bloodCenter){
     return this.http.put<BloodCenter>(this.bloodCentersUrl, bloodCenter);
   }
-
+  public sortBy(sortBy){
+    return this.http.get<BloodCenter[]>(this.sortUrl.concat(sortBy));
+  }
 }

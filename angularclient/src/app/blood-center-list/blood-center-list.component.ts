@@ -6,6 +6,7 @@ import { MatSort, Sort } from '@angular/material/sort';
 import { LiveAnnouncer } from '@angular/cdk/a11y';
 import { ObjectType } from 'typescript';
 import { BloodCenterAdminService } from '../blood-center-admin-service.service';
+import {FormBuilder, FormGroup} from "@angular/forms";
 
 @Component({
   selector: 'app-blood-center-list',
@@ -15,30 +16,34 @@ import { BloodCenterAdminService } from '../blood-center-admin-service.service';
 
 
 export class BloodCenterListComponent implements OnInit {
-  displayedColumns: string[] = ['averageRate', 'description', 'name', 'address.city', 'address.street', 'address.streetNumber'];
-  centers: MatTableDataSource<BloodCenter> = new MatTableDataSource<BloodCenter>();
+  centers: BloodCenter[];
+  sortBy: string;
   searchProperty = '';
   filterProperty = '';
   searchAndFilter = {};
   showFilter = false;
+  contactForm:FormGroup;
+  selectedDevice: string;
 
-  constructor(private bloodCenterService: BloodCenterService, private _liveAnnouncer: LiveAnnouncer, private bloodCenterAdminService: BloodCenterAdminService) { }
+  columns = [
+    { id: 1, name: "Average Rate", value:"averageRate" },
+    { id: 2, name: "Description", value:"description" },
+    { id: 3, name: "Name", value:"name" },
+    { id: 4, name: "City", value:"address.city" },
+    { id: 5, name: "Street", value:"address.street" },
+    { id: 6, name: "Street Number", value:"address.streetNumber" }
+  ];
 
-  @ViewChild(MatSort) sort: MatSort;
+  constructor(private bloodCenterService: BloodCenterService, private _liveAnnouncer: LiveAnnouncer, private bloodCenterAdminService: BloodCenterAdminService,
+              private fb:FormBuilder) { }
 
   ngOnInit(): void {
     this.bloodCenterService.findAll().subscribe(data => {
-      this.centers = new MatTableDataSource(data);
-      this.centers.sortingDataAccessor = (item, property) => {
-        switch (property) {
-          case 'address.city': return item.address.city;
-          case 'address.street': return item.address.street;
-          case 'address.streetNumber': return item.address.streetNumber;
-          default: return item[property];
-        }
-      };
-      this.centers.sort = this.sort;
+      this.centers = data;
     })
+    this.contactForm = this.fb.group({
+      columns: [null]
+    });
   }
   filterFun(searchValue) {
     this.filterProperty = searchValue.value;
@@ -48,7 +53,7 @@ export class BloodCenterListComponent implements OnInit {
       "filterProperty": this.filterProperty.toUpperCase()
     };
     this.bloodCenterService.findAllAndFilter(this.searchAndFilter).subscribe(res => {
-      this.centers = new MatTableDataSource(res);
+      this.centers = res;
     });
   }
 
@@ -57,20 +62,15 @@ export class BloodCenterListComponent implements OnInit {
     this.showFilter = this.searchProperty != "";
 
     this.bloodCenterService.findAllAndSearch(this.searchProperty.toUpperCase()).subscribe(res => {
-      this.centers = new MatTableDataSource(res);
+      this.centers = res;
     });
   }
 
-  /** Announce the change in sort state for assistive technology. */
-  announceSortChange(sortState: Sort) {
-    // This example uses English messages. If your application supports
-    // multiple language, you would internationalize these strings.
-    // Furthermore, you can customize the message to add additional
-    // details about the values being sorted.
-    if (sortState.direction) {
-      this._liveAnnouncer.announce(`Sorted ${sortState.direction}ending`);
-    } else {
-      this._liveAnnouncer.announce('Sorting cleared');
-    }
+  onChange(deviceValue) {
+    this.selectedDevice = deviceValue;
+    this.bloodCenterService.sortBy(deviceValue).subscribe(res =>{
+      this.centers = res;
+    });
   }
+
 }
