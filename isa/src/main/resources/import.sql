@@ -6,9 +6,10 @@ insert into blood_center_administrator(name, lastname, username, password, birth
 insert into blood_center_administrator(name, lastname, username, password, birthday, email) values ('Bora', 'Boroje', 'boraB', 'bora123', '2000-04-22', 'bora@test.com');
 
 
-insert into registered_user (name, lastname, username, password, birthday, role, email, address_id) values ('Pera', 'Peric', 'peraP', 'sifra123', '2000-03-19', 'Administrator', 'pera@test.com', 1);
-insert into registered_user (name, lastname, username, password, birthday, role, email, address_id) values ('Marko', 'Markovic', 'markoM', 'sifra123', '2000-03-19', 'RegisteredUser', 'marko@test.com', 2);
-insert into registered_user (name, lastname, username, password, birthday, role, email, address_id) values ('Mika', 'Mikic', 'mikaM', 'sifra123', '2000-03-19', 'Employee', 'mika@test.com', 3);
+insert into base_user (name, lastname, username, password, birthday, email, address_id, role, par) values ('Pera', 'Peric', 'peraP', 'sifra123', '2000-03-19', 'pera@test.com', 1, 1, '123');
+insert into base_user (name, lastname, username, password, birthday, email, address_id, role, par) values ('Marko', 'Markovic', 'markoM', 'sifra123', '2000-03-19', 'marko@test.com', 2, 1, 'asd');
+insert into base_user (name, lastname, username, password, birthday, email, address_id, role, par) values ('Mika', 'Mikic', 'mikaM', 'sifra123', '2000-03-19', 'mika@test.com', 3, 1, 'asd');
+insert into base_user (name, lastname, username, password, birthday, email, address_id, role, par2) values ('Mika', 'Mikic', 'mikaM', 'sifra123', '2000-03-19', 'mika@test.com', 3, 2, 'asd');
 
 insert into blood_amount(a, b, ab, zero) values (10, 11, 12, 9);
 insert into blood_amount(a, b, ab, zero) values (16, 21, 12, 9);
