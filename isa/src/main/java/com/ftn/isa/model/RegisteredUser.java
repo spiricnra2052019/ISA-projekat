@@ -32,19 +32,19 @@ public class RegisteredUser implements Serializable{
 	@Column(name = "name", nullable = false)
 	private String name;
 	
-	@Column(name = "lastname", nullable = true)
+	@Column(name = "lastname", nullable = false)
 	private String lastname;
 	
 	@Column(name = "username", nullable = false)
 	private String username;
 	
-	@Column(name = "email", nullable = false)
+	@Column(name = "email", unique = true, nullable = false)
 	private String email;
 	
 	@Column(name = "password", nullable = false)
 	private String password;
 	
-	@Column(name = "birthday", nullable = true)
+	@Column(name = "birthday", nullable = false)
 	private LocalDate birthday;
 	
 	@Enumerated(EnumType.STRING)

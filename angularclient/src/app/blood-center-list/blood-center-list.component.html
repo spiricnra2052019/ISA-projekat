@@ -8,58 +8,36 @@
       (keyup)="filterFun($event.target)">
   </form>
 </ng-template>
-<table mat-table [dataSource]="centers" matSort (matSortChange)="announceSortChange($event)" class="mat-elevation-z8">
-  <!-- Position Column -->
-  <ng-container matColumnDef="averageRate">
-    <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by number">
-      Average rate
-    </th>
-    <td mat-cell *matCellDef="let element"> {{element.averageRate}} </td>
-  </ng-container>
+<div class="float-right">
 
-  <!-- Name Column -->
-  <ng-container matColumnDef="description">
-    <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by description">
-      Description
-    </th>
-    <td mat-cell *matCellDef="let element"> {{element.description}} </td>
-  </ng-container>
+  <select [ngModel]="columns" (ngModelChange)="onChange($event)" name="sel2">
+    <option [value]="col.value" *ngFor="let col of columns">{{col.name}}</option>
+  </select>
+</div>
 
-  <!-- Weight Column -->
-  <ng-container matColumnDef="name">
-    <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by name">
-      Name
-    </th>
-    <td mat-cell *matCellDef="let element"> {{element.name}} </td>
-  </ng-container>
-
-  <!-- Symbol Column -->
-  <ng-container matColumnDef="address.city">
-    <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by city">
-      City
-    </th>
-    <td mat-cell *matCellDef="let element"> {{element.address.city}} </td>
-  </ng-container>
-
-  <!-- Symbol Column -->
-  <ng-container matColumnDef="address.street">
-    <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by street">
-      Address
-      Street
-    </th>
-    <td mat-cell *matCellDef="let element"> {{element.address.street}} </td>
-  </ng-container>
-
-  <ng-container matColumnDef="address.streetNumber">
-    <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by streetNumber">
-      Street Number
-    </th>
-    <td mat-cell *matCellDef="let element"> {{element.address.streetNumber}} </td>
-  </ng-container>
-
-  <!-- Bobane pomagaj ispisuj mi admine ovde,jer je bas tesko snaci se sta je sta ovde , ali mislim da sam na dobrom putu ovde dole. -->
-
-
-  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-</table>
+<div class="card my-5">
+  <div class="card-body">
+    <table class="table table-bordered table-striped">
+      <thead class="thead-dark">
+      <tr>
+        <th scope="col">Average rate</th>
+        <th scope="col">Description</th>
+        <th scope="col">Name</th>
+        <th scope="col">City</th>
+        <th scope="col">Street</th>
+        <th scope="col">Street Number</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let center of centers">
+        <td>{{ center.averageRate }}</td>
+        <td>{{ center.description }}</td>
+        <td>{{ center.name }}</td>
+        <td>{{ center.address.city }}</td>
+        <td>{{ center.address.street }}</td>
+        <td>{{ center.address.streetNumber }}</td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
