@@ -44,9 +44,7 @@ public class BaseUser {
 	@Column(name = "birthday", nullable = true)
 	private LocalDate birthday;
 	
-	@OneToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "address_id")
-	private Address address;
+
 
 	public BaseUser(Long id, String name, String lastname, String username, String email, String password,
 			LocalDate birthday, Address address) {
@@ -58,7 +56,6 @@ public class BaseUser {
 		this.email = email;
 		this.password = password;
 		this.birthday = birthday;
-		this.address = address;
 	}
 
 	public BaseUser() {
@@ -121,12 +118,5 @@ public class BaseUser {
 		this.birthday = birthday;
 	}
 
-	public Address getAddress() {
-		return address;
-	}
-
-	public void setAddress(Address address) {
-		this.address = address;
-	}
 	
 }

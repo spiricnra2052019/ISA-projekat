@@ -1,96 +1,27 @@
 package com.ftn.isa.model;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 
 import javax.persistence.Column;
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
-public class Employee {
+@DiscriminatorValue("2")
+public class Employee extends BaseUser implements Serializable {
 	
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id", unique=true, nullable = false)
-	private Long id;
-	
-	@Column(name = "name", nullable = false)
-	private String name;
-	
-	@Column(name = "lastname", nullable = true)
-	private String lastname;
-	
-	@Column(name = "username", nullable = false)
-	private String username;
-	
-	@Column(name = "password", nullable = false)
-	private String password;
-	
-	@Column(name = "birthday", nullable = true)
-	private LocalDate birthday;
-	
-	public Employee() {
-		
-	}
-
-	public Employee(Long id, String name, String lastname, String username, String password, LocalDate birthday) {
+	public Employee () {
 		super();
-		this.id = id;
-		this.name = name;
-		this.lastname = lastname;
-		this.username = username;
-		this.password = password;
-		this.birthday = birthday;
 	}
 
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public String getLastname() {
-		return lastname;
-	}
-
-	public void setLastname(String lastname) {
-		this.lastname = lastname;
-	}
-
-	public String getUsername() {
-		return username;
-	}
-
-	public void setUsername(String username) {
-		this.username = username;
-	}
-
-	public String getPassword() {
-		return password;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
-	}
-
-	public LocalDate getBirthday() {
-		return birthday;
-	}
-
-	public void setBirthday(LocalDate birthday) {
-		this.birthday = birthday;
+	public Employee(Long id, String name, String lastname, String username, String email, String password,
+			LocalDate birthday, Address address) {
+		super(id, name, lastname, username, email, password, birthday, address);
+		// TODO Auto-generated constructor stub
 	}
 	
 	
