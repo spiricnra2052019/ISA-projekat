@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { BloodCenter } from '../blood-center';
-import { Address } from '../address';
-import { BloodAmount } from '../blood-amount';
+import { BloodCenter } from 'src/app/model/blood-center';
+import { Address } from 'src/app/model/address';
+import { BloodAmount } from 'src/app/model/blood-amount';
 import { Router } from '@angular/router';
-import { BloodCenterService } from '../blood-center.service';
+import { BloodCenterService } from 'src/app/services/blood-center.service';
 
 @Component({
   selector: 'app-edit-center',

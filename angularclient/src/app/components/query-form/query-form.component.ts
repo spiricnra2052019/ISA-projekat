@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { PatientAnswer } from '../patient-answer';
-import { QueryService } from '../query.service';
+import { PatientAnswer } from 'src/app/model/patient-answer';
+import { QueryService } from 'src/app/services/query.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import {QueryQuestion} from "../query-question";
-import {RegisteredUserService} from "../registered-user.service";
-import {RegisteredUser} from "../registered-user";
+import { QueryQuestion } from 'src/app/model/query-question';
+import { RegisteredUserService } from 'src/app/services/registered-user.service';
+import { RegisteredUser } from 'src/app/model/registered-user';
 
 @Component({
   selector: 'app-query-form',
@@ -18,18 +18,18 @@ export class QueryFormComponent implements OnInit {
 
 
   constructor(private queryService: QueryService, private userService: RegisteredUserService,
-              private route: ActivatedRoute,
-              private router: Router,) { }
+    private route: ActivatedRoute,
+    private router: Router,) { }
 
   ngOnInit(): void {
     this.queryService.findAll().subscribe(data => {
       this.questions = data;
       this.userService.findById(3).subscribe((response) => this.patient = response);
     })
-    this.questions.forEach((x, i) => x.answer=false);
+    this.questions.forEach((x, i) => x.answer = false);
   }
 
-  addQuery(){
+  addQuery() {
     this.questions.forEach((x, i) => {
       this.queryAnswer = new PatientAnswer();
       this.queryAnswer.registeredUser = this.patient;

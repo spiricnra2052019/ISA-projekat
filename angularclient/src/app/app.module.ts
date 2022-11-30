@@ -1,24 +1,27 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
-import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { AppComponent } from './app.component';
-import { UserListComponent } from './user-list/user-list.component';
-import { UserFormComponent } from './user-form/user-form.component';
-import { RegisteredUserService } from './registered-user.service';
-import { UserLoginComponent } from './user-login/user-login.component';
-import { BloodCenterListComponent } from './blood-center-list/blood-center-list.component';
-import { QueryFormComponent } from './query-form/query-form.component';
+import { UserListComponent } from './components/user-list/user-list.component';
+import { UserFormComponent } from './components/user-form/user-form.component';
+import { RegisteredUserService } from './services/registered-user.service';
+import { UserLoginComponent } from './components/user-login/user-login.component';
+import { BloodCenterListComponent } from './components/blood-center-list/blood-center-list.component';
+import { QueryFormComponent } from './components/query-form/query-form.component';
 import { MatTableModule } from '@angular/material/table'
 import { MatSortModule } from '@angular/material/sort';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { NikolaTestComponent } from './administrator-search/nikola-test.component';
-import { AddNewCentersComponent } from './add-new-centers/add-new-centers.component';
-import { EditUserFormComponent } from './edit-user-form/edit-user-form.component';
-import { EditCenterComponent } from './edit-center/edit-center.component';
-import { EditEmployeeComponent } from './edit-employee/edit-employee.component';
-import { BloodCenterAdministrator } from './/blood-center-admin/blood-center-admin.component';
+import { UsersSearchComponent } from './components/users-search/users-search.component';
+import { AddNewCentersComponent } from './components/add-new-centers/add-new-centers.component';
+import { EditUserFormComponent } from './components/edit-user-form/edit-user-form.component';
+import { EditCenterComponent } from './components/edit-center/edit-center.component';
+import { EditEmployeeComponent } from './components/edit-employee/edit-employee.component';
+import { BloodCenterAdministrator } from './components/blood-center-admin/blood-center-admin.component';
+import { AddNewAdministratorComponent } from './components/add-new-administrator/add-new-administrator.component';
+
+
 
 @NgModule({
   declarations: [
@@ -28,22 +31,23 @@ import { BloodCenterAdministrator } from './/blood-center-admin/blood-center-adm
     UserLoginComponent,
     BloodCenterListComponent,
     QueryFormComponent,
-    NikolaTestComponent,
+    UsersSearchComponent,
     AddNewCentersComponent,
     EditUserFormComponent,
     EditCenterComponent,
     EditEmployeeComponent,
+    AddNewAdministratorComponent,
   ],
-    imports: [
-        BrowserModule,
-        AppRoutingModule,
-        HttpClientModule,
-        FormsModule,
-        MatSortModule,
-        MatTableModule,
-        BrowserAnimationsModule,
-        ReactiveFormsModule
-    ],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    HttpClientModule,
+    FormsModule,
+    MatSortModule,
+    MatTableModule,
+    BrowserAnimationsModule,
+    ReactiveFormsModule
+  ],
   providers: [RegisteredUserService],
   bootstrap: [AppComponent]
 })

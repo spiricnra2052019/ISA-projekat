@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Address } from '../address';
-import { RegisteredUser } from '../registered-user';
-import { RegisteredUserService } from '../registered-user.service';
+import { Address } from 'src/app/model/address';
+import { RegisteredUser } from 'src/app/model/registered-user';
+import { RegisteredUserService } from 'src/app/services/registered-user.service';
 
 @Component({
   selector: 'app-edit-user-form',

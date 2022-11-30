@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { BloodCenterService } from '../blood-center.service';
+import { BloodCenterService } from 'src/app/services/blood-center.service';
 import { Router } from '@angular/router';
-import { BloodCenter } from '../blood-center';
-import { Address } from '../address';
-import { BloodAmount } from '../blood-amount';
-import { BloodCenterAdministrator } from '../../app/blood-center-admin/blood-center-admin.component'
-import { BloodCenterAdminService } from '../blood-center-admin-service.service';
+import { BloodCenter } from 'src/app/model/blood-center';
+import { Address } from 'src/app/model/address';
+import { BloodAmount } from 'src/app/model/blood-amount';
+import { BloodCenterAdministrator } from '../blood-center-admin/blood-center-admin.component';
+import { BloodCenterAdminService } from 'src/app/services/blood-center-admin-service.service';
 
 @Component({
   selector: 'app-add-new-centers',

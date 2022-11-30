@@ -1,16 +1,16 @@
 import { Component, OnInit } from '@angular/core';
-import { RegisteredUser } from '../registered-user';
-import { RegisteredUserService } from '../registered-user.service';
+import { RegisteredUser } from 'src/app/model/registered-user';
+import { RegisteredUserService } from 'src/app/services/registered-user.service';
 import { Observable } from 'rxjs/internal/Observable';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 
 @Component({
   selector: 'app-nikola-test',
-  templateUrl: './nikola-test.component.html',
-  styleUrls: ['./nikola-test.component.css']
+  templateUrl: './users-search.component.html',
+  styleUrls: ['./users-search.component.css']
 })
-export class NikolaTestComponent implements OnInit {
+export class UsersSearchComponent implements OnInit {
   users: RegisteredUser[] = [];
   searchProperty = '';
   searchUrl: string;

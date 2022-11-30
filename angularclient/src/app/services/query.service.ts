@@ -1,9 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { PatientAnswer } from './patient-answer';
-import {RegisteredUser} from "./registered-user";
-import {QueryQuestion} from "./query-question";
+import { PatientAnswer } from '../model/patient-answer';
+import { QueryQuestion } from '../model/query-question';
 
 @Injectable({
   providedIn: 'root'
@@ -21,7 +20,7 @@ export class QueryService {
     return this.http.get<QueryQuestion[]>(this.queryQuestionsUrl);
   }
 
-  public save(queryAnswer: PatientAnswer){
+  public save(queryAnswer: PatientAnswer) {
     return this.http.post<PatientAnswer>(this.queryAnswersUrl, queryAnswer);
   }
 }

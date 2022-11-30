@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { BloodCenter } from './blood-center';
+import { BloodCenter } from '../model/blood-center';
 
 @Injectable({
   providedIn: 'root'
@@ -35,13 +35,13 @@ export class BloodCenterService {
     return this.http.get<BloodCenter[]>(this.filterUrl.concat(searchAndFilter.searchProperty).concat('&filterQuery=')
       .concat(searchAndFilter.filterProperty));
   }
-  public findById(id){
+  public findById(id) {
     return this.http.get<BloodCenter>(this.bloodCentersUrl + "/" + id);
   }
-  public edit(bloodCenter){
+  public edit(bloodCenter) {
     return this.http.put<BloodCenter>(this.bloodCentersUrl, bloodCenter);
   }
-  public sortBy(sortBy){
+  public sortBy(sortBy) {
     return this.http.get<BloodCenter[]>(this.sortUrl.concat(sortBy));
   }
 }

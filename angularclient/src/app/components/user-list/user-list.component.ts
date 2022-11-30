@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { RegisteredUser } from '../registered-user';
-import { RegisteredUserService } from '../registered-user.service';
+import { RegisteredUser } from 'src/app/model/registered-user';
+import { RegisteredUserService } from 'src/app/services/registered-user.service';
 
 
 @Component({

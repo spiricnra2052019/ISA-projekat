@@ -1,6 +1,6 @@
 import { Address } from "./address";
 import { BloodAmount } from "./blood-amount";
-import { BloodCenterAdministrator } from ".//blood-center-admin/blood-center-admin.component";
+import { BloodCenterAdministrator } from "../components/blood-center-admin/blood-center-admin.component";
 
 export class BloodCenter {
     id: number;

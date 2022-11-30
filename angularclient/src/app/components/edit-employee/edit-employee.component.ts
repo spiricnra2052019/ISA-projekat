@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Employee } from '../employee';
-import { EmployeeService } from '../employee.service';
+import { Employee } from 'src/app/model/employee';
+import { EmployeeService } from 'src/app/services/employee.service';
 import { Router } from '@angular/router';
 
 @Component({
@@ -10,20 +10,20 @@ import { Router } from '@angular/router';
 })
 export class EditEmployeeComponent implements OnInit {
 
-  employee : Employee;
-  confirmPassword : string;
+  employee: Employee;
+  confirmPassword: string;
 
   constructor(private router: Router, private employeeService: EmployeeService) {
     this.employee = new Employee();
-   }
+  }
 
   ngOnInit(): void {
     this.employeeService.findById(9).subscribe(data => {
       this.employee = data;
-  })
+    })
   }
   editEmployee(): void {
-    if (this.confirmPassword == this.employee.password && this.employee.password.length>3){
+    if (this.confirmPassword == this.employee.password && this.employee.password.length > 3) {
       this.employeeService.edit(this.employee).subscribe(res => this.gotoUserList());
     }
     else {
