@@ -11,6 +11,8 @@ import { EditCenterComponent } from './components/edit-center/edit-center.compon
 import { EditEmployeeComponent } from './components/edit-employee/edit-employee.component';
 import { AddNewAdministratorComponent } from './components/add-new-administrator/add-new-administrator.component';
 import { ScheduleCalendarComponent } from './components/schedule-calendar/schedule-calendar/schedule-calendar.component';
+import { AppealComponent } from './components/appeal/appeal.component';
+import { AppealResponseComponent } from './components/appeal-response/appeal-response.component';
 
 const routes: Routes = [
   { path: 'users', component: UserListComponent },
@@ -23,7 +25,9 @@ const routes: Routes = [
   { path: 'edit-center', component: EditCenterComponent },
   { path: 'editemployee', component: EditEmployeeComponent },
   { path: 'add-new-administrator', component: AddNewAdministratorComponent },
-  { path: 'schedule-calendar', component: ScheduleCalendarComponent }
+  { path: 'schedule-calendar', component: ScheduleCalendarComponent },
+  { path: 'send-appeal', component: AppealComponent },
+  { path: 'response-appeal', component: AppealResponseComponent },
 ];
 
 @NgModule({

@@ -37,7 +37,19 @@ insert into schedule_calendar(schedule_date, start_time, duration, name, lastnam
 insert into schedule_calendar(schedule_date, start_time, duration, name, lastname) values ('2022-12-01', '12:00:00', 60, 'Mihajlo', 'Torbica');
 insert into schedule_calendar(schedule_date, start_time, duration, name, lastname) values ('2022-12-02', '10:00:00', 120, 'Boban', 'Legendic');
 insert into schedule_calendar(schedule_date, start_time, duration, name, lastname) values ('2022-12-02', '10:00:00', 60, 'Anja', 'Carica');
+insert into schedule_calendar(schedule_date, start_time, duration, name, lastname) values ('2022-12-05', '11:00:00', 60, 'Lol', 'Lolic');
+insert into schedule_calendar(schedule_date, start_time, duration, name, lastname) values ('2022-12-05', '12:00:00', 60, 'Pera', 'Peric');
+insert into schedule_calendar(schedule_date, start_time, duration, name, lastname) values ('2022-12-05', '10:00:00', 120, 'Nole', 'Djokovic');
+insert into schedule_calendar(schedule_date, start_time, duration, name, lastname) values ('2022-12-06', '10:00:00', 60, 'Mika', 'Mikic');
+insert into schedule_calendar(schedule_date, start_time, duration, name, lastname) values ('2022-12-07', '11:00:00', 60, 'Mica', 'Micic');
+insert into schedule_calendar(schedule_date, start_time, duration, name, lastname) values ('2022-12-19', '12:00:00', 60, 'Mihajlo', 'Torbica');
+insert into schedule_calendar(schedule_date, start_time, duration, name, lastname) values ('2022-12-19', '10:00:00', 120, 'Boban', 'Bobic');
+insert into schedule_calendar(schedule_date, start_time, duration, name, lastname) values ('2022-12-19', '10:00:00', 60, 'Anja', 'Andjelic');
 
+
+insert into send_appeal(to_username, subject, text) values ('peraP', 'Zalba na objekat', 'Mnogo vam....');
+insert into send_appeal(to_username, subject, text) values ('mikaM', 'Zalba na osoblje', 'Osoblje vam je neljubazno....');
+insert into send_appeal(to_username, subject, text) values ('markoM', 'Zalba na objekat 12', 'Mnogo vam je neuredno....');
 
 
 
