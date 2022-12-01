@@ -10,6 +10,7 @@ import { EditUserFormComponent } from './components/edit-user-form/edit-user-for
 import { EditCenterComponent } from './components/edit-center/edit-center.component';
 import { EditEmployeeComponent } from './components/edit-employee/edit-employee.component';
 import { AddNewAdministratorComponent } from './components/add-new-administrator/add-new-administrator.component';
+import { ScheduleCalendarComponent } from './components/schedule-calendar/schedule-calendar/schedule-calendar.component';
 
 const routes: Routes = [
   { path: 'users', component: UserListComponent },
@@ -21,7 +22,8 @@ const routes: Routes = [
   { path: 'edituser', component: EditUserFormComponent },
   { path: 'edit-center', component: EditCenterComponent },
   { path: 'editemployee', component: EditEmployeeComponent },
-  { path: 'add-new-administrator', component: AddNewAdministratorComponent }
+  { path: 'add-new-administrator', component: AddNewAdministratorComponent },
+  { path: 'schedule-calendar', component: ScheduleCalendarComponent }
 ];
 
 @NgModule({

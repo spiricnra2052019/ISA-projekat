@@ -20,6 +20,12 @@ import { EditCenterComponent } from './components/edit-center/edit-center.compon
 import { EditEmployeeComponent } from './components/edit-employee/edit-employee.component';
 import { BloodCenterAdministrator } from './components/blood-center-admin/blood-center-admin.component';
 import { AddNewAdministratorComponent } from './components/add-new-administrator/add-new-administrator.component';
+import { ScheduleCalendarComponent } from './components/schedule-calendar/schedule-calendar/schedule-calendar.component';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
+import { MatInputModule } from '@angular/material/input';
+import { MatCardModule } from '@angular/material/card';
+
 
 
 
@@ -37,6 +43,7 @@ import { AddNewAdministratorComponent } from './components/add-new-administrator
     EditCenterComponent,
     EditEmployeeComponent,
     AddNewAdministratorComponent,
+    ScheduleCalendarComponent,
   ],
   imports: [
     BrowserModule,
@@ -46,7 +53,11 @@ import { AddNewAdministratorComponent } from './components/add-new-administrator
     MatSortModule,
     MatTableModule,
     BrowserAnimationsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatInputModule,
+    MatCardModule
   ],
   providers: [RegisteredUserService],
   bootstrap: [AppComponent]

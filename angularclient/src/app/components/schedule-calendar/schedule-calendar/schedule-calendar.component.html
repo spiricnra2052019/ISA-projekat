@@ -1,0 +1,40 @@
+<div class="positioning">
+    <mat-card class="demo-inline-calendar-card">
+        <mat-calendar [(selected)]="selected" (click)="dateSelected()"></mat-calendar>
+    </mat-card>
+
+    <div class="terminsTable">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">Datum termina:</th>
+                    <th class="gap"></th>
+                    <th scope="col">Trajanje:</th>
+                    <th class="gap"></th>
+                    <th scope="col">Ime:</th>
+                    <th class="gap"></th>
+                    <th scope="col">Prezime:</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let term of termins;">
+                    <td>
+                        <h3>{{term.date}}</h3>
+                    </td>
+                    <th class="gap"></th>
+                    <td>
+                        <h3>{{term.duration}}</h3>
+                    </td>
+                    <th class="gap"></th>
+                    <td>
+                        <h3>{{term.name}}</h3>
+                    </td>
+                    <th class="gap"></th>
+                    <td>
+                        <h3>{{term.lastname}}</h3>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
