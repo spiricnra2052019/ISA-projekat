@@ -29,7 +29,7 @@ public class SendAppealService {
 		return sendAppealRepository.save(appeal);
 	}
 	
-	/*public void sendEmail(String to, String subject, String message) {
+	public void sendEmail(String to, String subject, String message) {
 		
 		SimpleMailMessage simpleMailMessage = new SimpleMailMessage();
 		simpleMailMessage.setFrom("spiricn00@gmail.com");
@@ -38,7 +38,8 @@ public class SendAppealService {
 		simpleMailMessage.setSubject(message);
 		
 		this.mailSender.send(simpleMailMessage);
-	} */
+		System.out.println("Mail send");
+	} 
 	
 	public void remove(Long id) {
 		sendAppealRepository.deleteById(id);

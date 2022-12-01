@@ -1,36 +1,30 @@
 package com.ftn.isa.controller;
 
-import java.io.UnsupportedEncodingException;
+import java.util.Collection;
 
-import javax.mail.internet.MimeMessage;
-
-import org.springframework.mail.javamail.JavaMailSender;
-import org.springframework.mail.javamail.MimeMessageHelper;
-import org.springframework.messaging.MessagingException;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.ftn.isa.model.SendAppeal;
+import com.ftn.isa.service.SendAppealService;
 
 
 
 @RestController
 public class SendAppealRequestController {
-	JavaMailSender sender;
-	
-	public SendAppealRequestController(JavaMailSender sender) {
-		this.sender = sender;
-	}
+	@Autowired
+	private SendAppealService sendAppealService;
 	
 	
-	@GetMapping("/response-appeal")
-	public String sendMail() throws MessagingException, UnsupportedEncodingException, javax.mail.MessagingException{
-		MimeMessage message = sender.createMimeMessage();
-		MimeMessageHelper helper = new MimeMessageHelper(message);
-		helper.setSubject("Test email");
-		helper.setText("Hello this is the test email");
-		helper.setFrom("spiricn00@gmail.com");
-		helper.setTo("maki.spiric@gmail.com");
-		sender.send(message);
-		return "mail send successfully";
+	@PostMapping("/send-appeal-request")
+	public ResponseEntity sendEmail(@RequestBody SendAppeal sendAppeal) {
+	//	this.sendAppealService.sendEmail(String nes, String nesto, String nesto);
+		return ResponseEntity.ok("Success");
 	}
 
 }
