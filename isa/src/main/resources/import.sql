@@ -33,5 +33,11 @@ insert into patient_question(description, answer) values ('Have you taken any me
 insert into patient_question(description, answer) values ('Do you regularly take Aspirin (Cardiopirin)? Have you taken it in the last 5 days?', false);
 
 
+insert into schedule_calendar(schedule_date, start_time, duration, name, lastname) values ('2022-12-01', '11:00:00', 60, 'Nikola', 'Spiric');
+insert into schedule_calendar(schedule_date, start_time, duration, name, lastname) values ('2022-12-01', '12:00:00', 60, 'Mihajlo', 'Torbica');
+insert into schedule_calendar(schedule_date, start_time, duration, name, lastname) values ('2022-12-02', '10:00:00', 120, 'Boban', 'Legendic');
+insert into schedule_calendar(schedule_date, start_time, duration, name, lastname) values ('2022-12-02', '10:00:00', 60, 'Anja', 'Carica');
+
+
 
 
