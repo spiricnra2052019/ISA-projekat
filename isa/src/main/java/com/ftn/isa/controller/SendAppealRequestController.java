@@ -21,9 +21,9 @@ public class SendAppealRequestController {
 	private SendAppealService sendAppealService;
 	
 	
-	@PostMapping("/send-appeal-request")
+	@PostMapping("/response-appeal")
 	public ResponseEntity sendEmail(@RequestBody SendAppeal sendAppeal) {
-	//	this.sendAppealService.sendEmail(String nes, String nesto, String nesto);
+		this.sendAppealService.sendEmail(sendAppeal.getToUsername(), sendAppeal.getSubject(), sendAppeal.getText());
 		return ResponseEntity.ok("Success");
 	}
 

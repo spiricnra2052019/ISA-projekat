@@ -40,8 +40,8 @@
             </div>
             <div>
                 <label class="label">Response:</label>
-                <textarea class="textboxBig"></textarea>
-                <a routerLink="/response-appeal" class=" btn btn-info">Send</a>
+                <textarea class="textboxBig" (keyup)="responseTextFunction($event.target)"></textarea>
+                <a routerLink="/response-appeal" class=" btn btn-info" (click)="sendResponse()">Send</a>
             </div>
         </form>
     </div>

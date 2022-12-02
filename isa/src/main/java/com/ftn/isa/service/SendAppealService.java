@@ -15,7 +15,9 @@ import com.ftn.isa.repository.SendAppealRepository;
 public class SendAppealService {
 	@Autowired
 	private SendAppealRepository sendAppealRepository;
+	@Autowired
 	private JavaMailSender mailSender;
+	
 	
 	public SendAppeal findOne(Long id) {
 		return sendAppealRepository.findById(id).orElseGet(null);

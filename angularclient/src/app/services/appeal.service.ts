@@ -9,9 +9,11 @@ import { Appeal } from '../model/appeal';
 export class AppealService {
 
   private sendAppealUrl: string;
+  private appealResponseUrl: string;
 
   constructor(private http: HttpClient) {
     this.sendAppealUrl = 'http://localhost:8080/send-appeal'
+    this.appealResponseUrl = "http://localhost:8080/response-appeal"
   }
 
   public getAllAppeals(): Observable<Appeal[]> {
@@ -23,6 +25,6 @@ export class AppealService {
   }
 
   public sendAppealResponse(appeal: Appeal): Observable<Appeal> {
-    return this.http.post<Appeal>(this.sendAppealUrl, appeal);
+    return this.http.post<Appeal>(this.appealResponseUrl, appeal);
   }
 }
