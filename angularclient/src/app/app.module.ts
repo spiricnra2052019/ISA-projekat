@@ -25,8 +25,8 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatInputModule } from '@angular/material/input';
 import { MatCardModule } from '@angular/material/card';
-
-
+import { AppealComponent } from './components/appeal/appeal.component';
+import { AppealResponseComponent } from './components/appeal-response/appeal-response.component';
 
 
 @NgModule({
@@ -44,6 +44,8 @@ import { MatCardModule } from '@angular/material/card';
     EditEmployeeComponent,
     AddNewAdministratorComponent,
     ScheduleCalendarComponent,
+    AppealComponent,
+    AppealResponseComponent,
   ],
   imports: [
     BrowserModule,

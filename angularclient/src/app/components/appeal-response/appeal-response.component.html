@@ -1,0 +1,49 @@
+<div class="general">
+
+    <div class="terminsTable">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">From:</th>
+                    <th class="gap"></th>
+                    <th scope="col">Subject:</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let appeals of appealData;"
+                    (click)="appealSelected(appeals.toUsername,appeals.subject,appeals.text)">
+                    <td>
+                        <h5>{{appeals.toUsername}}</h5>
+                    </td>
+                    <th class="gap"></th>
+                    <td>
+                        <h5>{{appeals.subject}}</h5>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="appealForm" *ngIf="showAppeal">
+        <form>
+            <div>
+                <label class="label">From:</label>
+                <input type="text" class="textbox" readonly="true" value={{getUsername}}>
+            </div>
+            <div>
+                <label class="label">Subject:</label>
+                <input type="text" class="textbox2" readonly="true" value={{getSubject}}>
+            </div>
+            <div>
+                <label class="label">Text:</label>
+                <textarea class="textArea" readonly="true" value={{getText}}></textarea>
+            </div>
+            <div>
+                <label class="label">Response:</label>
+                <textarea class="textboxBig" (keyup)="responseTextFunction($event.target)"></textarea>
+                <a routerLink="/response-appeal" class=" btn btn-info" (click)="sendResponse()">Send</a>
+            </div>
+        </form>
+    </div>
+
+</div>

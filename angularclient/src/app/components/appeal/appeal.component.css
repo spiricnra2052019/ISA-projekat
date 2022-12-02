@@ -1,0 +1,27 @@
+.appealForm {
+    margin-left: 35%;
+    width: 400px;
+    height: 300px;
+    background-color: rgba(13, 167, 227, 0.473);
+    padding-left: 20px;
+    padding-top: 14px;
+}
+
+.label {
+    font-size: 20px;
+    color: white;
+}
+
+.textbox {
+    margin-left: 120px;
+}
+
+.textbox2 {
+    margin-left: 75px;
+}
+
+.textboxBig {
+    margin-top: 20px;
+    width: 336px;
+    height: 130px;
+}
