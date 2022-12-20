@@ -27,6 +27,8 @@ import { MatInputModule } from '@angular/material/input';
 import { MatCardModule } from '@angular/material/card';
 import { AppealComponent } from './components/appeal/appeal.component';
 import { AppealResponseComponent } from './components/appeal-response/appeal-response.component';
+import { LoginAdministratorComponent } from './components/login-administrator/login-administrator.component';
+import { SetPasswordComponent } from './components/set-password/set-password.component';
 
 
 @NgModule({
@@ -46,6 +48,8 @@ import { AppealResponseComponent } from './components/appeal-response/appeal-res
     ScheduleCalendarComponent,
     AppealComponent,
     AppealResponseComponent,
+    LoginAdministratorComponent,
+    SetPasswordComponent,
   ],
   imports: [
     BrowserModule,

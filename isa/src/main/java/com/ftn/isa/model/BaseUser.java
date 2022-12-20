@@ -28,7 +28,8 @@ public class BaseUser {
 	
 	@Column(name = "name", nullable = false)
 	private String name;
-	
+
+
 	@Column(name = "lastname", nullable = true)
 	private String lastname;
 	
