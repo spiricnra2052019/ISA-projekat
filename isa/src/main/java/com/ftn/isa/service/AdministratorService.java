@@ -40,5 +40,5 @@ public class AdministratorService {
 	public List<Administrator> findByNameAndLastname(String firstName, String lastName) {
 		return administratorRepository.findByNameAndLastnameAllIgnoringCase(firstName, lastName);
 	}
-	
+	public Administrator findOneByUsername(String username){ return administratorRepository.findOneByUsername(username);}
 }

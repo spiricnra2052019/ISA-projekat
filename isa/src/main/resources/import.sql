@@ -10,10 +10,14 @@ insert into base_user (name, lastname, username, password, birthday, email, addr
 insert into base_user (name, lastname, username, password, birthday, email, address_id, role) values ('Marko', 'Markovic', 'markoM', 'sifra123', '2000-03-19', 'marko@test.com', 2, 1);
 insert into base_user (name, lastname, username, password, birthday, email, address_id, role) values ('Mika', 'Mikic', 'mikaM', 'sifra123', '2000-03-19', 'mika@test.com', 3, 1);
 
+-- insert into base_user (name, lastname, username, email, password, birthday, role) values ('Pera', 'Peric', 'peraP', 'mika@test.com', 'sifra123', '2000-03-19', 3);
+-- insert into base_user (name, lastname, username, email, password, birthday, role) values ('Marko', 'Markovic', 'markoM', 'mika@test.com', 'sifra123', '2000-03-19', 3);
+-- insert into base_user (name, lastname, username, email, password, birthday, role) values ('Mika', 'Mikic', 'mikaM', 'mika@test.com', 'sifra123', '2000-03-19', 3);
 
-insert into base_user (name, lastname, username, email, password, birthday, role) values ('Pera', 'Peric', 'peraP', 'mika@test.com', 'sifra123', '2000-03-19', 3);
-insert into base_user (name, lastname, username, email, password, birthday, role) values ('Marko', 'Markovic', 'markoM', 'mika@test.com', 'sifra123', '2000-03-19', 3);
-insert into base_user (name, lastname, username, email, password, birthday, role) values ('Mika', 'Mikic', 'mikaM', 'mika@test.com', 'sifra123', '2000-03-19', 3);
+insert into base_user (name, lastname, username, email, password, birthday, role, validated) values ('Pera', 'Peric', 'peraP', 'mika@test.com', 'sifra123', '2000-03-19', 3, false);
+insert into base_user (name, lastname, username, email, password, birthday, role, validated) values ('Marko', 'Markovic', 'markoM', 'mika@test.com', 'sifra123', '2000-03-19', 3, true);
+insert into base_user (name, lastname, username, email, password, birthday, role, validated) values ('Mika', 'Mikic', 'mikaM', 'mika@test.com', 'sifra123', '2000-03-19', 3, true);
+
 
 insert into base_user (name, lastname, username, email, password, birthday, role) values ('Mile', 'Veliki', 'milecar','mile@gmail.com', '1312', '2000-05-03', 2);
 

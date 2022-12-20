@@ -13,6 +13,9 @@ import { AddNewAdministratorComponent } from './components/add-new-administrator
 import { ScheduleCalendarComponent } from './components/schedule-calendar/schedule-calendar/schedule-calendar.component';
 import { AppealComponent } from './components/appeal/appeal.component';
 import { AppealResponseComponent } from './components/appeal-response/appeal-response.component';
+import { LoginAdministratorComponent } from './components/login-administrator/login-administrator.component';
+import { SetPasswordComponent } from './components/set-password/set-password.component';
+
 
 const routes: Routes = [
   { path: 'users', component: UserListComponent },
@@ -28,6 +31,8 @@ const routes: Routes = [
   { path: 'schedule-calendar', component: ScheduleCalendarComponent },
   { path: 'send-appeal', component: AppealComponent },
   { path: 'response-appeal', component: AppealResponseComponent },
+  { path: 'login-administrator', component: LoginAdministratorComponent },
+  { path: 'set-password', component: SetPasswordComponent },
 ];
 
 @NgModule({

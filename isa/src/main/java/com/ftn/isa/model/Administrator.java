@@ -13,9 +13,10 @@ import javax.persistence.Id;
 @Entity
 @DiscriminatorValue("3")
 public class Administrator extends BaseUser implements Serializable {
-	
 
 
+	@Column(name = "validated", nullable = true)
+	private Boolean validated;
 
 	/**
 	 * 
@@ -29,11 +30,17 @@ public class Administrator extends BaseUser implements Serializable {
 	}
 	
 	public Administrator(Long id, String name, String lastname, String username, String email, String password,
-			LocalDate birthday, Address address) {
+			LocalDate birthday, Address address, Boolean validated) {
 		super(id, name, lastname, username, email, password, birthday, address);
 		// TODO Auto-generated constructor stub
+		this.validated = validated;
 	}
-	
-	
-	
+
+	public Boolean getValidated() {
+		return validated;
+	}
+
+	public void setValidated(Boolean validated) {
+		this.validated = validated;
+	}
 }

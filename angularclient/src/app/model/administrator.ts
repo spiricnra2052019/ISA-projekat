@@ -9,4 +9,5 @@ export class Administrator {
     password: string;
     birthday: string;
     address: Address;
+    validated: boolean;
 }
