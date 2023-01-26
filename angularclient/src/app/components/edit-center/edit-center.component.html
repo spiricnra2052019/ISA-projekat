@@ -1,0 +1,62 @@
+<div class="card my-5">
+    <div class="card-body">
+        <form #userForm="ngForm">
+            <div class="form-group">
+                <label for="name">Name</label>
+                <input type="text" [(ngModel)]="bloodCenter.name" class="form-control" id="name" name="name" required
+                    #name="ngModel">
+            </div>
+            <div class="form-group">
+                <label for="description">Description</label>
+                <input type="text" [(ngModel)]="bloodCenter.description" class="form-control" id="description"
+                    name="description" required #description="ngModel">
+            </div>
+            <div class="form-group">
+                <label for="averageRate">Avarage rate</label>
+                <input type="text" [(ngModel)]="bloodCenter.averageRate" class="form-control" id="averageRate"
+                    name="averageRate" required #averageRate="ngModel" disabled>
+            </div>
+            <div class="form-group">
+                <label for="street">Street</label>
+                <input type="text" [(ngModel)]="address.street" class="form-control" id="street" name="street" required
+                    #street="ngModel">
+            </div>
+            <div class="form-group">
+                <label for="streetNumber">StreetNumber</label>
+                <input type="text" [(ngModel)]="address.streetNumber" class="form-control" id="streetNumber"
+                    name="streetNumber" required #streetNumber="ngModel">
+            </div>
+            <div class="form-group">
+                <label for="city">City</label>
+                <input type="text" [(ngModel)]="address.city" class="form-control" id="city" name="city" required
+                    #city="ngModel">
+            </div>
+            <div class="form-group">
+                <label for="country">Country</label>
+                <input type="text" [(ngModel)]="address.country" class="form-control" id="country" name="country"
+                    required #country="ngModel">
+            </div>
+            <div class="form-group">
+                <label for="street">A</label>
+                <input type="text" [(ngModel)]="bloodAmount.a" class="form-control" id="a" name="a" required
+                    #a="ngModel" disabled>
+            </div>
+            <div class="form-group">
+                <label for="street-number">B</label>
+                <input type="text" [(ngModel)]="bloodAmount.b" class="form-control" id="b" name="b" required
+                    #b="ngModel" disabled>
+            </div>
+            <div class="form-group">
+                <label for="city">AB</label>
+                <input type="text" [(ngModel)]="bloodAmount.ab" class="form-control" id="ab" name="ab" required
+                    #ab="ngModel" disabled>
+            </div>
+            <div class="form-group">
+                <label for="country">ZERO</label>
+                <input type="text" [(ngModel)]="bloodAmount.zero" class="form-control" id="zero" name="zero" required
+                    #zero="ngModel" disabled>
+            </div>
+            <button (click)="editCenter()" class="btn btn-info">Submit</button>
+        </form>
+    </div>
+</div>
