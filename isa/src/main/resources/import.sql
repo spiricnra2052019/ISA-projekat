@@ -22,10 +22,10 @@ insert into base_user (name, lastname, username, email, password, birthday, role
 insert into base_user (name, lastname, username, email, password, birthday, role) values ('Mile', 'Veliki', 'milecar','mile@gmail.com', '1312', '2000-05-03', 2);
 
 insert into blood_amount(a, b, ab, zero) values (10, 11, 12, 9);
-insert into blood_amount(a, b, ab, zero) values (16, 21, 12, 9);
 
-insert into blood_center(average_rate, description, name, address_id, blood_amount_id, blood_center_administrator_id) values (9.5, 'asdadsdasdasd', 'Klinika BG', 1, 1, 1);
-insert into blood_center(average_rate, description, name, address_id, blood_amount_id, blood_center_administrator_id) values (9.1, 'asdadsdasdasd', 'Klinika NS', 2, 2, 2);
+
+insert into blood_center(average_rate, description, name, address_id, blood_amount_id, blood_center_administrator_id, equipment_num ) values (9.5, 'asdadsdasdasd', 'Klinika BG', 1, 1, 1, 20);
+
 
 insert into patient_question(description, answer) values ('Have you ever donated blood or blood components voluntarily?', false);
 insert into patient_question(description, answer) values ('Have you ever been rejected as a blood or blood component donor?', false);

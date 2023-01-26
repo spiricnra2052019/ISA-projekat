@@ -30,6 +30,9 @@ public class BloodCenter {
 	
 	@Column(name = "averageRate", nullable = false)
 	private float averageRate;
+
+	@Column(name = "equipmentNum", nullable = false)
+	private int equipmentNum;
 	
 	@OneToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "address_id")
@@ -57,6 +60,14 @@ public class BloodCenter {
 		this.address = address;
 		this.bloodAmount = bloodAmount;
 		this.bloodCenterAdministrator = bloodCenterAdministrator;
+	}
+
+	public int getEquipmentNum() {
+		return equipmentNum;
+	}
+
+	public void setEquipmentNum(int equipmentNum) {
+		this.equipmentNum = equipmentNum;
 	}
 
 	public Long getId() {
