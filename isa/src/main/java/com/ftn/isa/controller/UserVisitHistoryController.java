@@ -55,7 +55,6 @@ public class UserVisitHistoryController {
             e.printStackTrace();
             return new ResponseEntity<UserVisitHistory>(savedReport, HttpStatus.CONFLICT);
         }
-        // ovde treba napomenuti jos da kada se obavi ova funkcija treba povecati kolicinu krvi, a smanjiti opremu,sto je zadatak nekog drugog studenta u okviru tacke 3.20
     }
 
     @GetMapping("/search")

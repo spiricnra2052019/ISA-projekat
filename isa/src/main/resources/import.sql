@@ -22,10 +22,10 @@ insert into base_user (name, lastname, username, email, password, birthday, role
 insert into base_user (name, lastname, username, email, password, birthday, role) values ('Mile', 'Veliki', 'milecar','mile@gmail.com', '1312', '2000-05-03', 2);
 
 insert into blood_amount(a, b, ab, zero) values (10, 11, 12, 9);
-insert into blood_amount(a, b, ab, zero) values (16, 21, 12, 9);
 
-insert into blood_center(average_rate, description, name, address_id, blood_amount_id, blood_center_administrator_id) values (9.5, 'asdadsdasdasd', 'Klinika BG', 1, 1, 1);
-insert into blood_center(average_rate, description, name, address_id, blood_amount_id, blood_center_administrator_id) values (9.1, 'asdadsdasdasd', 'Klinika NS', 2, 2, 2);
+
+insert into blood_center(average_rate, description, name, address_id, blood_amount_id, blood_center_administrator_id, equipment_num ) values (9.5, 'asdadsdasdasd', 'Klinika BG', 1, 1, 1, 20);
+
 
 insert into patient_question(description, answer) values ('Have you ever donated blood or blood components voluntarily?', false);
 insert into patient_question(description, answer) values ('Have you ever been rejected as a blood or blood component donor?', false);
@@ -49,6 +49,14 @@ insert into schedule_calendar(schedule_date, start_time, duration, name, lastnam
 insert into schedule_calendar(schedule_date, start_time, duration, name, lastname) values ('2022-12-19', '12:00:00', 60, 'Mihajlo', 'Torbica');
 insert into schedule_calendar(schedule_date, start_time, duration, name, lastname) values ('2022-12-19', '10:00:00', 120, 'Boban', 'Bobic');
 insert into schedule_calendar(schedule_date, start_time, duration, name, lastname) values ('2022-12-19', '10:00:00', 60, 'Anja', 'Andjelic');
+insert into schedule_calendar(schedule_date, start_time, duration, name, lastname) values ('2022-12-06', '10:00:00', 60, 'Mika', 'Mikic');
+insert into schedule_calendar(schedule_date, start_time, duration, name, lastname) values ('2023-01-28', '10:00:00', 60, 'Jovan', 'Spiric');
+insert into schedule_calendar(schedule_date, start_time, duration, name, lastname) values ('2023-01-28', '12:00:00', 60, 'Mihajlo', 'Torbica');
+insert into schedule_calendar(schedule_date, start_time, duration, name, lastname) values ('2023-01-28', '10:00:00', 120, 'Boban', 'Petrovic');
+insert into schedule_calendar(schedule_date, start_time, duration, name, lastname) values ('2023-01-28', '11:00:00', 60, 'Milica', 'Micic');
+insert into schedule_calendar(schedule_date, start_time, duration, name, lastname) values ('2023-01-29', '10:00:00', 60, 'Nikola', 'Spiric');
+insert into schedule_calendar(schedule_date, start_time, duration, name, lastname) values ('2023-01-29', '12:00:00', 60, 'Marko', 'Milanovic');
+insert into schedule_calendar(schedule_date, start_time, duration, name, lastname) values ('2023-01-29', '10:00:00', 120, 'Jelena', 'Milenkovic');
 
 
 insert into send_appeal(to_username, subject, text) values ('peraP', 'Zalba na objekat', 'Mnogo vam....');
