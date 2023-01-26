@@ -29,6 +29,8 @@ import { AppealComponent } from './components/appeal/appeal.component';
 import { AppealResponseComponent } from './components/appeal-response/appeal-response.component';
 import { LoginAdministratorComponent } from './components/login-administrator/login-administrator.component';
 import { SetPasswordComponent } from './components/set-password/set-password.component';
+import { ReportsListComponent } from './components/reports-list/reports-list/reports-list.component';
+
 
 
 @NgModule({
@@ -50,6 +52,7 @@ import { SetPasswordComponent } from './components/set-password/set-password.com
     AppealResponseComponent,
     LoginAdministratorComponent,
     SetPasswordComponent,
+    ReportsListComponent,
   ],
   imports: [
     BrowserModule,
