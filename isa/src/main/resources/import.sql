@@ -49,6 +49,14 @@ insert into schedule_calendar(schedule_date, start_time, duration, name, lastnam
 insert into schedule_calendar(schedule_date, start_time, duration, name, lastname) values ('2022-12-19', '12:00:00', 60, 'Mihajlo', 'Torbica');
 insert into schedule_calendar(schedule_date, start_time, duration, name, lastname) values ('2022-12-19', '10:00:00', 120, 'Boban', 'Bobic');
 insert into schedule_calendar(schedule_date, start_time, duration, name, lastname) values ('2022-12-19', '10:00:00', 60, 'Anja', 'Andjelic');
+insert into schedule_calendar(schedule_date, start_time, duration, name, lastname) values ('2022-12-06', '10:00:00', 60, 'Mika', 'Mikic');
+insert into schedule_calendar(schedule_date, start_time, duration, name, lastname) values ('2023-01-28', '10:00:00', 60, 'Jovan', 'Spiric');
+insert into schedule_calendar(schedule_date, start_time, duration, name, lastname) values ('2023-01-28', '12:00:00', 60, 'Mihajlo', 'Torbica');
+insert into schedule_calendar(schedule_date, start_time, duration, name, lastname) values ('2023-01-28', '10:00:00', 120, 'Boban', 'Petrovic');
+insert into schedule_calendar(schedule_date, start_time, duration, name, lastname) values ('2023-01-28', '11:00:00', 60, 'Milica', 'Micic');
+insert into schedule_calendar(schedule_date, start_time, duration, name, lastname) values ('2023-01-29', '10:00:00', 60, 'Nikola', 'Spiric');
+insert into schedule_calendar(schedule_date, start_time, duration, name, lastname) values ('2023-01-29', '12:00:00', 60, 'Marko', 'Milanovic');
+insert into schedule_calendar(schedule_date, start_time, duration, name, lastname) values ('2023-01-29', '10:00:00', 120, 'Jelena', 'Milenkovic');
 
 
 insert into send_appeal(to_username, subject, text) values ('peraP', 'Zalba na objekat', 'Mnogo vam....');
