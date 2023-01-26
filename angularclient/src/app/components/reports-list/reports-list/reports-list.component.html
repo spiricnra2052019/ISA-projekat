@@ -1,5 +1,6 @@
 <form class="form-inline md-form mr-auto mb-4">
-    <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
+    <input (keyup)="searchFun($event.target)" class="form-control mr-sm-2" type="text" placeholder="Search"
+        aria-label="Search ">
 </form>
 <div class="card my-5">
     <div class="card-body">

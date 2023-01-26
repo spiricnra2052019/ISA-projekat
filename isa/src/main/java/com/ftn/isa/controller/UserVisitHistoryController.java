@@ -1,6 +1,7 @@
 package com.ftn.isa.controller;
 
 
+import com.ftn.isa.model.RegisteredUser;
 import com.ftn.isa.model.SendAppeal;
 import com.ftn.isa.model.UserVisitHistory;
 import com.ftn.isa.service.UserVisitHistoryService;
@@ -17,6 +18,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Collection;
+import java.util.List;
 
 @RestController
 @RequestMapping("/employee-report")
@@ -53,6 +55,11 @@ public class UserVisitHistoryController {
             e.printStackTrace();
             return new ResponseEntity<UserVisitHistory>(savedReport, HttpStatus.CONFLICT);
         }
+        // ovde treba napomenuti jos da kada se obavi ova funkcija treba povecati kolicinu krvi, a smanjiti opremu,sto je zadatak nekog drugog studenta u okviru tacke 3.20
     }
 
+    @GetMapping("/search")
+    public ResponseEntity<List<UserVisitHistory>> searchReports(@RequestParam("query") String query){
+        return ResponseEntity.ok(userVisitHistoryService.searchReports(query));
+    }
 }

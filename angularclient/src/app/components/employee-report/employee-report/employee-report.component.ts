@@ -42,5 +42,4 @@ export class EmployeeReportComponent implements OnInit {
   addDescription(desc) {
     this.employeeReport.description = desc.value;
   }
-
 }

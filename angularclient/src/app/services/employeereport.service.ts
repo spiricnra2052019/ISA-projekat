@@ -9,9 +9,11 @@ import { EmployeeReport } from '../model/employee-report';
 export class EmployeereportService {
 
   private employeeReportUrl: string;
+  private searchUrl: string;
 
   constructor(private http: HttpClient) {
-    this.employeeReportUrl = "http://localhost:8080/employee-report"
+    this.employeeReportUrl = "http://localhost:8080/employee-report";
+    this.searchUrl = 'http://localhost:8080/employee-report/search?query=';
   }
 
   public getAllReports(): Observable<EmployeeReport[]> {
@@ -20,5 +22,9 @@ export class EmployeereportService {
 
   public sendAppealResponse(dto: EmployeeReport): Observable<EmployeeReport> {
     return this.http.post<EmployeeReport>(this.employeeReportUrl, dto);
+  }
+
+  public searchByBTandDesc(searchProperty): Observable<EmployeeReport[]> {
+    return this.http.get<EmployeeReport[]>(this.searchUrl.concat(searchProperty));
   }
 }
