@@ -16,6 +16,7 @@ import { AppealResponseComponent } from './components/appeal-response/appeal-res
 import { LoginAdministratorComponent } from './components/login-administrator/login-administrator.component';
 import { SetPasswordComponent } from './components/set-password/set-password.component';
 import { EmployeeReportComponent } from './components/employee-report/employee-report/employee-report.component';
+import { ReportsListComponent } from './components/reports-list/reports-list/reports-list.component';
 
 
 const routes: Routes = [
@@ -36,6 +37,7 @@ const routes: Routes = [
   { path: 'set-password', component: SetPasswordComponent },
   { path: 'set-password', component: SetPasswordComponent },
   { path: 'employee-report', component: EmployeeReportComponent },
+  { path: 'report-list', component: ReportsListComponent }
 ];
 
 @NgModule({
