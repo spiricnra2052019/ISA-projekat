@@ -14,4 +14,9 @@ export class EmployeeReportComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  addReport(event) {
+    event.preventDefault();
+    console.log("Employee report added!");
+  }
+
 }
