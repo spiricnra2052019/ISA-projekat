@@ -12,6 +12,10 @@ export class ScheduleCalendarComponent implements OnInit {
   temp: string;
   date: string;
   termins: ScheduleCalendar[] = [];
+  terminsYearly: ScheduleCalendar[] = [];
+  weekly = false;
+  monthly = false;
+  yearly = false;
 
 
   constructor(private scheduleCalendarService: ScheduleCalendarService) {
@@ -19,6 +23,20 @@ export class ScheduleCalendarComponent implements OnInit {
 
   schedules: ScheduleCalendar;
   ngOnInit(): void {
+  }
+
+  selectedYear(yearSelected) {
+    console.log(yearSelected.value);
+    this.terminsYearly = [];
+    this.scheduleCalendarService.getAllTermins().subscribe(data => {
+      for (let i = 0; i < data.length; i++) {
+        const splitTemp = data[i].date.split("-");
+        const first = splitTemp[0];
+        if (first == yearSelected.value) {
+          this.terminsYearly.push(data[i]);
+        }
+      }
+    });
   }
 
   dateSelected() {
@@ -48,5 +66,23 @@ export class ScheduleCalendarComponent implements OnInit {
         }
       }
     })
+  }
+
+  weeklyCalendar() {
+    this.weekly = true;
+    this.monthly = false;
+    this.yearly = false;
+  }
+
+  monthlyCalendar() {
+    this.weekly = false;
+    this.monthly = true;
+    this.yearly = false;
+  }
+
+  yearlyCalendar() {
+    this.weekly = false;
+    this.monthly = false;
+    this.yearly = true;
   }
 }

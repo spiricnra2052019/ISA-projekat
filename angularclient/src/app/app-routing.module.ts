@@ -33,6 +33,7 @@ const routes: Routes = [
   { path: 'response-appeal', component: AppealResponseComponent },
   { path: 'login-administrator', component: LoginAdministratorComponent },
   { path: 'set-password', component: SetPasswordComponent },
+  { path: 'set-password', component: SetPasswordComponent },
 ];
 
 @NgModule({
