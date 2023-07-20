@@ -6,9 +6,9 @@ insert into base_user(name, lastname, username, password, birthday, email, role)
 insert into base_user(name, lastname, username, password, birthday, email, role) values ('Bora', 'Boroje', 'boraB', 'bora123', '2000-04-22', 'bora@test.com', 4);
 
 
-insert into base_user (name, lastname, username, password, birthday, email, address_id, role) values ('Pera', 'Peric', 'peraP', 'sifra123', '2000-03-19', 'pera@test.com', 1, 1);
-insert into base_user (name, lastname, username, password, birthday, email, address_id, role) values ('Marko', 'Markovic', 'markoM', 'sifra123', '2000-03-19', 'marko@test.com', 2, 1);
-insert into base_user (name, lastname, username, password, birthday, email, address_id, role) values ('Mika', 'Mikic', 'mikaM', 'sifra123', '2000-03-19', 'mika@test.com', 3, 1);
+insert into base_user (name, lastname, username, password, birthday, email, address_id, role, enabled) values ('Pera', 'Peric', 'peraP', 'sifra123', '2000-03-19', 'pera@test.com', 1, 1, true);
+insert into base_user (name, lastname, username, password, birthday, email, address_id, role, enabled) values ('Marko', 'Markovic', 'markoM', 'sifra123', '2000-03-19', 'marko@test.com', 2, 1, true);
+insert into base_user (name, lastname, username, password, birthday, email, address_id, role, enabled) values ('Mika', 'Mikic', 'mikaM', 'sifra123', '2000-03-19', 'mika@test.com', 3, 1, true);
 
 -- insert into base_user (name, lastname, username, email, password, birthday, role) values ('Pera', 'Peric', 'peraP', 'mika@test.com', 'sifra123', '2000-03-19', 3);
 -- insert into base_user (name, lastname, username, email, password, birthday, role) values ('Marko', 'Markovic', 'markoM', 'mika@test.com', 'sifra123', '2000-03-19', 3);
