@@ -5,6 +5,7 @@ import com.ftn.isa.model.RegisteredUser;
 import com.ftn.isa.model.UserVisitHistory;
 import com.ftn.isa.repository.UserVisitHistoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -49,4 +50,7 @@ public class UserVisitHistoryService {
         return userVisitHistoryRepository.findAllByUserId(id);
     }
 
+    public List<UserVisitHistory> findAllByUserId(Long id, Sort by) {
+        return userVisitHistoryRepository.findAllByUserId(id, by);
+    }
 }

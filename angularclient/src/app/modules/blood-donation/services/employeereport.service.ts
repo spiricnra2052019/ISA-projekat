@@ -31,4 +31,8 @@ export class EmployeereportService {
   public getAllReportsByUserId(userId): Observable<EmployeeReport[]> {
     return this.http.get<EmployeeReport[]>(this.employeeReportUrl + '/user/' + userId);
   }
+
+  public sortUserHistoryBy(userId, sortBy): Observable<EmployeeReport[]> {
+    return this.http.get<EmployeeReport[]>(this.employeeReportUrl + '/sort/' + userId + "?sortBy=" + sortBy);
+  }
 }

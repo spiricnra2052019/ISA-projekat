@@ -2,6 +2,13 @@
     <input (keyup)="searchFun($event.target)" class="form-control mr-sm-2" type="text" placeholder="Search"
         aria-label="Search ">
 </form>
+
+<div class="float-right">
+
+    <select [ngModel]="columns" (ngModelChange)="onChange($event)" name="sel2">
+        <option [value]="col.value" *ngFor="let col of columns">{{col.name}}</option>
+    </select>
+</div>
 <div class="card my-5">
     <div class="card-body">
         <table class="table table-bordered table-striped">

@@ -15,6 +15,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.data.domain.Sort;
 
 import java.util.Collection;
 import java.util.List;
@@ -69,6 +70,17 @@ public class UserVisitHistoryController {
     @GetMapping("/search")
     public ResponseEntity<List<UserVisitHistory>> searchReports(@RequestParam("query") String query) {
         return ResponseEntity.ok(userVisitHistoryService.searchReports(query));
+    }
+
+    @Operation(summary = "Sort reports of specific user by specific field", description = "Sort reports of specific user by specific field", method = "GET")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "successful operation", content = @Content(mediaType = "application/json", array = @ArraySchema(schema = @Schema(implementation = UserVisitHistory.class))))
+    })
+    @GetMapping(value = "/sort/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Collection<UserVisitHistory>> sortReportsByField(@PathVariable("id") Long id,
+                                                                            @RequestParam("sortBy") String field) {
+        Collection<UserVisitHistory> reports = userVisitHistoryService.findAllByUserId(id, Sort.by(Sort.Direction.ASC, field));
+        return new ResponseEntity<Collection<UserVisitHistory>>(reports, HttpStatus.OK);
     }
 
 }
