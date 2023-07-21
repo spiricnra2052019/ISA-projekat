@@ -12,4 +12,6 @@ public interface UserVisitHistoryRepository extends JpaRepository<UserVisitHisto
             "UPPER(u.bloodType) LIKE CONCAT('%' , :query, '%')" +
             "Or UPPER(u.description) LIKE CONCAT('%' , :query, '%')")
     public List<UserVisitHistory> searchReports(String query);
+
+    public List<UserVisitHistory> findAllByUserId(Long id);
 }

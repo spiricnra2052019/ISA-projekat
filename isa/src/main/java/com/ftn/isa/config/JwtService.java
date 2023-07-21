@@ -1,5 +1,6 @@
 package com.ftn.isa.config;
 
+import com.ftn.isa.model.Administrator;
 import com.ftn.isa.model.BaseUser;
 import com.ftn.isa.model.RegisteredUser;
 
@@ -32,6 +33,13 @@ public class JwtService {
     }
 
     public String generateTokenRegisteredUser(RegisteredUser userDetails) {
+        HashMap<String, String> map = new HashMap<>();// Creating HashMap.
+        map.put("role", userDetails.getAuthorities().iterator().next().toString());
+        map.put("id", userDetails.getId().toString());
+        return generateToken(map, userDetails);
+    }
+
+    public String generateTokenAdmin(Administrator userDetails) {
         HashMap<String, String> map = new HashMap<>();// Creating HashMap.
         map.put("role", userDetails.getAuthorities().iterator().next().toString());
         map.put("id", userDetails.getId().toString());

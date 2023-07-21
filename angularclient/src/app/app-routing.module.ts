@@ -18,9 +18,12 @@ import { SetPasswordComponent } from './modules/pages/set-password/set-password.
 import { EmployeeReportComponent } from './modules/pages/employee-report/employee-report.component';
 import { ReportsListComponent } from './modules/pages/reports-list/reports-list.component';
 import { UserLoginComponent } from './modules/pages/user-login/user-login.component';
+import { HomeComponent } from './modules/pages/home/home.component';
+import { UserHistoryComponent } from './modules/pages/user-history/user-history.component';
 
 
 const routes: Routes = [
+  { path: '', component: HomeComponent },
   { path: 'users', component: UserListComponent },
   { path: 'sign-up', component: UserFormComponent },
   { path: 'sign-in', component: UserLoginComponent },
@@ -38,7 +41,8 @@ const routes: Routes = [
   { path: 'login-administrator', component: LoginAdministratorComponent },
   { path: 'set-password', component: SetPasswordComponent },
   { path: 'employee-report', component: EmployeeReportComponent },
-  { path: 'report-list', component: ReportsListComponent }
+  { path: 'report-list', component: ReportsListComponent },
+  { path: 'user-history', component: UserHistoryComponent },
 ];
 
 @NgModule({

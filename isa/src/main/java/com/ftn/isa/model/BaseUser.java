@@ -50,6 +50,9 @@ public class BaseUser {
 	@Column(name = "birthday", nullable = true)
 	private LocalDate birthday;
 
+	@Column(name = "enabled", nullable = true)
+	private boolean enabled;
+
 	public BaseUser(Long id, String name, String lastname, String username, String email, String password,
 			LocalDate birthday, Address address) {
 		super();
@@ -122,4 +125,11 @@ public class BaseUser {
 		this.birthday = birthday;
 	}
 
+	public void setEnabled(boolean enabled) {
+		this.enabled = enabled;
+	}
+
+	public boolean getEnabled() {
+		return enabled;
+	}
 }

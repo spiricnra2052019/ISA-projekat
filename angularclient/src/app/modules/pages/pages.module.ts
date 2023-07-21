@@ -22,6 +22,8 @@ import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { MaterialModule } from "src/app/material/material.module";
 import { BloodCenterAdminComponent } from './blood-center-admin/blood-center-admin.component';
 import { UserLoginComponent } from './user-login/user-login.component';
+import { HomeComponent } from './home/home.component';
+import { UserHistoryComponent } from './user-history/user-history.component';
 
 @NgModule(
     {
@@ -44,7 +46,9 @@ import { UserLoginComponent } from './user-login/user-login.component';
             UserListComponent,
             UserLoginComponent,
             UsersSearchComponent,
-            BloodCenterAdminComponent
+            BloodCenterAdminComponent,
+            HomeComponent,
+            UserHistoryComponent,
         ],
         imports: [
             CommonModule,

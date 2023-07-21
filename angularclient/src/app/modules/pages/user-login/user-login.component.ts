@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { RegisteredUserService } from '../../blood-donation/services/registered-user.service';
 import { AuthService } from '../../blood-donation/services/auth.service';
+import { TokenStorageService } from '../../blood-donation/services/token-storage.service';
 
 @Component({
   selector: 'app-user-login',
@@ -15,6 +15,7 @@ export class UserLoginComponent implements OnInit {
   constructor(private route: ActivatedRoute,
     private router: Router,
     private authService: AuthService,
+    private tokenStorageService: TokenStorageService
   ) { }
 
 
@@ -27,12 +28,19 @@ export class UserLoginComponent implements OnInit {
 
     this.authService.authenticate(loginRequest).subscribe(result => {
       if (result) {
-        this.router.navigate(['/users']);
+        this.tokenStorageService.saveToken(result.token);
+        this.tokenStorageService.saveUser(result.token);
+        this.router.navigate(['/blood-centers']).then(
+          () => {
+            window.location.reload();
+          }
+        );
+        alert("Success!");
       } else {
         this.username = "";
         this.password = "";
       }
-    }); // <-- added missing closing parenthesis here
+    });
   }
 
   ngOnInit(): void {

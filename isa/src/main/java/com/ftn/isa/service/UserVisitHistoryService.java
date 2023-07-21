@@ -23,20 +23,17 @@ public class UserVisitHistoryService {
         return userVisitHistoryRepository.findById(id).orElseGet(null);
     }
 
-    public List<UserVisitHistory> findAll(){
+    public List<UserVisitHistory> findAll() {
         return userVisitHistoryRepository.findAll();
     }
 
     public UserVisitHistory save(UserVisitHistory history) {
         BloodAmount bloodAmount = new BloodAmount();
-        if (history.getBloodType() == "A")
-        {
+        if (history.getBloodType() == "A") {
             bloodAmount.setA(bloodAmount.getA() + history.getQuantity());
-        } else if (history.getBloodType() == "B")
-        {
+        } else if (history.getBloodType() == "B") {
             bloodAmount.setB(bloodAmount.getB() + history.getQuantity());
-        } else if (history.getBloodType() == "AB")
-        {
+        } else if (history.getBloodType() == "AB") {
             bloodAmount.setAb(bloodAmount.getAb() + history.getQuantity());
         } else {
             bloodAmount.setZero(bloodAmount.getZero() + history.getQuantity());
@@ -46,6 +43,10 @@ public class UserVisitHistoryService {
 
     public void remove(Long id) {
         userVisitHistoryRepository.deleteById(id);
+    }
+
+    public List<UserVisitHistory> findAllByUserId(Long id) {
+        return userVisitHistoryRepository.findAllByUserId(id);
     }
 
 }

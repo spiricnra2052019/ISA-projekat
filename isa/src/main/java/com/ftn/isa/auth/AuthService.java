@@ -3,14 +3,17 @@ package com.ftn.isa.auth;
 import com.ftn.isa.config.JwtService;
 import com.ftn.isa.enums.Role;
 import com.ftn.isa.model.Address;
+import com.ftn.isa.model.Administrator;
 import com.ftn.isa.model.BaseUser;
 import com.ftn.isa.model.RegisteredUser;
 import com.ftn.isa.repository.AddressRepository;
+import com.ftn.isa.repository.AdministratorRepository;
 import com.ftn.isa.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 
 import java.util.UUID;
 
+import org.springframework.boot.autoconfigure.kafka.KafkaProperties.Admin;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -23,6 +26,7 @@ import org.springframework.stereotype.Service;
 public class AuthService {
 
         private final UserRepository repository;
+        private final AdministratorRepository administratorRepository;
         private final PasswordEncoder passwordEncoder;
         private final JwtService jwtService;
         private final AuthenticationManager authenticationManager;
@@ -35,8 +39,27 @@ public class AuthService {
                                                 request.getUsername(),
                                                 request.getPassword()));
                 var user = repository.findOneByUsername(request.getUsername())
-                                .orElseThrow();
+                                .orElse(null);
+                var admin = administratorRepository.findOneByUsername(request.getUsername())
+                                .orElse(null);
+                if (user == null && admin == null) {
+                        throw new RuntimeException("User not found");
+                } else if (user != null) {
+                        return generateTokenRegistered(user);
+                } else {
+                        return generateTokenAdmin(admin);
+                }
+        }
+
+        public AuthenticationResponse generateTokenRegistered(RegisteredUser user) {
                 var jwtToken = jwtService.generateTokenRegisteredUser(user);
+                return AuthenticationResponse.builder()
+                                .token(jwtToken)
+                                .build();
+        }
+
+        public AuthenticationResponse generateTokenAdmin(Administrator admin) {
+                var jwtToken = jwtService.generateTokenAdmin(admin);
                 return AuthenticationResponse.builder()
                                 .token(jwtToken)
                                 .build();

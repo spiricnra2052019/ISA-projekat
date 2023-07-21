@@ -25,6 +25,7 @@ export class TokenStorageService {
     return window.sessionStorage.getItem(TOKEN_KEY);
   }
   public isLoggedIn(): boolean {
+    console.log(window.sessionStorage.getItem(TOKEN_KEY))
     return !!window.sessionStorage.getItem(TOKEN_KEY);
   }
   public saveUser(token: string): void {

@@ -27,4 +27,8 @@ export class EmployeereportService {
   public searchByBTandDesc(searchProperty): Observable<EmployeeReport[]> {
     return this.http.get<EmployeeReport[]>(this.searchUrl.concat(searchProperty));
   }
+
+  public getAllReportsByUserId(userId): Observable<EmployeeReport[]> {
+    return this.http.get<EmployeeReport[]>(this.employeeReportUrl + '/user/' + userId);
+  }
 }

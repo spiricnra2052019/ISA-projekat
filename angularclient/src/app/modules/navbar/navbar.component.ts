@@ -17,6 +17,8 @@ export class NavbarComponent implements OnInit {
     constructor(private tokenStorageService: TokenStorageService, private router: Router) {
         this.user = this.tokenStorageService.getUser()
         this.isLoggedIn = this.tokenStorageService.isLoggedIn()
+        this.role = this.user.role
+        console.log("Role: ", this.role)
     }
 
     ngOnInit(): void {

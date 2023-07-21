@@ -34,9 +34,6 @@ public class RegisteredUser extends BaseUser implements Serializable, UserDetail
 	@JoinColumn(name = "address_id")
 	private Address address;
 
-	@Column(name = "enabled", nullable = true)
-	private boolean enabled;
-
 	@Column(name = "activationToken", nullable = true)
 	private String activationToken;
 
@@ -57,10 +54,6 @@ public class RegisteredUser extends BaseUser implements Serializable, UserDetail
 
 	public void setAddress(Address address) {
 		this.address = address;
-	}
-
-	public void setEnabled(boolean enabled) {
-		this.enabled = enabled;
 	}
 
 	public void setActivationToken(String activationToken) {
@@ -93,7 +86,7 @@ public class RegisteredUser extends BaseUser implements Serializable, UserDetail
 
 	@Override
 	public boolean isEnabled() {
-		return enabled;
+		return this.getEnabled();
 	}
 
 }
