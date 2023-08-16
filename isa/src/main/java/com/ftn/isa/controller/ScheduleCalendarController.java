@@ -79,9 +79,11 @@ public class ScheduleCalendarController {
 	public ResponseEntity<ScheduleCalendar> scheduleAppointmentForUser(
 			@RequestBody UserAppointmentDTO userAppointmentDTO) {
 		try {
-			ScheduleCalendar schedule = scheduleCalendarService.scheduleAppointmentForUser(userAppointmentDTO);
+			ScheduleCalendar schedule = scheduleCalendarService.scheduleAppointmentForUser(
+					userAppointmentDTO.getAppointmentId(), userAppointmentDTO.getUser().getId());
 			return new ResponseEntity<ScheduleCalendar>(schedule, HttpStatus.OK);
 		} catch (Exception e) {
+			e.printStackTrace();
 			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 		}
 	}

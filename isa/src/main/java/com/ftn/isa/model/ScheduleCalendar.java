@@ -13,8 +13,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 
-import org.apache.tomcat.jni.Local;
-
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.ftn.isa.dto.ScheduleCalendarDTO;
 
@@ -36,11 +34,9 @@ public class ScheduleCalendar {
 	@Column(name = "duration", nullable = false)
 	private int duration;
 
-	@Column(name = "name", nullable = true)
-	private String name;
-
-	@Column(name = "lastname", nullable = true)
-	private String lastname;
+	@OneToOne
+	@JoinColumn(name = "user_id", nullable = true)
+	private BaseUser user;
 
 	@OneToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "blood_center_id")
@@ -53,19 +49,17 @@ public class ScheduleCalendar {
 		this.scheduleDate = scheduleCalendarDTO.getDate();
 		this.startTime = scheduleCalendarDTO.getStartTime();
 		this.duration = scheduleCalendarDTO.getDuration();
-		this.name = scheduleCalendarDTO.getName();
-		this.lastname = scheduleCalendarDTO.getLastname();
+		this.user = scheduleCalendarDTO.getUser();
 	}
 
-	public ScheduleCalendar(Long id, LocalDate scheduleDate, LocalTime startTime, int duration, String name,
-			String lastname, BloodCenter bloodCenter) {
+	public ScheduleCalendar(Long id, LocalDate scheduleDate, LocalTime startTime, int duration, BaseUser user,
+			BloodCenter bloodCenter) {
 		super();
 		this.id = id;
 		this.scheduleDate = scheduleDate;
 		this.startTime = startTime;
 		this.duration = duration;
-		this.name = name;
-		this.lastname = lastname;
+		this.user = user;
 		this.bloodCenter = bloodCenter;
 	}
 
@@ -110,20 +104,12 @@ public class ScheduleCalendar {
 		this.duration = duration;
 	}
 
-	public String getName() {
-		return name;
+	public BaseUser getUser() {
+		return user;
 	}
 
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public String getLastname() {
-		return lastname;
-	}
-
-	public void setLastname(String lastname) {
-		this.lastname = lastname;
+	public void setUser(BaseUser user) {
+		this.user = user;
 	}
 
 	public BloodCenter getBloodCenter() {

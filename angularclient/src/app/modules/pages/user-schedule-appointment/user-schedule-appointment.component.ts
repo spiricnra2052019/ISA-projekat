@@ -25,7 +25,7 @@ export class UserScheduleAppointmentComponent implements OnInit {
       this.scheduleCalendarService.getAllTerminsForBloodCenter(this.id).subscribe(data => {
         this.appointments = data;
         // filter appointments that are in the future (not in the past)
-        this.appointments = this.appointments.filter(appointment => new Date(appointment.scheduleDate) >= new Date());
+        this.appointments = this.appointments.filter(appointment => new Date(appointment.scheduleDate) >= new Date() && appointment.user == null);
       });
     });
     this.user = this.tokenStorageService.getUser();
@@ -36,9 +36,15 @@ export class UserScheduleAppointmentComponent implements OnInit {
     userAppointment.appointmentId = parseInt(id);
     userAppointment.user = this.user;
     console.log("User appointment: ", userAppointment);
-    this.scheduleCalendarService.scheduleAppointment(userAppointment).subscribe(data => {
-      alert("Appointment scheduled!");
-      this.ngOnInit();
-    });
+    this.scheduleCalendarService.scheduleAppointment(userAppointment).subscribe(
+      data => {
+        alert("Appointment scheduled!");
+        this.ngOnInit();
+      },
+      error => {
+        alert("Appointment not scheduled!");
+      }
+    );
+
   }
 }

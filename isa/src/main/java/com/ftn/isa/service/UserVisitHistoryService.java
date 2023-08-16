@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+import java.time.Period;
 import java.util.List;
 
 @Service
@@ -52,5 +54,17 @@ public class UserVisitHistoryService {
 
     public List<UserVisitHistory> findAllByUserId(Long id, Sort by) {
         return userVisitHistoryRepository.findAllByUserId(id, by);
+    }
+
+    public boolean checkIfUserVisitedIn6Months(Long userId) {
+        List<UserVisitHistory> userVisitHistories = userVisitHistoryRepository.findAllByUserId(userId);
+        for (UserVisitHistory userVisitHistory : userVisitHistories) {
+            LocalDate currentDate = LocalDate.now();
+            Period period = Period.between(userVisitHistory.getDate(), currentDate);
+            if (period.getMonths() < 6) {
+                return true;
+            }
+        }
+        return false;
     }
 }

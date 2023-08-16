@@ -63,6 +63,6 @@ insert into send_appeal(to_username, subject, text) values ('markoM', 'Zalba na 
 
 
 
-INSERT INTO user_visit_history (blood_type, quantity, number_of_equipment_used, description, user_id) VALUES ('A+', 5, 2, 'Regular checkup', 3);
-INSERT INTO user_visit_history (blood_type, quantity, number_of_equipment_used, description, user_id) VALUES ('O-', 3, 1, 'Emergency visit', 3);
-INSERT INTO user_visit_history (blood_type, quantity, number_of_equipment_used, description, user_id) VALUES ('B+', 7, 3, 'Routine examination', 3);
+INSERT INTO user_visit_history (blood_type, quantity, number_of_equipment_used, description, user_id, date) VALUES ('A+', 5, 2, 'Regular checkup', 3, '2021-08-17');
+INSERT INTO user_visit_history (blood_type, quantity, number_of_equipment_used, description, user_id, date) VALUES ('O-', 3, 1, 'Emergency visit', 3, '2021-08-17');
+INSERT INTO user_visit_history (blood_type, quantity, number_of_equipment_used, description, user_id, date) VALUES ('B+', 7, 3, 'Routine examination', 3, '2021-08-17');

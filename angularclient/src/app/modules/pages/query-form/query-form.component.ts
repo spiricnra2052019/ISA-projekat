@@ -5,6 +5,8 @@ import { QueryQuestion } from 'src/app/modules/blood-donation/model/query-questi
 import { RegisteredUser } from 'src/app/modules/blood-donation/model/registered-user';
 import { QueryService } from '../../blood-donation/services/query.service';
 import { RegisteredUserService } from '../../blood-donation/services/registered-user.service';
+import { TokenStorageService } from '../../blood-donation/services/token-storage.service';
+import { UserToken } from '../../blood-donation/model/user-token';
 
 @Component({
   selector: 'app-query-form',
@@ -14,17 +16,19 @@ import { RegisteredUserService } from '../../blood-donation/services/registered-
 export class QueryFormComponent implements OnInit {
   questions: QueryQuestion[] = [];
   queryAnswer: PatientAnswer;
-  patient: RegisteredUser;
+  userToken: UserToken;
 
 
   constructor(private queryService: QueryService, private userService: RegisteredUserService,
     private route: ActivatedRoute,
-    private router: Router,) { }
+    private router: Router,
+    private tokenStorageService: TokenStorageService) {
+    this.userToken = this.tokenStorageService.getUser();
+  }
 
   ngOnInit(): void {
     this.queryService.findAll().subscribe(data => {
       this.questions = data;
-      this.userService.findById(3).subscribe((response) => this.patient = response);
     })
     this.questions.forEach((x, i) => x.answer = false);
   }
@@ -32,15 +36,15 @@ export class QueryFormComponent implements OnInit {
   addQuery() {
     this.questions.forEach((x, i) => {
       this.queryAnswer = new PatientAnswer();
-      this.queryAnswer.registeredUser = this.patient;
-      this.queryAnswer.patientQuestion = x;
+      this.queryAnswer.userId = parseInt(this.userToken.id);
+      this.queryAnswer.question = x;
       this.queryAnswer.answer = x.answer;
       this.queryService.save(this.queryAnswer).subscribe(result => this.gotoUserList());
     })
   }
 
   gotoUserList() {
-    this.router.navigate(['/users']);
+    this.router.navigate(['/']);
   }
 
 

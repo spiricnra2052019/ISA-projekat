@@ -1,8 +1,9 @@
-import {QueryQuestion} from "./query-question";
-import {RegisteredUser} from "./registered-user";
+import { QueryQuestion } from "./query-question";
+import { RegisteredUser } from "./registered-user";
+import { UserToken } from "./user-token";
 
 export class PatientAnswer {
-    registeredUser: RegisteredUser;
-    patientQuestion: QueryQuestion;
+    userId: number;
+    question: QueryQuestion;
     answer: boolean;
 }

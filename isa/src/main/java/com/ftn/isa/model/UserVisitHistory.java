@@ -1,6 +1,10 @@
 package com.ftn.isa.model;
 
+import java.time.LocalDate;
+
 import javax.persistence.*;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 @Entity(name = "UserVisitHistory")
 public class UserVisitHistory {
@@ -25,6 +29,21 @@ public class UserVisitHistory {
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
     private RegisteredUser user;
+
+    @JsonFormat(pattern = "yyyy-MM-dd")
+    @Column(name = "date", nullable = true)
+    private LocalDate date;
+
+    public UserVisitHistory(Long id, String bloodType, int quantity, int numberOfEquipmentUsed, String description,
+            RegisteredUser user, LocalDate date) {
+        this.id = id;
+        this.bloodType = bloodType;
+        this.quantity = quantity;
+        this.numberOfEquipmentUsed = numberOfEquipmentUsed;
+        this.description = description;
+        this.user = user;
+        this.date = date;
+    }
 
     public UserVisitHistory(Long id, String bloodType, int quantity, int numberOfEquipmentUsed, String description,
             RegisteredUser user) {
@@ -85,5 +104,13 @@ public class UserVisitHistory {
 
     public void setUser(RegisteredUser user) {
         this.user = user;
+    }
+
+    public LocalDate getDate() {
+        return date;
+    }
+
+    public void setDate(LocalDate date) {
+        this.date = date;
     }
 }
