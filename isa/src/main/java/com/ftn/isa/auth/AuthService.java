@@ -5,9 +5,11 @@ import com.ftn.isa.enums.Role;
 import com.ftn.isa.model.Address;
 import com.ftn.isa.model.Administrator;
 import com.ftn.isa.model.BaseUser;
+import com.ftn.isa.model.BloodCenterAdministrator;
 import com.ftn.isa.model.RegisteredUser;
 import com.ftn.isa.repository.AddressRepository;
 import com.ftn.isa.repository.AdministratorRepository;
+import com.ftn.isa.repository.BloodCenterAdministratorRepository;
 import com.ftn.isa.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 
@@ -27,6 +29,7 @@ public class AuthService {
 
         private final UserRepository repository;
         private final AdministratorRepository administratorRepository;
+        private final BloodCenterAdministratorRepository bloodCenterAdministratorRepository;
         private final PasswordEncoder passwordEncoder;
         private final JwtService jwtService;
         private final AuthenticationManager authenticationManager;
@@ -42,10 +45,15 @@ public class AuthService {
                                 .orElse(null);
                 var admin = administratorRepository.findOneByUsername(request.getUsername())
                                 .orElse(null);
-                if (user == null && admin == null) {
+                var bloodAdmin = bloodCenterAdministratorRepository.findOneByUsername(request.getUsername())
+                                .orElse(null);
+
+                if (user == null && admin == null && bloodAdmin == null) {
                         throw new RuntimeException("User not found");
                 } else if (user != null) {
                         return generateTokenRegistered(user);
+                } else if (bloodAdmin != null) {
+                        return generateTokenBloodAdmin(bloodAdmin);
                 } else {
                         return generateTokenAdmin(admin);
                 }
@@ -60,6 +68,13 @@ public class AuthService {
 
         public AuthenticationResponse generateTokenAdmin(Administrator admin) {
                 var jwtToken = jwtService.generateTokenAdmin(admin);
+                return AuthenticationResponse.builder()
+                                .token(jwtToken)
+                                .build();
+        }
+
+        public AuthenticationResponse generateTokenBloodAdmin(BloodCenterAdministrator bloodAdmin) {
+                var jwtToken = jwtService.generateTokenBloodAdmin(bloodAdmin);
                 return AuthenticationResponse.builder()
                                 .token(jwtToken)
                                 .build();

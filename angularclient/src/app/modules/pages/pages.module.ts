@@ -24,6 +24,8 @@ import { BloodCenterAdminComponent } from './blood-center-admin/blood-center-adm
 import { UserLoginComponent } from './user-login/user-login.component';
 import { HomeComponent } from './home/home.component';
 import { UserHistoryComponent } from './user-history/user-history.component';
+import { ScheduleAppointmentComponent } from './schedule-appointment/schedule-appointment.component';
+import { UserScheduleAppointmentComponent } from './user-schedule-appointment/user-schedule-appointment.component';
 
 @NgModule(
     {
@@ -49,6 +51,9 @@ import { UserHistoryComponent } from './user-history/user-history.component';
             BloodCenterAdminComponent,
             HomeComponent,
             UserHistoryComponent,
+            ScheduleAppointmentComponent,
+            UserScheduleAppointmentComponent,
+            UserScheduleAppointmentComponent,
         ],
         imports: [
             CommonModule,

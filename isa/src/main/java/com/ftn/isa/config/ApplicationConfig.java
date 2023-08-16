@@ -1,8 +1,10 @@
 package com.ftn.isa.config;
 
 import com.ftn.isa.model.Administrator;
+import com.ftn.isa.model.BloodCenterAdministrator;
 import com.ftn.isa.model.RegisteredUser;
 import com.ftn.isa.repository.AdministratorRepository;
+import com.ftn.isa.repository.BloodCenterAdministratorRepository;
 import com.ftn.isa.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
@@ -23,6 +25,7 @@ public class ApplicationConfig {
 
     private final UserRepository userRepository;
     private final AdministratorRepository administratorRepository;
+    private final BloodCenterAdministratorRepository bloodCenterAdministratorRepository;
 
     // @Bean
     // public UserDetailsService userDetailsService() {
@@ -38,10 +41,16 @@ public class ApplicationConfig {
             // Check for administrator in AdministratorRepository
             Administrator administratorEntity = administratorRepository.findOneByUsername(username).orElse(null);
 
-            if (userEntity == null && administratorEntity == null) {
+            // Check for blood center administrator in BloodCenterAdministratorRepository
+            BloodCenterAdministrator bloodCenterAdministratorEntity = bloodCenterAdministratorRepository
+                    .findOneByUsername(username).orElse(null);
+
+            if (userEntity == null && administratorEntity == null && bloodCenterAdministratorEntity == null) {
                 throw new UsernameNotFoundException("User not found");
             } else if (userEntity != null) {
                 return userEntity;
+            } else if (bloodCenterAdministratorEntity != null) {
+                return bloodCenterAdministratorEntity;
             } else {
                 return administratorEntity;
             }

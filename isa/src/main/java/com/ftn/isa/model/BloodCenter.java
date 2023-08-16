@@ -13,42 +13,45 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 
 // list of employees is missing
 
-
 @Entity
 public class BloodCenter {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id", unique = true, nullable = false)
 	private Long id;
-	
+
 	@Column(name = "name", nullable = false)
 	private String name;
-	
+
 	@Column(name = "description", nullable = false)
 	private String description;
-	
+
 	@Column(name = "averageRate", nullable = false)
 	private float averageRate;
-	
+
 	@OneToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "address_id")
 	private Address address;
-	
+
 	@OneToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "bloodAmount_id")
 	private BloodAmount bloodAmount;
-	
+
 	@OneToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "blood_center_administrator_id")
 	private BloodCenterAdministrator bloodCenterAdministrator;
-	
+
+	@OneToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "working_time_id")
+	private WorkingTime workingTime;
+
 	public BloodCenter() {
 		super();
 	}
 
 	public BloodCenter(Long id, String name, String description, float averageRate, Address address,
-			BloodAmount bloodAmount, BloodCenterAdministrator bloodCenterAdministrator) {
+			BloodAmount bloodAmount, BloodCenterAdministrator bloodCenterAdministrator, WorkingTime workingTime) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -57,6 +60,7 @@ public class BloodCenter {
 		this.address = address;
 		this.bloodAmount = bloodAmount;
 		this.bloodCenterAdministrator = bloodCenterAdministrator;
+		this.workingTime = workingTime;
 	}
 
 	public Long getId() {
@@ -98,11 +102,11 @@ public class BloodCenter {
 	public void setAddress(Address address) {
 		this.address = address;
 	}
-	
+
 	public BloodCenterAdministrator getBloodCenterAdministrator() {
 		return bloodCenterAdministrator;
 	}
-	
+
 	public void setBloodCenterAdministrator(BloodCenterAdministrator bloodCenterAdministrator) {
 		this.bloodCenterAdministrator = bloodCenterAdministrator;
 	}
@@ -113,6 +117,14 @@ public class BloodCenter {
 
 	public void setBloodAmount(BloodAmount bloodAmount) {
 		this.bloodAmount = bloodAmount;
-	}	
-	
+	}
+
+	public WorkingTime getWorkingTime() {
+		return workingTime;
+	}
+
+	public void setWorkingTime(WorkingTime workingTime) {
+		this.workingTime = workingTime;
+	}
+
 }

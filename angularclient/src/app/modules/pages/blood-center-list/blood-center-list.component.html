@@ -19,24 +19,28 @@
   <div class="card-body">
     <table class="table table-bordered table-striped">
       <thead class="thead-dark">
-      <tr>
-        <th scope="col">Average rate</th>
-        <th scope="col">Description</th>
-        <th scope="col">Name</th>
-        <th scope="col">City</th>
-        <th scope="col">Street</th>
-        <th scope="col">Street Number</th>
-      </tr>
+        <tr>
+          <th scope="col">Average rate</th>
+          <th scope="col">Description</th>
+          <th scope="col">Name</th>
+          <th scope="col">City</th>
+          <th scope="col">Street</th>
+          <th scope="col">Street Number</th>
+          <th scope="col">Free Appointments</th>
+        </tr>
       </thead>
       <tbody>
-      <tr *ngFor="let center of centers">
-        <td>{{ center.averageRate }}</td>
-        <td>{{ center.description }}</td>
-        <td>{{ center.name }}</td>
-        <td>{{ center.address.city }}</td>
-        <td>{{ center.address.street }}</td>
-        <td>{{ center.address.streetNumber }}</td>
-      </tr>
+        <tr *ngFor="let center of centers">
+          <td>{{ center.averageRate }}</td>
+          <td>{{ center.description }}</td>
+          <td>{{ center.name }}</td>
+          <td>{{ center.address.city }}</td>
+          <td>{{ center.address.street }}</td>
+          <td>{{ center.address.streetNumber }}</td>
+          <td>
+            <button class="btn btn-primary" (click)="goToFreeAppointments(center.id)">Free Appointments</button>
+          </td>
+        </tr>
       </tbody>
     </table>
   </div>

@@ -1,6 +1,6 @@
-<li class="list-inline-item">
+<!-- <li class="list-inline-item">
     <button class="btn btn-info" (click)="weeklyCalendar()">Weekly</button>
-</li>
+</li> -->
 <li class="list-inline-item">
     <button class="btn btn-info" (click)="monthlyCalendar()">Monthly</button>
 </li>
@@ -18,32 +18,32 @@
         <table class="table table-striped">
             <thead>
                 <tr>
-                    <th scope="col">Datum termina:</th>
+                    <th scope="col">Appointment Time:</th>
                     <th class="gap"></th>
-                    <th scope="col">Trajanje:</th>
+                    <th scope="col">Duration:</th>
                     <th class="gap"></th>
-                    <th scope="col">Ime:</th>
+                    <!-- <th scope="col">Ime:</th>
                     <th class="gap"></th>
-                    <th scope="col">Prezime:</th>
+                    <th scope="col">Prezime:</th> -->
                 </tr>
             </thead>
             <tbody>
                 <tr *ngFor="let term of termins;">
                     <td>
-                        <h3>{{term.date}}</h3>
+                        <h3>{{term.startTime}}</h3>
                     </td>
                     <th class="gap"></th>
                     <td>
                         <h3>{{term.duration}}</h3>
                     </td>
-                    <th class="gap"></th>
+                    <!-- <th class="gap"></th>
                     <td>
                         <h3>{{term.name}}</h3>
                     </td>
                     <th class="gap"></th>
                     <td>
                         <h3>{{term.lastname}}</h3>
-                    </td>
+                    </td> -->
                 </tr>
             </tbody>
         </table>
@@ -63,32 +63,32 @@
         <table class="table table-striped">
             <thead>
                 <tr>
-                    <th scope="col">Datum termina:</th>
+                    <th scope="col">Appoinment Time:</th>
                     <th class="gap"></th>
-                    <th scope="col">Trajanje:</th>
+                    <th scope="col">Duration:</th>
                     <th class="gap"></th>
-                    <th scope="col">Ime:</th>
+                    <!-- <th scope="col">Ime:</th>
                     <th class="gap"></th>
-                    <th scope="col">Prezime:</th>
+                    <th scope="col">Prezime:</th> -->
                 </tr>
             </thead>
             <tbody>
                 <tr *ngFor="let term of terminsYearly;">
                     <td>
-                        <h3>{{term.date}}</h3>
+                        <h3>{{term.startTime}}</h3>
                     </td>
                     <th class="gap"></th>
                     <td>
                         <h3>{{term.duration}}</h3>
                     </td>
-                    <th class="gap"></th>
+                    <!-- <th class="gap"></th>
                     <td>
                         <h3>{{term.name}}</h3>
                     </td>
                     <th class="gap"></th>
                     <td>
                         <h3>{{term.lastname}}</h3>
-                    </td>
+                    </td> -->
                 </tr>
             </tbody>
         </table>

@@ -6,38 +6,59 @@ import java.time.LocalTime;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
+
+import org.apache.tomcat.jni.Local;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.ftn.isa.dto.ScheduleCalendarDTO;
 
-@Entity(name="ScheduleCalendar")
+@Entity(name = "ScheduleCalendar")
 public class ScheduleCalendar {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id", unique=true, nullable = false)
+	@Column(name = "id", unique = true, nullable = false)
 	private Long id;
-	
+
+	@JsonFormat(pattern = "yyyy-MM-dd")
 	@Column(name = "scheduleDate", nullable = false)
-	private String scheduleDate;
-	
-	@JsonFormat(pattern="HH:mm:ss")
+	private LocalDate scheduleDate;
+
+	@JsonFormat(pattern = "HH:mm")
 	@Column(name = "startTime", nullable = false)
 	private LocalTime startTime;
-	
+
 	@Column(name = "duration", nullable = false)
 	private int duration;
-	
-	@Column(name = "name", nullable = false)
+
+	@Column(name = "name", nullable = true)
 	private String name;
-	
-	@Column(name = "lastname", nullable = false)
+
+	@Column(name = "lastname", nullable = true)
 	private String lastname;
 
-	public ScheduleCalendar() {}
+	@OneToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "blood_center_id")
+	private BloodCenter bloodCenter;
 
-	public ScheduleCalendar(Long id, String scheduleDate, LocalTime startTime, int duration, String name, String lastname) {
+	public ScheduleCalendar() {
+	}
+
+	public ScheduleCalendar(ScheduleCalendarDTO scheduleCalendarDTO) {
+		this.scheduleDate = scheduleCalendarDTO.getDate();
+		this.startTime = scheduleCalendarDTO.getStartTime();
+		this.duration = scheduleCalendarDTO.getDuration();
+		this.name = scheduleCalendarDTO.getName();
+		this.lastname = scheduleCalendarDTO.getLastname();
+	}
+
+	public ScheduleCalendar(Long id, LocalDate scheduleDate, LocalTime startTime, int duration, String name,
+			String lastname, BloodCenter bloodCenter) {
 		super();
 		this.id = id;
 		this.scheduleDate = scheduleDate;
@@ -45,6 +66,16 @@ public class ScheduleCalendar {
 		this.duration = duration;
 		this.name = name;
 		this.lastname = lastname;
+		this.bloodCenter = bloodCenter;
+	}
+
+	public ScheduleCalendar(LocalDate scheduleDate, LocalTime startTime, int duration,
+			BloodCenter bloodCenter) {
+		super();
+		this.scheduleDate = scheduleDate;
+		this.startTime = startTime;
+		this.duration = duration;
+		this.bloodCenter = bloodCenter;
 	}
 
 	public Long getId() {
@@ -55,11 +86,11 @@ public class ScheduleCalendar {
 		this.id = id;
 	}
 
-	public String getDate() {
+	public LocalDate getDate() {
 		return scheduleDate;
 	}
 
-	public void setDate(String date) {
+	public void setDate(LocalDate date) {
 		this.scheduleDate = date;
 	}
 
@@ -94,5 +125,12 @@ public class ScheduleCalendar {
 	public void setLastname(String lastname) {
 		this.lastname = lastname;
 	}
-	
+
+	public BloodCenter getBloodCenter() {
+		return bloodCenter;
+	}
+
+	public void setBloodCenter(BloodCenter bloodCenter) {
+		this.bloodCenter = bloodCenter;
+	}
 }

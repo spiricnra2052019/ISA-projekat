@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ScheduleCalendar } from 'src/app/modules/blood-donation/model/schedule-calendar';
 import { ScheduleCalendarService } from '../../blood-donation/services/schedule-calendar.service';
+import { UserToken } from '../../blood-donation/model/user-token';
+import { TokenStorageService } from '../../blood-donation/services/token-storage.service';
+import { BloodCenter } from '../../blood-donation/model/blood-center';
+import { BloodCenterService } from '../../blood-donation/services/blood-center.service';
 
 @Component({
   selector: 'app-schedule-calendar',
@@ -16,9 +20,16 @@ export class ScheduleCalendarComponent implements OnInit {
   weekly = false;
   monthly = false;
   yearly = false;
+  user: UserToken
+  bloodCenter: BloodCenter;
 
-
-  constructor(private scheduleCalendarService: ScheduleCalendarService) {
+  constructor(private scheduleCalendarService: ScheduleCalendarService, private tokenStorageService: TokenStorageService,
+    private bloodCenterService: BloodCenterService) {
+    this.user = this.tokenStorageService.getUser();
+    this.bloodCenterService.findBloodCenterIdByAdministratorId(this.user.id).subscribe(data => {
+      this.bloodCenter = data;
+    }
+    );
   }
 
   schedules: ScheduleCalendar;
@@ -28,9 +39,9 @@ export class ScheduleCalendarComponent implements OnInit {
   selectedYear(yearSelected) {
     console.log(yearSelected.value);
     this.terminsYearly = [];
-    this.scheduleCalendarService.getAllTermins().subscribe(data => {
+    this.scheduleCalendarService.getAllTerminsForBloodCenter(this.bloodCenter.id).subscribe(data => {
       for (let i = 0; i < data.length; i++) {
-        const splitTemp = data[i].date.split("-");
+        const splitTemp = data[i].scheduleDate.split("-");
         const first = splitTemp[0];
         if (first == yearSelected.value) {
           this.terminsYearly.push(data[i]);
@@ -41,18 +52,23 @@ export class ScheduleCalendarComponent implements OnInit {
 
   dateSelected() {
     this.termins = [];
-    this.scheduleCalendarService.getAllTermins().subscribe(data => {
+    this.scheduleCalendarService.getAllTerminsForBloodCenter(this.bloodCenter.id).subscribe(data => {
       this.temp = this.selected.toISOString().substring(0, 10);
-
       for (let i = 0; i < data.length; i++) {
 
         const year = this.selected.getFullYear().toString();
         const month = (this.selected.getMonth() + 1).toString();
         const day = this.selected.getDate().toString();
-
-        const splitTemp = data[i].date.split("-");
+        const splitTemp = data[i].scheduleDate.split("-");
         const first = splitTemp[0];
-        const second = splitTemp[1];
+        let second = splitTemp[1];
+
+
+        if (Number(splitTemp[1]) < 10) {
+          second = splitTemp[1].substring(1, 2);
+        }
+
+
         if (Number(splitTemp[2]) < 10) {
           const third = splitTemp[2].substring(1, 2);
           if (first == year && month == second && day == third) {
@@ -61,6 +77,7 @@ export class ScheduleCalendarComponent implements OnInit {
         } else {
           const third = splitTemp[2];
           if (first == year && month == second && day == third) {
+            console.log("Nasao")
             this.termins.push(data[i]);
           }
         }

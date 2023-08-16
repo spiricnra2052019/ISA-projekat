@@ -7,6 +7,7 @@ import { ObjectType } from 'typescript';
 import { FormBuilder, FormGroup } from "@angular/forms";
 import { BloodCenterService } from '../../blood-donation/services/blood-center.service';
 import { BloodCenterAdminService } from '../../blood-donation/services/blood-center-admin-service.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-blood-center-list',
@@ -35,7 +36,7 @@ export class BloodCenterListComponent implements OnInit {
   ];
 
   constructor(private bloodCenterService: BloodCenterService, private _liveAnnouncer: LiveAnnouncer, private bloodCenterAdminService: BloodCenterAdminService,
-    private fb: FormBuilder) { }
+    private fb: FormBuilder, private router: Router) { }
 
   ngOnInit(): void {
     this.bloodCenterService.findAll().subscribe(data => {
@@ -71,6 +72,10 @@ export class BloodCenterListComponent implements OnInit {
     this.bloodCenterService.sortBy(deviceValue).subscribe(res => {
       this.centers = res;
     });
+  }
+
+  goToFreeAppointments(id) {
+    this.router.navigate(['/user-schedule-appointment/' + id]);
   }
 
 }

@@ -44,4 +44,8 @@ export class BloodCenterService {
   public sortBy(sortBy) {
     return this.http.get<BloodCenter[]>(this.sortUrl.concat(sortBy));
   }
+
+  public findBloodCenterIdByAdministratorId(administratorId) {
+    return this.http.get<BloodCenter>(this.bloodCentersUrl + "/administrator/" + administratorId);
+  }
 }

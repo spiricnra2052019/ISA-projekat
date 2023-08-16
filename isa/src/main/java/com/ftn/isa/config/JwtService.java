@@ -2,6 +2,7 @@ package com.ftn.isa.config;
 
 import com.ftn.isa.model.Administrator;
 import com.ftn.isa.model.BaseUser;
+import com.ftn.isa.model.BloodCenterAdministrator;
 import com.ftn.isa.model.RegisteredUser;
 
 import io.jsonwebtoken.Claims;
@@ -40,6 +41,13 @@ public class JwtService {
     }
 
     public String generateTokenAdmin(Administrator userDetails) {
+        HashMap<String, String> map = new HashMap<>();// Creating HashMap.
+        map.put("role", userDetails.getAuthorities().iterator().next().toString());
+        map.put("id", userDetails.getId().toString());
+        return generateToken(map, userDetails);
+    }
+
+    public String generateTokenBloodAdmin(BloodCenterAdministrator userDetails) {
         HashMap<String, String> map = new HashMap<>();// Creating HashMap.
         map.put("role", userDetails.getAuthorities().iterator().next().toString());
         map.put("id", userDetails.getId().toString());

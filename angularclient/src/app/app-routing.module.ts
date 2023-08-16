@@ -20,6 +20,8 @@ import { ReportsListComponent } from './modules/pages/reports-list/reports-list.
 import { UserLoginComponent } from './modules/pages/user-login/user-login.component';
 import { HomeComponent } from './modules/pages/home/home.component';
 import { UserHistoryComponent } from './modules/pages/user-history/user-history.component';
+import { ScheduleAppointmentComponent } from './modules/pages/schedule-appointment/schedule-appointment.component';
+import { UserScheduleAppointmentComponent } from './modules/pages/user-schedule-appointment/user-schedule-appointment.component';
 
 
 const routes: Routes = [
@@ -43,6 +45,8 @@ const routes: Routes = [
   { path: 'employee-report', component: EmployeeReportComponent },
   { path: 'report-list', component: ReportsListComponent },
   { path: 'user-history', component: UserHistoryComponent },
+  { path: 'schedule-appointment', component: ScheduleAppointmentComponent },
+  { path: 'user-schedule-appointment/:id', component: UserScheduleAppointmentComponent },
 ];
 
 @NgModule({
