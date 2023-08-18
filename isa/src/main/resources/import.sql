@@ -40,6 +40,8 @@ insert into patient_question(description, answer) values ('Have you taken any me
 insert into patient_question(description, answer) values ('Do you regularly take Aspirin (Cardiopirin)? Have you taken it in the last 5 days?', false);
 
 
+insert into schedule_calendar(duration, schedule_date, start_time, blood_center_id, user_id) values (20, '2023-08-17', '10:00:00', 1, 3);
+insert into schedule_calendar(duration, schedule_date, start_time, blood_center_id, user_id) values (50, '2023-08-19', '18:10:00', 1, 3);
 insert into schedule_calendar(duration, schedule_date, start_time, blood_center_id) values (20, '2023-08-24', '15:10:00', 1);
 insert into schedule_calendar(duration, schedule_date, start_time, blood_center_id) values (40, '2023-08-24', '14:10:00', 2);
 insert into schedule_calendar(duration, schedule_date, start_time, blood_center_id) values (60, '2023-08-24', '16:10:00', 1);
@@ -65,7 +67,8 @@ insert into send_appeal(to_username, subject, text) values ('mikaM', 'Zalba na o
 insert into send_appeal(to_username, subject, text) values ('markoM', 'Zalba na objekat 12', 'Mnogo vam je neuredno....');
 
 
-
-INSERT INTO user_visit_history (blood_type, quantity, number_of_equipment_used, description, user_id, date) VALUES ('A+', 5, 2, 'Regular checkup', 3, '2021-08-17');
-INSERT INTO user_visit_history (blood_type, quantity, number_of_equipment_used, description, user_id, date) VALUES ('O-', 3, 1, 'Emergency visit', 3, '2021-08-17');
-INSERT INTO user_visit_history (blood_type, quantity, number_of_equipment_used, description, user_id, date) VALUES ('B+', 7, 3, 'Routine examination', 3, '2021-08-17');
+INSERT INTO user_visit_history (blood_type, quantity, number_of_equipment_used, description, user_id, appointment_id, price) VALUES ('A+', 5, 2, 'Regular checkup', 3, 1, 2000.00);
+INSERT INTO user_visit_history (blood_type, quantity, number_of_equipment_used, description, user_id, appointment_id, price) VALUES ('B+', 10, 8, 'Checkup', 3, 2, 5000.00);
+-- INSERT INTO user_visit_history (blood_type, quantity, number_of_equipment_used, description, user_id, date) VALUES ('A+', 5, 2, 'Regular checkup', 3, '2021-08-17');
+-- INSERT INTO user_visit_history (blood_type, quantity, number_of_equipment_used, description, user_id, date) VALUES ('O-', 3, 1, 'Emergency visit', 3, '2021-08-17');
+-- INSERT INTO user_visit_history (blood_type, quantity, number_of_equipment_used, description, user_id, date) VALUES ('B+', 7, 3, 'Routine examination', 3, '2021-08-17');

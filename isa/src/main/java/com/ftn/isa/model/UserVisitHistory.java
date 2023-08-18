@@ -30,19 +30,23 @@ public class UserVisitHistory {
     @JoinColumn(name = "user_id", nullable = false)
     private RegisteredUser user;
 
-    @JsonFormat(pattern = "yyyy-MM-dd")
-    @Column(name = "date", nullable = true)
-    private LocalDate date;
+    @OneToOne
+    @JoinColumn(name = "appointment_id", nullable = false)
+    private ScheduleCalendar appointment;
+
+    @Column(name = "price", nullable = false)
+    private float price;
 
     public UserVisitHistory(Long id, String bloodType, int quantity, int numberOfEquipmentUsed, String description,
-            RegisteredUser user, LocalDate date) {
+            RegisteredUser user, ScheduleCalendar appointment, float price) {
         this.id = id;
         this.bloodType = bloodType;
         this.quantity = quantity;
         this.numberOfEquipmentUsed = numberOfEquipmentUsed;
         this.description = description;
         this.user = user;
-        this.date = date;
+        this.appointment = appointment;
+        this.price = price;
     }
 
     public UserVisitHistory(Long id, String bloodType, int quantity, int numberOfEquipmentUsed, String description,
@@ -106,11 +110,19 @@ public class UserVisitHistory {
         this.user = user;
     }
 
-    public LocalDate getDate() {
-        return date;
+    public ScheduleCalendar getAppointment() {
+        return appointment;
     }
 
-    public void setDate(LocalDate date) {
-        this.date = date;
+    public void setAppointment(ScheduleCalendar appointment) {
+        this.appointment = appointment;
+    }
+
+    public float getPrice() {
+        return price;
+    }
+
+    public void setPrice(float price) {
+        this.price = price;
     }
 }

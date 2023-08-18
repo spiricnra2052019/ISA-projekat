@@ -1,8 +1,3 @@
-<form class="form-inline md-form mr-auto mb-4">
-    <input (keyup)="searchFun($event.target)" class="form-control mr-sm-2" type="text" placeholder="Search"
-        aria-label="Search ">
-</form>
-
 <div class="float-right">
 
     <select [ngModel]="columns" (ngModelChange)="onChange($event)" name="sel2">
@@ -14,6 +9,10 @@
         <table class="table table-bordered table-striped">
             <thead class="thead-dark">
                 <tr>
+                    <th scope="col">Start Date</th>
+                    <th scope="col">Start Time</th>
+                    <th scope="col">Duration</th>
+                    <th scope="col">Price</th>
                     <th scope="col">Blood Type</th>
                     <th scope="col">Quantity</th>
                     <th scope="col">Number of used Equipments</th>
@@ -22,6 +21,10 @@
             </thead>
             <tbody>
                 <tr *ngFor="let report of reports">
+                    <td>{{report.appointment.scheduleDate}}</td>
+                    <td>{{report.appointment.startTime}}</td>
+                    <td>{{report.appointment.duration}}</td>
+                    <td>{{report.price}}</td>
                     <td>{{ report.bloodType }}</td>
                     <td>{{ report.quantity }}</td>
                     <td>{{ report.numberOfEquipmentUsed }}</td>
