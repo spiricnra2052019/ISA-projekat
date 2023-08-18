@@ -11,11 +11,13 @@ export class ScheduleCalendarService {
   private scheduleCalendarUrl: string;
   private scheduleCalendarBloodCenterUrl: string;
   private scheduleCalendarAppointmentUrl: string;
+  private scheduleCalendarUrlUser: string;
 
   constructor(private http: HttpClient) {
     this.scheduleCalendarUrl = 'http://localhost:8080/schedule-calendar';
     this.scheduleCalendarBloodCenterUrl = 'http://localhost:8080/schedule-calendar/blood-center';
     this.scheduleCalendarAppointmentUrl = 'http://localhost:8080/schedule-calendar/appointment';
+    this.scheduleCalendarUrlUser = 'http://localhost:8080/schedule-calendar/user';
   }
 
   public getAllTerminsForBloodCenter(id: number): Observable<ScheduleCalendar[]> {
@@ -29,5 +31,13 @@ export class ScheduleCalendarService {
 
   public scheduleAppointment(userAppointment) {
     return this.http.post<ScheduleCalendar>(this.scheduleCalendarAppointmentUrl, userAppointment);
+  }
+
+  public getAllTerminsForUser(id): Observable<ScheduleCalendar[]> {
+    return this.http.get<ScheduleCalendar[]>(this.scheduleCalendarUrlUser + "/" + id);
+  }
+
+  public declineAppointment(id: number) {
+    return this.http.put(this.scheduleCalendarUrl + "/decline/" + id, null);
   }
 }

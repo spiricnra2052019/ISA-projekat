@@ -61,7 +61,7 @@ public class UserVisitHistoryService {
         for (UserVisitHistory userVisitHistory : userVisitHistories) {
             LocalDate currentDate = LocalDate.now();
             Period period = Period.between(userVisitHistory.getDate(), currentDate);
-            if (period.getMonths() < 6) {
+            if (period.getMonths() < 6 && period.getYears() == 0) {
                 return true;
             }
         }

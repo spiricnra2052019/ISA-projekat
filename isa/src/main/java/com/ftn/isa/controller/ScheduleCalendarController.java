@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -69,6 +70,16 @@ public class ScheduleCalendarController {
 		return new ResponseEntity<Collection<ScheduleCalendar>>(schedules, HttpStatus.OK);
 	}
 
+	@Operation(summary = "Get all schedule's for user", description = "Get all schedule's for user", method = "GET")
+	@ApiResponses(value = {
+			@ApiResponse(responseCode = "200", description = "successful operation", content = @Content(mediaType = "application/json", array = @ArraySchema(schema = @Schema(implementation = ScheduleCalendar.class))))
+	})
+	@GetMapping(value = "/user/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<Collection<ScheduleCalendar>> getAllTerminsForUser(@PathVariable("id") Long id) {
+		Collection<ScheduleCalendar> schedules = scheduleCalendarService.findAllByUserId(id);
+		return new ResponseEntity<Collection<ScheduleCalendar>>(schedules, HttpStatus.OK);
+	}
+
 	@Operation(summary = "Schedule appointment for user", description = "Schedule appointment for user", method = "POST")
 	@ApiResponses(value = {
 			@ApiResponse(responseCode = "201", description = "Created", content = {
@@ -84,6 +95,20 @@ public class ScheduleCalendarController {
 			return new ResponseEntity<ScheduleCalendar>(schedule, HttpStatus.OK);
 		} catch (Exception e) {
 			e.printStackTrace();
+			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+		}
+	}
+
+	@Operation(summary = "Decline appointment for user", description = "Decline appointment for user", method = "PUT")
+	@ApiResponses(value = {
+			@ApiResponse(responseCode = "200", description = "successful operation", content = @Content(mediaType = "application/json", array = @ArraySchema(schema = @Schema(implementation = ScheduleCalendar.class))))
+	})
+	@PutMapping(value = "/decline/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<ScheduleCalendar> declineAppointment(@PathVariable("id") Long id) {
+		try {
+			ScheduleCalendar schedule = scheduleCalendarService.declineAppointment(id);
+			return new ResponseEntity<ScheduleCalendar>(schedule, HttpStatus.OK);
+		} catch (Exception e) {
 			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 		}
 	}

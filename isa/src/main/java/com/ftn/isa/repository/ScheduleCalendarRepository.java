@@ -8,4 +8,6 @@ import com.ftn.isa.model.ScheduleCalendar;
 
 public interface ScheduleCalendarRepository extends JpaRepository<ScheduleCalendar, Long> {
     public List<ScheduleCalendar> findAllByBloodCenterId(Long id);
+
+    public List<ScheduleCalendar> findAllByUserId(Long id);
 }

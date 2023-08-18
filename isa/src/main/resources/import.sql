@@ -40,9 +40,12 @@ insert into patient_question(description, answer) values ('Have you taken any me
 insert into patient_question(description, answer) values ('Do you regularly take Aspirin (Cardiopirin)? Have you taken it in the last 5 days?', false);
 
 
-insert into schedule_calendar(duration, schedule_date, start_time, blood_center_id) values (20, '2023-08-17', '15:10:00', 1);
-insert into schedule_calendar(duration, schedule_date, start_time, blood_center_id) values (40, '2023-08-17', '14:10:00', 2);
-insert into schedule_calendar(duration, schedule_date, start_time, blood_center_id) values (60, '2023-08-17', '16:10:00', 1);
+insert into schedule_calendar(duration, schedule_date, start_time, blood_center_id) values (20, '2023-08-24', '15:10:00', 1);
+insert into schedule_calendar(duration, schedule_date, start_time, blood_center_id) values (40, '2023-08-24', '14:10:00', 2);
+insert into schedule_calendar(duration, schedule_date, start_time, blood_center_id) values (60, '2023-08-24', '16:10:00', 1);
+insert into schedule_calendar(duration, schedule_date, start_time, blood_center_id, user_id) values (20, '2023-08-19', '15:10:00', 1, 3);
+insert into schedule_calendar(duration, schedule_date, start_time, blood_center_id, user_id) values (20, '2023-08-19', '23:40:00', 1, 3);
+
 -- insert into schedule_calendar(schedule_date, start_time, duration, name, lastname) values ('2022-12-01', '11:00:00', 60, 'Nikola', 'Spiric');
 -- insert into schedule_calendar(schedule_date, start_time, duration, name, lastname) values ('2022-12-01', '12:00:00', 60, 'Mihajlo', 'Torbica');
 -- insert into schedule_calendar(schedule_date, start_time, duration, name, lastname) values ('2022-12-02', '10:00:00', 120, 'Boban', 'Legendic');

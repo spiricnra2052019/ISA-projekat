@@ -58,8 +58,14 @@ public class ScheduleCalendarService {
 	}
 
 	public ScheduleCalendar scheduleAppointmentForUser(Long id, Long userId) {
+
 		ScheduleCalendar scheduleCalendar = scheduleCalendarRepository.findById(id).orElseGet(null);
+		List<ScheduleCalendar> userAppointments = scheduleCalendarRepository.findAllByUserId(userId);
 		BaseUser user = userRepository.findById(userId).orElseGet(null);
+
+		if (checkIfAppointmentIsAlreadyScheduled(scheduleCalendar, userAppointments)) {
+			throw new IllegalArgumentException("Patient already has scheduled appointment for this date and time.");
+		}
 		if (!patientAnswerService.checkIfPatientHasAlreadyAnswered(userId)) {
 			throw new IllegalArgumentException("Patient has not answered questions yet.");
 		}
@@ -69,6 +75,28 @@ public class ScheduleCalendarService {
 		scheduleCalendar.setUser(user);
 
 		emailQRService.sendEmailWithQRCode(scheduleCalendar, "givemij506@bagonew.com");
+		return scheduleCalendarRepository.save(scheduleCalendar);
+	}
+
+	public boolean checkIfAppointmentIsAlreadyScheduled(ScheduleCalendar scheduleCalendar,
+			List<ScheduleCalendar> userAppointments) {
+		for (ScheduleCalendar appointment : userAppointments) {
+			if (appointment.getDate().equals(scheduleCalendar.getDate())
+					&& appointment.getStartTime().equals(scheduleCalendar.getStartTime())
+					&& appointment.getBloodCenter().getId() == scheduleCalendar.getBloodCenter().getId()) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	public List<ScheduleCalendar> findAllByUserId(Long id) {
+		return scheduleCalendarRepository.findAllByUserId(id);
+	}
+
+	public ScheduleCalendar declineAppointment(Long id) {
+		ScheduleCalendar scheduleCalendar = scheduleCalendarRepository.findById(id).orElseGet(null);
+		scheduleCalendar.setUser(null);
 		return scheduleCalendarRepository.save(scheduleCalendar);
 	}
 }
