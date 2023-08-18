@@ -1,0 +1,47 @@
+<form class="form-inline md-form mr-auto mb-4">
+  <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search"
+    (keyup)="searchFun($event.target)">
+</form>
+<ng-template [ngIf]="showFilter">
+  <form class="form-inline md-form mr-auto mb-2">
+    <input class="form-control mr-sm-2" type="text" placeholder="Filter By" aria-label="Search"
+      (keyup)="filterFun($event.target)">
+  </form>
+</ng-template>
+<div class="float-right">
+
+  <select [ngModel]="columns" (ngModelChange)="onChange($event)" name="sel2">
+    <option [value]="col.value" *ngFor="let col of columns">{{col.name}}</option>
+  </select>
+</div>
+
+<div class="card my-5">
+  <div class="card-body">
+    <table class="table table-bordered table-striped">
+      <thead class="thead-dark">
+        <tr>
+          <th scope="col">Average rate</th>
+          <th scope="col">Description</th>
+          <th scope="col">Name</th>
+          <th scope="col">City</th>
+          <th scope="col">Street</th>
+          <th scope="col">Street Number</th>
+          <th scope="col">Free Appointments</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let center of centers">
+          <td>{{ center.averageRate }}</td>
+          <td>{{ center.description }}</td>
+          <td>{{ center.name }}</td>
+          <td>{{ center.address.city }}</td>
+          <td>{{ center.address.street }}</td>
+          <td>{{ center.address.streetNumber }}</td>
+          <td>
+            <button class="btn btn-primary" (click)="goToFreeAppointments(center.id)">Free Appointments</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

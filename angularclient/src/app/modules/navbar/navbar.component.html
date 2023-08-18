@@ -1,0 +1,27 @@
+<body>
+    <header>
+        <h2 class="logo"><a href="">Blood Donation</a></h2>
+        <nav class="navigation">
+            <a href="/blood-centers" *ngIf="role=='RegisteredUser'">Centers</a>
+            <a href="/user-history" *ngIf="role=='RegisteredUser'">User History</a>
+            <a href="/user-appointments" *ngIf="role=='RegisteredUser'">Appointments</a>
+            <!-- <a href="/qr-confirmation" *ngIf="role=='RegisteredUser'">QR Confirmation</a> -->
+            <!-- <a href="/penalties" *ngIf="role=='RegisteredUser'">Penalties</a> -->
+            <a href="/query" *ngIf="role=='RegisteredUser'">Query</a>
+            <!-- <a href="/complaints" *ngIf="role=='RegisteredUser'">Complaints</a> -->
+
+            <a href="/blood-center-users" *ngIf="role=='BloodCenterAdministrator'">Blood Center Users</a>
+            <a href="/start-appoinment" *ngIf="role=='BloodCenterAdministrator'">Start Appoinment</a>
+            <a href="/schedule-calendar" *ngIf="role=='BloodCenterAdministrator'">Calendar</a>
+            <a href="/schedule-appointment" *ngIf="role=='BloodCenterAdministrator'">Schedule Appoinment</a>
+
+            <a href="/user" *ngIf="isLoggedIn">User</a>
+            <button class="btnLogin-popup" *ngIf="!isLoggedIn" (click)="routeToSignUp()">Sign up</button>
+            <button class="btnLogin-popup" *ngIf="!isLoggedIn" (click)="routeToSignIn()">Sign in</button>
+            <button class="btnLogin-popup" *ngIf="isLoggedIn" (click)="signOut()">Sign out</button>
+
+        </nav>
+    </header>
+
+
+</body>

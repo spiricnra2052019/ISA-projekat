@@ -1,6 +1,5 @@
 package com.ftn.isa.controller;
 
-
 import com.ftn.isa.model.RegisteredUser;
 import com.ftn.isa.model.SendAppeal;
 import com.ftn.isa.model.UserVisitHistory;
@@ -16,6 +15,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.data.domain.Sort;
 
 import java.util.Collection;
 import java.util.List;
@@ -26,11 +26,9 @@ public class UserVisitHistoryController {
     @Autowired
     private UserVisitHistoryService userVisitHistoryService;
 
-    @Operation(summary = "Get all report's", description = "Get all report's", method="GET")
+    @Operation(summary = "Get all report's", description = "Get all report's", method = "GET")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "successful operation",
-                    content = @Content(mediaType = "application/json",
-                            array = @ArraySchema(schema = @Schema(implementation = UserVisitHistory.class))))
+            @ApiResponse(responseCode = "200", description = "successful operation", content = @Content(mediaType = "application/json", array = @ArraySchema(schema = @Schema(implementation = UserVisitHistory.class))))
     })
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Collection<UserVisitHistory>> getAllTermins() {
@@ -38,28 +36,51 @@ public class UserVisitHistoryController {
         return new ResponseEntity<Collection<UserVisitHistory>>(schedules, HttpStatus.OK);
     }
 
+    @Operation(summary = "Get reports by user id", description = "Get reports by user id", method = "GET")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "successful operation", content = @Content(mediaType = "application/json", array = @ArraySchema(schema = @Schema(implementation = UserVisitHistory.class))))
+    })
+    @GetMapping(value = "/user/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Collection<UserVisitHistory>> getReportsByUserId(@PathVariable("id") Long id) {
+        Collection<UserVisitHistory> reports = userVisitHistoryService.findAllByUserId(id);
+        return new ResponseEntity<Collection<UserVisitHistory>>(reports, HttpStatus.OK);
+    }
+
     @Operation(summary = "Create new Report", description = "Create new Report", method = "POST")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "201", description = "Created",
-                    content = { @Content(mediaType = "application/json", schema = @Schema(implementation = UserVisitHistory.class)) }),
-            @ApiResponse(responseCode = "409", description = "Not possible to create new Report when given id is not null",
-                    content = @Content)
+            @ApiResponse(responseCode = "201", description = "Created", content = {
+                    @Content(mediaType = "application/json", schema = @Schema(implementation = UserVisitHistory.class)) }),
+            @ApiResponse(responseCode = "409", description = "Not possible to create new Report when given id is not null", content = @Content)
     })
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<UserVisitHistory> createNewReport(@RequestBody UserVisitHistory report){
+    public ResponseEntity<UserVisitHistory> createNewReport(@RequestBody UserVisitHistory report) {
         UserVisitHistory savedReport = null;
         try {
             savedReport = userVisitHistoryService.save(report);
             return new ResponseEntity<UserVisitHistory>(savedReport, HttpStatus.CREATED);
-        }catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
             return new ResponseEntity<UserVisitHistory>(savedReport, HttpStatus.CONFLICT);
         }
-        // ovde treba napomenuti jos da kada se obavi ova funkcija treba povecati kolicinu krvi, a smanjiti opremu,sto je zadatak nekog drugog studenta u okviru tacke 3.20
+        // ovde treba napomenuti jos da kada se obavi ova funkcija treba povecati
+        // kolicinu krvi, a smanjiti opremu,sto je zadatak nekog drugog studenta u
+        // okviru tacke 3.20
     }
 
     @GetMapping("/search")
-    public ResponseEntity<List<UserVisitHistory>> searchReports(@RequestParam("query") String query){
+    public ResponseEntity<List<UserVisitHistory>> searchReports(@RequestParam("query") String query) {
         return ResponseEntity.ok(userVisitHistoryService.searchReports(query));
     }
+
+    @Operation(summary = "Sort reports of specific user by specific field", description = "Sort reports of specific user by specific field", method = "GET")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "successful operation", content = @Content(mediaType = "application/json", array = @ArraySchema(schema = @Schema(implementation = UserVisitHistory.class))))
+    })
+    @GetMapping(value = "/sort/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Collection<UserVisitHistory>> sortReportsByField(@PathVariable("id") Long id,
+                                                                            @RequestParam("sortBy") String field) {
+        Collection<UserVisitHistory> reports = userVisitHistoryService.findAllByUserId(id, Sort.by(Sort.Direction.ASC, field));
+        return new ResponseEntity<Collection<UserVisitHistory>>(reports, HttpStatus.OK);
+    }
+
 }

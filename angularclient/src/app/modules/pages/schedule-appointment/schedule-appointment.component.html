@@ -1,0 +1,24 @@
+<div class="card my-5">
+    <div class="card-body">
+        <form #scheduleForm="ngForm">
+            <div class="form-group">
+                <label for="scheduleDate">Schedule Date</label>
+                <input type="date" [(ngModel)]="appointment.scheduleDate" class="form-control" id="scheduleDate"
+                    name="scheduleDate" required #scheduleDate="ngModel">
+            </div>
+            <div class="form-group">
+                <label for="startTime">Start Time</label>
+                <input type="time" [(ngModel)]="appointment.startTime" class="form-control" id="startTime"
+                    name="startTime" required #startTime="ngModel">
+                <span class="validity"></span>
+
+            </div>
+            <div class="form-group">
+                <label for="duration">Duration (minutes)</label>
+                <input type="number" [(ngModel)]="appointment.duration" class="form-control" id="duration"
+                    name="duration" required #duration="ngModel">
+            </div>
+            <button (click)="scheduleAppointment()" class="btn btn-info">Schedule Appointment</button>
+        </form>
+    </div>
+</div>

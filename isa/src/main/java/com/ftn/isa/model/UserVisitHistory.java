@@ -1,13 +1,17 @@
 package com.ftn.isa.model;
 
+import java.time.LocalDate;
 
 import javax.persistence.*;
 
-@Entity(name="UserVisitHistory")
+import com.fasterxml.jackson.annotation.JsonFormat;
+
+@Entity(name = "UserVisitHistory")
 public class UserVisitHistory {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", unique=true, nullable = false)
+    @Column(name = "id", unique = true, nullable = false)
     private Long id;
 
     @Column(name = "bloodType", nullable = false)
@@ -22,15 +26,41 @@ public class UserVisitHistory {
     @Column(name = "description", nullable = false)
     private String description;
 
-    public UserVisitHistory(Long id, String bloodType, int quantity, int numberOfEquipmentUsed, String description) {
+    @ManyToOne
+    @JoinColumn(name = "user_id", nullable = false)
+    private RegisteredUser user;
+
+    @OneToOne
+    @JoinColumn(name = "appointment_id", nullable = false)
+    private ScheduleCalendar appointment;
+
+    @Column(name = "price", nullable = false)
+    private float price;
+
+    public UserVisitHistory(Long id, String bloodType, int quantity, int numberOfEquipmentUsed, String description,
+            RegisteredUser user, ScheduleCalendar appointment, float price) {
         this.id = id;
         this.bloodType = bloodType;
         this.quantity = quantity;
         this.numberOfEquipmentUsed = numberOfEquipmentUsed;
         this.description = description;
+        this.user = user;
+        this.appointment = appointment;
+        this.price = price;
     }
 
-    public UserVisitHistory() {}
+    public UserVisitHistory(Long id, String bloodType, int quantity, int numberOfEquipmentUsed, String description,
+            RegisteredUser user) {
+        this.id = id;
+        this.bloodType = bloodType;
+        this.quantity = quantity;
+        this.numberOfEquipmentUsed = numberOfEquipmentUsed;
+        this.description = description;
+        this.user = user;
+    }
+
+    public UserVisitHistory() {
+    }
 
     public Long getId() {
         return id;
@@ -70,5 +100,29 @@ public class UserVisitHistory {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public RegisteredUser getUser() {
+        return user;
+    }
+
+    public void setUser(RegisteredUser user) {
+        this.user = user;
+    }
+
+    public ScheduleCalendar getAppointment() {
+        return appointment;
+    }
+
+    public void setAppointment(ScheduleCalendar appointment) {
+        this.appointment = appointment;
+    }
+
+    public float getPrice() {
+        return price;
+    }
+
+    public void setPrice(float price) {
+        this.price = price;
     }
 }

@@ -5,8 +5,11 @@ import com.ftn.isa.model.RegisteredUser;
 import com.ftn.isa.model.UserVisitHistory;
 import com.ftn.isa.repository.UserVisitHistoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+import java.time.Period;
 import java.util.List;
 
 @Service
@@ -23,20 +26,17 @@ public class UserVisitHistoryService {
         return userVisitHistoryRepository.findById(id).orElseGet(null);
     }
 
-    public List<UserVisitHistory> findAll(){
+    public List<UserVisitHistory> findAll() {
         return userVisitHistoryRepository.findAll();
     }
 
     public UserVisitHistory save(UserVisitHistory history) {
         BloodAmount bloodAmount = new BloodAmount();
-        if (history.getBloodType() == "A")
-        {
+        if (history.getBloodType() == "A") {
             bloodAmount.setA(bloodAmount.getA() + history.getQuantity());
-        } else if (history.getBloodType() == "B")
-        {
+        } else if (history.getBloodType() == "B") {
             bloodAmount.setB(bloodAmount.getB() + history.getQuantity());
-        } else if (history.getBloodType() == "AB")
-        {
+        } else if (history.getBloodType() == "AB") {
             bloodAmount.setAb(bloodAmount.getAb() + history.getQuantity());
         } else {
             bloodAmount.setZero(bloodAmount.getZero() + history.getQuantity());
@@ -48,4 +48,23 @@ public class UserVisitHistoryService {
         userVisitHistoryRepository.deleteById(id);
     }
 
+    public List<UserVisitHistory> findAllByUserId(Long id) {
+        return userVisitHistoryRepository.findAllByUserId(id);
+    }
+
+    public List<UserVisitHistory> findAllByUserId(Long id, Sort by) {
+        return userVisitHistoryRepository.findAllByUserId(id, by);
+    }
+
+    public boolean checkIfUserVisitedIn6Months(Long userId) {
+        List<UserVisitHistory> userVisitHistories = userVisitHistoryRepository.findAllByUserId(userId);
+        for (UserVisitHistory userVisitHistory : userVisitHistories) {
+            LocalDate currentDate = LocalDate.now();
+            Period period = Period.between(userVisitHistory.getAppointment().getDate(), currentDate);
+            if (period.getMonths() < 6 && period.getYears() == 0) {
+                return true;
+            }
+        }
+        return false;
+    }
 }

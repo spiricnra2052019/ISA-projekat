@@ -1,6 +1,7 @@
 package com.ftn.isa.model;
 
 import java.time.LocalDate;
+import java.util.Collection;
 
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorColumn;
@@ -15,37 +16,42 @@ import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+import javax.persistence.*;
+import lombok.*;
+import java.util.List;
 
-@Entity(name="BaseUser")
+@Entity(name = "BaseUser")
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn(name="role", 
-  discriminatorType = DiscriminatorType.INTEGER)
+@DiscriminatorColumn(name = "role", discriminatorType = DiscriminatorType.INTEGER)
 public class BaseUser {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id", unique=true, nullable = false)
+	@Column(name = "id", unique = true, nullable = false)
 	private Long id;
-	
+
 	@Column(name = "name", nullable = false)
 	private String name;
 
-
 	@Column(name = "lastname", nullable = true)
 	private String lastname;
-	
+
 	@Column(name = "username", nullable = false)
 	private String username;
-	
+
 	@Column(name = "email", nullable = false)
 	private String email;
-	
+
 	@Column(name = "password", nullable = false)
 	private String password;
-	
+
 	@Column(name = "birthday", nullable = true)
 	private LocalDate birthday;
-	
 
+	@Column(name = "enabled", nullable = true)
+	private boolean enabled;
 
 	public BaseUser(Long id, String name, String lastname, String username, String email, String password,
 			LocalDate birthday, Address address) {
@@ -119,5 +125,11 @@ public class BaseUser {
 		this.birthday = birthday;
 	}
 
-	
+	public void setEnabled(boolean enabled) {
+		this.enabled = enabled;
+	}
+
+	public boolean getEnabled() {
+		return enabled;
+	}
 }

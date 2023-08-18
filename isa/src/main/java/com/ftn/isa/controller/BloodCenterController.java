@@ -34,78 +34,85 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 @RestController
 @RequestMapping("/blood-centers")
 public class BloodCenterController {
-	
+
 	@Autowired
 	private BloodCenterService bloodCenterService;
-	
-	@Operation(summary = "Get all centers", description = "Get all centers", method="GET")
+
+	@Operation(summary = "Get all centers", description = "Get all centers", method = "GET")
 	@ApiResponses(value = {
-			@ApiResponse(responseCode = "200", description = "successful operation",
-					     content = @Content(mediaType = "application/json", 
-					     array = @ArraySchema(schema = @Schema(implementation = BloodCenter.class))))
+			@ApiResponse(responseCode = "200", description = "successful operation", content = @Content(mediaType = "application/json", array = @ArraySchema(schema = @Schema(implementation = BloodCenter.class))))
 	})
 	@GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Collection<BloodCenter>> getBloodCenters() {
-		Collection<BloodCenter> bloodCenters= bloodCenterService.findAll();
+		Collection<BloodCenter> bloodCenters = bloodCenterService.findAll();
 		return new ResponseEntity<Collection<BloodCenter>>(bloodCenters, HttpStatus.OK);
 	}
-	
+
 	@Operation(summary = "Create new Centers", description = "Create new Centers", method = "POST")
 	@ApiResponses(value = {
-			@ApiResponse(responseCode = "201", description = "Created",
-					content = { @Content(mediaType = "application/json", schema = @Schema(implementation = BloodCenter.class)) }),
-			@ApiResponse(responseCode = "409", description = "Not possible to create new Centers when given id is not null",
-					content = @Content)
+			@ApiResponse(responseCode = "201", description = "Created", content = {
+					@Content(mediaType = "application/json", schema = @Schema(implementation = BloodCenter.class)) }),
+			@ApiResponse(responseCode = "409", description = "Not possible to create new Centers when given id is not null", content = @Content)
 	})
 	@PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<BloodCenter> createBloodCenter(@RequestBody BloodCenter bloodCenter){
+	public ResponseEntity<BloodCenter> createBloodCenter(@RequestBody BloodCenter bloodCenter) {
 		BloodCenter savedBloodCenter = null;
 		try {
 			savedBloodCenter = bloodCenterService.save(bloodCenter);
 			return new ResponseEntity<BloodCenter>(savedBloodCenter, HttpStatus.CREATED);
-		}catch (Exception e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 			return new ResponseEntity<BloodCenter>(savedBloodCenter, HttpStatus.CONFLICT);
 		}
 	}
 
 	@GetMapping("/search")
-	public ResponseEntity<List<BloodCenter>> searchUsers(@RequestParam("query") String query){
+	public ResponseEntity<List<BloodCenter>> searchUsers(@RequestParam("query") String query) {
 		return ResponseEntity.ok(bloodCenterService.searchCenters(query));
 	}
-	
+
 	@GetMapping("/filter")
-	public ResponseEntity<List<BloodCenter>> filterUsers(@RequestParam("searchQuery") String searchQuery, @RequestParam("filterQuery") float filterQuery){
+	public ResponseEntity<List<BloodCenter>> filterUsers(@RequestParam("searchQuery") String searchQuery,
+			@RequestParam("filterQuery") float filterQuery) {
 		return ResponseEntity.ok(bloodCenterService.filterCenters(searchQuery, filterQuery));
 	}
-	
+
 	@PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<BloodCenter> editBloodCenter(@RequestBody BloodCenter bloodCenter){
+	public ResponseEntity<BloodCenter> editBloodCenter(@RequestBody BloodCenter bloodCenter) {
 		BloodCenter savedBC = null;
 		try {
 			savedBC = bloodCenterService.edit(bloodCenter);
 			return new ResponseEntity<BloodCenter>(savedBC, HttpStatus.OK);
-		}catch (Exception e) {
+		} catch (Exception e) {
 			e.printStackTrace();
-			return new ResponseEntity<BloodCenter>(savedBC, HttpStatus.BAD_REQUEST);			
+			return new ResponseEntity<BloodCenter>(savedBC, HttpStatus.BAD_REQUEST);
 		}
 	}
-	
+
 	@GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<BloodCenter> getCenterById(@Parameter(name="id", description = "ID of center", required = true) @PathVariable("id") Long id) {
+	public ResponseEntity<BloodCenter> getCenterById(
+			@Parameter(name = "id", description = "ID of center", required = true) @PathVariable("id") Long id) {
 		BloodCenter bloodCenter = bloodCenterService.findOne(id);
 		return new ResponseEntity<BloodCenter>(bloodCenter, HttpStatus.OK);
 	}
 
-	@Operation(summary = "Get sorted centers", description = "Get all centers", method="GET")
+	@Operation(summary = "Get center by administator id", description = "Get center by administator id", method = "GET")
 	@ApiResponses(value = {
-			@ApiResponse(responseCode = "200", description = "successful operation",
-					content = @Content(mediaType = "application/json",
-							array = @ArraySchema(schema = @Schema(implementation = BloodCenter.class))))
+			@ApiResponse(responseCode = "200", description = "successful operation", content = @Content(mediaType = "application/json", array = @ArraySchema(schema = @Schema(implementation = BloodCenter.class))))
 	})
-	@GetMapping(value="/sort", produces = MediaType.APPLICATION_JSON_VALUE)
+	@GetMapping(value = "/administrator/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<BloodCenter> getBloodCenterByAdministratorId(@PathVariable("id") Long id) {
+		BloodCenter bloodCenter = bloodCenterService.findOneByBloodCenterAdministratorId(id);
+		return new ResponseEntity<BloodCenter>(bloodCenter, HttpStatus.OK);
+	}
+
+	@Operation(summary = "Get sorted centers", description = "Get all centers", method = "GET")
+	@ApiResponses(value = {
+			@ApiResponse(responseCode = "200", description = "successful operation", content = @Content(mediaType = "application/json", array = @ArraySchema(schema = @Schema(implementation = BloodCenter.class))))
+	})
+	@GetMapping(value = "/sort", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Collection<BloodCenter>> getSortedBloodCenters(@RequestParam("sortBy") String sortBy) {
-		Collection<BloodCenter> bloodCenters= bloodCenterService.findAll(Sort.by(Sort.Direction.ASC, sortBy));
+		Collection<BloodCenter> bloodCenters = bloodCenterService.findAll(Sort.by(Sort.Direction.ASC, sortBy));
 
 		return new ResponseEntity<Collection<BloodCenter>>(bloodCenters, HttpStatus.OK);
 	}

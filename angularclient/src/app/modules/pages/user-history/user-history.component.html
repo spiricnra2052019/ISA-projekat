@@ -1,0 +1,36 @@
+<div class="float-right">
+
+    <select [ngModel]="columns" (ngModelChange)="onChange($event)" name="sel2">
+        <option [value]="col.value" *ngFor="let col of columns">{{col.name}}</option>
+    </select>
+</div>
+<div class="card my-5">
+    <div class="card-body">
+        <table class="table table-bordered table-striped">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">Start Date</th>
+                    <th scope="col">Start Time</th>
+                    <th scope="col">Duration</th>
+                    <th scope="col">Price</th>
+                    <th scope="col">Blood Type</th>
+                    <th scope="col">Quantity</th>
+                    <th scope="col">Number of used Equipments</th>
+                    <th scope="col">Description</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let report of reports">
+                    <td>{{report.appointment.scheduleDate}}</td>
+                    <td>{{report.appointment.startTime}}</td>
+                    <td>{{report.appointment.duration}}</td>
+                    <td>{{report.price}}</td>
+                    <td>{{ report.bloodType }}</td>
+                    <td>{{ report.quantity }}</td>
+                    <td>{{ report.numberOfEquipmentUsed }}</td>
+                    <td>{{ report.description }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

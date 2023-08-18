@@ -1,0 +1,25 @@
+<div class="card my-5">
+    <div class="card-body">
+        <table class="table table-bordered table-striped">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">Schedule Date</th>
+                    <th scope="col">Start Time</th>
+                    <th scope="col">Duration</th>
+                    <th scope="col">Decline</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let appointment of appointments">
+                    <td>{{ appointment.scheduleDate }}</td>
+                    <td>{{ appointment.startTime }}</td>
+                    <td>{{ appointment.duration }}</td>
+                    <td>
+                        <button class="btn btn-danger" *ngIf="isEligibleForDecline(appointment)"
+                            (click)="declineAppointment(appointment)">Decline</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
