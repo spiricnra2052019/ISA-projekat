@@ -78,14 +78,14 @@ public class UserController {
 			@ApiResponse(responseCode = "400", description = "Bad request", content = @Content)
 	})
 	@PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<RegisteredUser> editUser(@RequestBody RegisteredUser registeredUser) {
-		RegisteredUser savedUser = null;
+	public ResponseEntity<AuthenticationResponse> editUser(@RequestBody RegisteredUser user) {
+		AuthenticationResponse editedUser = null;
 		try {
-			savedUser = userService.save(registeredUser);
-			return new ResponseEntity<RegisteredUser>(savedUser, HttpStatus.OK);
+			editedUser = authService.edit(user);
+			return new ResponseEntity<AuthenticationResponse>(editedUser, HttpStatus.OK);
 		} catch (Exception e) {
 			e.printStackTrace();
-			return new ResponseEntity<RegisteredUser>(savedUser, HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<AuthenticationResponse>(editedUser, HttpStatus.BAD_REQUEST);
 		}
 	}
 

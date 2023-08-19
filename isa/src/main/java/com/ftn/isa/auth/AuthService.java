@@ -93,6 +93,15 @@ public class AuthService {
                                 .build();
         }
 
+        public AuthenticationResponse edit(RegisteredUser request) {
+                request.setPassword(passwordEncoder.encode(request.getPassword()));
+                repository.save(request);
+                var jwtToken = jwtService.generateTokenRegisteredUser(request);
+                return AuthenticationResponse.builder()
+                                .token(jwtToken)
+                                .build();
+        }
+
         public void sendEmail(RegisteredUser request) {
                 // Send email to user to activate their account
                 String activationToken = UUID.randomUUID().toString();

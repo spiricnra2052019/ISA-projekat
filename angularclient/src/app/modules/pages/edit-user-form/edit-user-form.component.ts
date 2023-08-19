@@ -4,6 +4,9 @@ import { Address } from 'src/app/modules/blood-donation/model/address';
 import { RegisteredUser } from 'src/app/modules/blood-donation/model/registered-user';
 import { RegisteredUserService } from '../../blood-donation/services/registered-user.service';
 import { FormsModule } from '@angular/forms';
+import { UserToken } from '../../blood-donation/model/user-token';
+import { TokenStorageService } from '../../blood-donation/services/token-storage.service';
+import { EditRegisteredUser } from '../../blood-donation/model/edit-registered-user';
 
 @Component({
   selector: 'app-edit-user-form',
@@ -12,6 +15,7 @@ import { FormsModule } from '@angular/forms';
 })
 export class EditUserFormComponent implements OnInit {
 
+  userToken: UserToken
   user: RegisteredUser;
   showAddress: boolean;
   confirmPassword: string;
@@ -20,15 +24,18 @@ export class EditUserFormComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private userService: RegisteredUserService) {
+    private userService: RegisteredUserService,
+    private tokenService: TokenStorageService) {
     this.user = new RegisteredUser();
     this.address = new Address();
   }
 
   ngOnInit(): void {
-    this.userService.findById(3).subscribe(data => {
-      this.user = data;
+    this.userToken = this.tokenService.getUser();
+    this.userService.findById(this.userToken.id).subscribe(data => {
+      this.user = new EditRegisteredUser(data.id, data.name, data.email, data.lastname, data.username, data.password, data.birthday, data.address);
       this.address = this.user.address;
+      console.log(this.user);
     })
   }
 
@@ -39,6 +46,7 @@ export class EditUserFormComponent implements OnInit {
   editUser(): void {
     if (this.confirmPassword == this.user.password && this.user.password != "") {
       this.user.address = this.address;
+      console.log(this.user)
       this.userService.update(this.user).subscribe(result => this.gotoUserList());
     } else {
       this.confirmPassword = "";

@@ -34,7 +34,7 @@ const routes: Routes = [
   { path: 'query', component: QueryFormComponent },
   { path: 'users-search', component: UsersSearchComponent },
   { path: 'add-blood-center', component: AddNewCentersComponent },
-  { path: 'edituser', component: EditUserFormComponent },
+  { path: 'edit-user', component: EditUserFormComponent },
   { path: 'edit-center', component: EditCenterComponent },
   { path: 'editemployee', component: EditEmployeeComponent },
   { path: 'add-new-administrator', component: AddNewAdministratorComponent },
