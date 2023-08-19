@@ -15,7 +15,7 @@
             <a href="/schedule-calendar" *ngIf="role=='BloodCenterAdministrator'">Calendar</a>
             <a href="/schedule-appointment" *ngIf="role=='BloodCenterAdministrator'">Schedule Appoinment</a>
 
-            <a href="/user" *ngIf="isLoggedIn">User</a>
+            <a href="/edit-user" *ngIf="isLoggedIn">User</a>
             <button class="btnLogin-popup" *ngIf="!isLoggedIn" (click)="routeToSignUp()">Sign up</button>
             <button class="btnLogin-popup" *ngIf="!isLoggedIn" (click)="routeToSignIn()">Sign in</button>
             <button class="btnLogin-popup" *ngIf="isLoggedIn" (click)="signOut()">Sign out</button>

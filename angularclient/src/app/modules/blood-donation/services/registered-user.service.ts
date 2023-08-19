@@ -35,6 +35,7 @@ export class RegisteredUserService {
   }
 
   public update(user) {
+    console.log(user);
     return this.http.put<RegisteredUser>(this.usersUrl, user);
   }
 
