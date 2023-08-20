@@ -27,6 +27,7 @@ import { UserHistoryComponent } from './user-history/user-history.component';
 import { ScheduleAppointmentComponent } from './schedule-appointment/schedule-appointment.component';
 import { UserScheduleAppointmentComponent } from './user-schedule-appointment/user-schedule-appointment.component';
 import { UserAppointmentsComponent } from './user-appointments/user-appointments.component';
+import { SearchScheduleAppointmentComponent } from './search-schedule-appointment/search-schedule-appointment.component';
 
 @NgModule(
     {
@@ -56,6 +57,7 @@ import { UserAppointmentsComponent } from './user-appointments/user-appointments
             UserScheduleAppointmentComponent,
             UserScheduleAppointmentComponent,
             UserAppointmentsComponent,
+            SearchScheduleAppointmentComponent,
         ],
         imports: [
             CommonModule,

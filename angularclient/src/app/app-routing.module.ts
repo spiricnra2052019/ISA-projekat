@@ -23,6 +23,7 @@ import { UserHistoryComponent } from './modules/pages/user-history/user-history.
 import { ScheduleAppointmentComponent } from './modules/pages/schedule-appointment/schedule-appointment.component';
 import { UserScheduleAppointmentComponent } from './modules/pages/user-schedule-appointment/user-schedule-appointment.component';
 import { UserAppointmentsComponent } from './modules/pages/user-appointments/user-appointments.component';
+import { SearchScheduleAppointmentComponent } from './modules/pages/search-schedule-appointment/search-schedule-appointment.component';
 
 
 const routes: Routes = [
@@ -49,6 +50,7 @@ const routes: Routes = [
   { path: 'schedule-appointment', component: ScheduleAppointmentComponent },
   { path: 'user-schedule-appointment/:id', component: UserScheduleAppointmentComponent },
   { path: 'user-appointments', component: UserAppointmentsComponent },
+  { path: 'search-schedule-appointment', component: SearchScheduleAppointmentComponent }
 ];
 
 @NgModule({

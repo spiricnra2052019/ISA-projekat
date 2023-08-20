@@ -1,6 +1,16 @@
 package com.ftn.isa.service;
 
+import java.sql.Time;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
 import java.util.List;
+
+import org.springframework.data.domain.Sort;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -98,5 +108,23 @@ public class ScheduleCalendarService {
 		ScheduleCalendar scheduleCalendar = scheduleCalendarRepository.findById(id).orElseGet(null);
 		scheduleCalendar.setUser(null);
 		return scheduleCalendarRepository.save(scheduleCalendar);
+	}
+
+	public List<ScheduleCalendar> searchAppointments(String startDate, String startTime) {
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+		LocalDate scheduleDate = LocalDate.parse(startDate, formatter);
+
+		LocalTime startTimeCnv = LocalTime.parse(startTime);
+
+		return scheduleCalendarRepository.searchByScheduleDateAndTime(scheduleDate, startTimeCnv);
+	}
+
+	public List<ScheduleCalendar> searchAppointmentsAndSortBy(String startDate, String startTime, String sortBy) {
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+		LocalDate scheduleDate = LocalDate.parse(startDate, formatter);
+
+		LocalTime startTimeCnv = LocalTime.parse(startTime);
+
+		return scheduleCalendarRepository.searchByScheduleDateAndTimeAndSortByRate(scheduleDate, startTimeCnv);
 	}
 }
