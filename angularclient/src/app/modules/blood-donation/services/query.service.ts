@@ -23,4 +23,8 @@ export class QueryService {
   public save(queryAnswer: PatientAnswer) {
     return this.http.post<PatientAnswer>(this.queryAnswersUrl, queryAnswer);
   }
+
+  public check(userId): Observable<any> {
+    return this.http.get<any>(this.queryAnswersUrl + "/check/" + userId);
+  }
 }

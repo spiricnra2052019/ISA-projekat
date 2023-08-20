@@ -40,9 +40,10 @@ insert into patient_question(description, answer) values ('Have you taken any me
 insert into patient_question(description, answer) values ('Do you regularly take Aspirin (Cardiopirin)? Have you taken it in the last 5 days?', false);
 
 
-insert into schedule_calendar(duration, schedule_date, start_time, blood_center_id, user_id) values (20, '2023-08-17', '10:00:00', 1, 3);
-insert into schedule_calendar(duration, schedule_date, start_time, blood_center_id, user_id) values (50, '2023-08-19', '18:10:00', 1, 3);
+insert into schedule_calendar(duration, schedule_date, start_time, blood_center_id, user_id) values (20, '2022-08-17', '10:00:00', 1, 3);
+insert into schedule_calendar(duration, schedule_date, start_time, blood_center_id, user_id) values (50, '2022-08-19', '18:10:00', 1, 3);
 insert into schedule_calendar(duration, schedule_date, start_time, blood_center_id) values (20, '2023-08-24', '15:10:00', 1);
+insert into schedule_calendar(duration, schedule_date, start_time, blood_center_id) values (20, '2023-08-24', '15:10:00', 2);
 insert into schedule_calendar(duration, schedule_date, start_time, blood_center_id) values (40, '2023-08-24', '14:10:00', 2);
 insert into schedule_calendar(duration, schedule_date, start_time, blood_center_id) values (60, '2023-08-24', '16:10:00', 1);
 insert into schedule_calendar(duration, schedule_date, start_time, blood_center_id, user_id) values (20, '2023-08-19', '15:10:00', 1, 3);

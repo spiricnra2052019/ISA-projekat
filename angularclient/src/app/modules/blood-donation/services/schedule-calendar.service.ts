@@ -12,12 +12,16 @@ export class ScheduleCalendarService {
   private scheduleCalendarBloodCenterUrl: string;
   private scheduleCalendarAppointmentUrl: string;
   private scheduleCalendarUrlUser: string;
+  private searchUrl: string;
+  private searchSortUrl: string;
 
   constructor(private http: HttpClient) {
     this.scheduleCalendarUrl = 'http://localhost:8080/schedule-calendar';
     this.scheduleCalendarBloodCenterUrl = 'http://localhost:8080/schedule-calendar/blood-center';
     this.scheduleCalendarAppointmentUrl = 'http://localhost:8080/schedule-calendar/appointment';
     this.scheduleCalendarUrlUser = 'http://localhost:8080/schedule-calendar/user';
+    this.searchUrl = 'http://localhost:8080/schedule-calendar/search?scheduleDate=';
+    this.searchSortUrl = 'http://localhost:8080/schedule-calendar/search/sort?scheduleDate=';
   }
 
   public getAllTerminsForBloodCenter(id: number): Observable<ScheduleCalendar[]> {
@@ -39,5 +43,13 @@ export class ScheduleCalendarService {
 
   public declineAppointment(id: number) {
     return this.http.put(this.scheduleCalendarUrl + "/decline/" + id, null);
+  }
+
+  public searchAppointmentsByDateAndTime(searchAppointment): Observable<ScheduleCalendar[]> {
+    return this.http.get<ScheduleCalendar[]>(this.searchUrl.concat(searchAppointment.scheduleDate).concat('&startTime=').concat(searchAppointment.startTime));
+  }
+
+  public sortByAndSearch(sortBy, searchAppointment): Observable<ScheduleCalendar[]> {
+    return this.http.get<ScheduleCalendar[]>(this.searchSortUrl.concat(searchAppointment.scheduleDate).concat('&startTime=').concat(searchAppointment.startTime).concat('&sortBy=').concat(sortBy));
   }
 }

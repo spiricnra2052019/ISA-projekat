@@ -8,4 +8,5 @@ export class ScheduleCalendar {
     duration: number;
     user: RegisteredUser
     bloodCenterId: number;
+    bloodCenter: BloodCenter;
 }

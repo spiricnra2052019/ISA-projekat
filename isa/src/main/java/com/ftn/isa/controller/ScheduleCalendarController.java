@@ -1,5 +1,6 @@
 package com.ftn.isa.controller;
 
+import java.text.ParseException;
 import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ftn.isa.dto.ScheduleCalendarDTO;
@@ -113,4 +115,29 @@ public class ScheduleCalendarController {
 		}
 	}
 
+	@Operation(summary = "Search appointments by startDate and startTime", description = "Search appointments by startDate and startTime", method = "GET")
+	@ApiResponses(value = {
+			@ApiResponse(responseCode = "200", description = "successful operation", content = @Content(mediaType = "application/json", array = @ArraySchema(schema = @Schema(implementation = ScheduleCalendar.class))))
+	})
+	@GetMapping(value = "/search", produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<Collection<ScheduleCalendar>> searchAppointments(
+			@RequestParam("scheduleDate") String scheduleDate,
+			@RequestParam("startTime") String startTime) throws ParseException {
+		Collection<ScheduleCalendar> schedules = scheduleCalendarService.searchAppointments(scheduleDate, startTime);
+		return new ResponseEntity<Collection<ScheduleCalendar>>(schedules, HttpStatus.OK);
+	}
+
+	@Operation(summary = "Search appointments by startDate and startTime and sortBy rate", description = "Search appointments by startDate and startTime and sortBy rate", method = "GET")
+	@ApiResponses(value = {
+			@ApiResponse(responseCode = "200", description = "successful operation", content = @Content(mediaType = "application/json", array = @ArraySchema(schema = @Schema(implementation = ScheduleCalendar.class))))
+	})
+	@GetMapping(value = "/search/sort", produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<Collection<ScheduleCalendar>> searchAppointmentsAndSortByRate(
+			@RequestParam("scheduleDate") String scheduleDate,
+			@RequestParam("startTime") String startTime,
+			@RequestParam("sortBy") String sortBy) throws ParseException {
+		Collection<ScheduleCalendar> schedules = scheduleCalendarService.searchAppointmentsAndSortBy(scheduleDate,
+				startTime, sortBy);
+		return new ResponseEntity<Collection<ScheduleCalendar>>(schedules, HttpStatus.OK);
+	}
 }

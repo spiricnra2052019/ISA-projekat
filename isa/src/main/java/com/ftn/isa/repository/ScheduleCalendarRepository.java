@@ -1,8 +1,13 @@
 package com.ftn.isa.repository;
 
+import java.sql.Time;
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.List;
 
+import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 
 import com.ftn.isa.model.ScheduleCalendar;
 
@@ -10,4 +15,15 @@ public interface ScheduleCalendarRepository extends JpaRepository<ScheduleCalend
     public List<ScheduleCalendar> findAllByBloodCenterId(Long id);
 
     public List<ScheduleCalendar> findAllByUserId(Long id);
+
+    @Query("SELECT sc FROM ScheduleCalendar sc WHERE " +
+            "sc.scheduleDate = :date AND sc.startTime = :startTime")
+    public List<ScheduleCalendar> searchByScheduleDateAndTime(LocalDate date, LocalTime startTime);
+
+    @Query("SELECT sc FROM ScheduleCalendar sc " +
+            "JOIN sc.bloodCenter bc " +
+            "WHERE sc.scheduleDate = :date AND sc.startTime = :startTime " +
+            "ORDER BY bc.averageRate")
+    public List<ScheduleCalendar> searchByScheduleDateAndTimeAndSortByRate(LocalDate date, LocalTime startTime);
+
 }
