@@ -1,0 +1,49 @@
+<div class="card my-5">
+    <div class="card-body">
+        <form #scheduleForm="ngForm">
+            <div class="form-group">
+                <label for="scheduleDate">Schedule Date</label>
+                <input type="date" [(ngModel)]="searchAppointment.scheduleDate" class="form-control" id="scheduleDate"
+                    name="scheduleDate" required #scheduleDate="ngModel">
+            </div>
+            <div class="form-group">
+                <label for="startTime">Start Time</label>
+                <input type="time" [(ngModel)]="searchAppointment.startTime" class="form-control" id="startTime"
+                    name="startTime" required #startTime="ngModel">
+                <span class="validity"></span>
+
+            </div>
+            <button (click)="searchAppointments(searchAppointment)" class="btn btn-info">Search
+                Appointments</button>
+        </form>
+    </div>
+
+    <select [ngModel]="columns" (ngModelChange)="onChange($event)" name="sel2">
+        <option [value]="col.value" *ngFor="let col of columns">{{col.name}}</option>
+    </select>
+</div>
+
+<div class="card my-5">
+    <div class="card-body">
+        <table class="table table-bordered table-striped">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">Blood Center</th>
+                    <th scope="col">Average Rate</th>
+                    <th scope="col">City</th>
+                    <th scope="col">Schedule Appointment</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let appointment of appointments">
+                    <td>{{ appointment.bloodCenter.name }}</td>
+                    <td>{{ appointment.bloodCenter.averageRate }}</td>
+                    <td>{{ appointment.bloodCenter.address.city }}</td>
+                    <td>
+                        <button class="btn btn-primary" (click)="scheduleAppointment(appointment.id)">Schedule
+                            Appointment</button>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
