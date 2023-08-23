@@ -17,6 +17,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.ftn.isa.dto.ScheduleCalendarDTO;
 import com.ftn.isa.dto.UserAppointmentDTO;
+import com.ftn.isa.dto.UserScheduleAppointmentDTO;
+import com.ftn.isa.model.BloodCenter;
 import com.ftn.isa.model.BloodCenterAdministrator;
 import com.ftn.isa.model.RegisteredUser;
 import com.ftn.isa.model.ScheduleCalendar;
@@ -115,29 +117,48 @@ public class ScheduleCalendarController {
 		}
 	}
 
-	@Operation(summary = "Search appointments by startDate and startTime", description = "Search appointments by startDate and startTime", method = "GET")
+	@Operation(summary = "Get free BloodCenters by startDate and startTime", description = "Search appointments by startDate and startTime", method = "GET")
 	@ApiResponses(value = {
 			@ApiResponse(responseCode = "200", description = "successful operation", content = @Content(mediaType = "application/json", array = @ArraySchema(schema = @Schema(implementation = ScheduleCalendar.class))))
 	})
-	@GetMapping(value = "/search", produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<Collection<ScheduleCalendar>> searchAppointments(
-			@RequestParam("scheduleDate") String scheduleDate,
-			@RequestParam("startTime") String startTime) throws ParseException {
-		Collection<ScheduleCalendar> schedules = scheduleCalendarService.searchAppointments(scheduleDate, startTime);
-		return new ResponseEntity<Collection<ScheduleCalendar>>(schedules, HttpStatus.OK);
-	}
-
-	@Operation(summary = "Search appointments by startDate and startTime and sortBy rate", description = "Search appointments by startDate and startTime and sortBy rate", method = "GET")
-	@ApiResponses(value = {
-			@ApiResponse(responseCode = "200", description = "successful operation", content = @Content(mediaType = "application/json", array = @ArraySchema(schema = @Schema(implementation = ScheduleCalendar.class))))
-	})
-	@GetMapping(value = "/search/sort", produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<Collection<ScheduleCalendar>> searchAppointmentsAndSortByRate(
+	@GetMapping(value = "/free", produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<Collection<BloodCenter>> searchAppointments(
 			@RequestParam("scheduleDate") String scheduleDate,
 			@RequestParam("startTime") String startTime,
-			@RequestParam("sortBy") String sortBy) throws ParseException {
-		Collection<ScheduleCalendar> schedules = scheduleCalendarService.searchAppointmentsAndSortBy(scheduleDate,
-				startTime, sortBy);
-		return new ResponseEntity<Collection<ScheduleCalendar>>(schedules, HttpStatus.OK);
+			@RequestParam("duration") int duration) throws ParseException {
+		Collection<BloodCenter> bloodCenters = scheduleCalendarService.freeBloodCenters(scheduleDate, startTime,
+				duration);
+		return new ResponseEntity<Collection<BloodCenter>>(bloodCenters, HttpStatus.OK);
+	}
+
+	@Operation(summary = "Get free BloodCenters by startDate and startTime and sortBy rate", description = "Search appointments by startDate and startTime and sortBy rate", method = "GET")
+	@ApiResponses(value = {
+			@ApiResponse(responseCode = "200", description = "successful operation", content = @Content(mediaType = "application/json", array = @ArraySchema(schema = @Schema(implementation = ScheduleCalendar.class))))
+	})
+	@GetMapping(value = "/free/sort", produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<Collection<BloodCenter>> searchAppointmentsAndSortByRate(
+			@RequestParam("scheduleDate") String scheduleDate,
+			@RequestParam("startTime") String startTime,
+			@RequestParam("duration") int duration) throws ParseException {
+		Collection<BloodCenter> bloodCenters = scheduleCalendarService.freeBloodCentersAndSortBy(scheduleDate,
+				startTime, duration);
+		return new ResponseEntity<Collection<BloodCenter>>(bloodCenters, HttpStatus.OK);
+	}
+
+	@Operation(summary = "Create appointment by user", description = "Create appointment by user", method = "POST")
+	@ApiResponses(value = {
+			@ApiResponse(responseCode = "201", description = "Created", content = {
+					@Content(mediaType = "application/json", schema = @Schema(implementation = ScheduleCalendar.class)) }),
+			@ApiResponse(responseCode = "409", description = "Not possible to create new RegisteredUser when given id is not null", content = @Content)
+	})
+	@PostMapping(value = "/appointment/user", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<ScheduleCalendar> createAppointmentByUser(
+			@RequestBody UserScheduleAppointmentDTO userScheduleAppointmentDTO) {
+		try {
+			ScheduleCalendar schedule = scheduleCalendarService.createAppointmentByUser(userScheduleAppointmentDTO);
+			return new ResponseEntity<ScheduleCalendar>(schedule, HttpStatus.OK);
+		} catch (Exception e) {
+			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+		}
 	}
 }
