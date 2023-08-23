@@ -87,7 +87,7 @@ public class BloodCenter {
 		this.description = description;
 	}
 
-	public float getAverageRate() {
+	public Float getAverageRate() {
 		return averageRate;
 	}
 
@@ -125,6 +125,23 @@ public class BloodCenter {
 
 	public void setWorkingTime(WorkingTime workingTime) {
 		this.workingTime = workingTime;
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o)
+			return true;
+		if (o == null || getClass() != o.getClass())
+			return false;
+
+		BloodCenter that = (BloodCenter) o;
+
+		return id != null && id.equals(that.id);
+	}
+
+	@Override
+	public int hashCode() {
+		return id != null ? id.hashCode() : 0;
 	}
 
 }
