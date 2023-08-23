@@ -7,6 +7,7 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -16,6 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.ftn.isa.dto.ScheduleCalendarDTO;
+import com.ftn.isa.dto.UserScheduleAppointmentDTO;
 import com.ftn.isa.model.BaseUser;
 import com.ftn.isa.model.BloodCenter;
 import com.ftn.isa.model.BloodCenterAdministrator;
@@ -114,21 +116,52 @@ public class ScheduleCalendarService {
 		return scheduleCalendarRepository.save(scheduleCalendar);
 	}
 
-	public List<ScheduleCalendar> searchAppointments(String startDate, String startTime) {
+	public List<BloodCenter> freeBloodCenters(String startDate, String startTime, int duration) {
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 		LocalDate scheduleDate = LocalDate.parse(startDate, formatter);
-
 		LocalTime startTimeCnv = LocalTime.parse(startTime);
+		LocalTime endTimeCnv = startTimeCnv.plusMinutes(duration);
 
-		return scheduleCalendarRepository.searchByScheduleDateAndTime(scheduleDate, startTimeCnv);
+		List<ScheduleCalendar> schedules = scheduleCalendarRepository.searchByScheduleDate(scheduleDate);
+
+		List<BloodCenter> bloodCenters = bloodCenterRepository.findAll();
+
+		List<BloodCenter> overlappingCenters = new ArrayList<>();
+
+		for (ScheduleCalendar schedule : schedules) {
+			LocalTime scheduleStartTime = schedule.getStartTime();
+			LocalTime scheduleEndTime = scheduleStartTime.plusMinutes(schedule.getDuration());
+
+			if ((scheduleStartTime.isBefore(endTimeCnv) && scheduleEndTime.isAfter(startTimeCnv)) ||
+					(startTimeCnv.equals(scheduleStartTime) && endTimeCnv.equals(scheduleEndTime)) ||
+					(startTimeCnv.isBefore(scheduleEndTime) && endTimeCnv.isAfter(scheduleStartTime))) {
+				overlappingCenters.add(schedule.getBloodCenter());
+			}
+		}
+
+		// remove overlapping centers
+		bloodCenters.removeAll(overlappingCenters);
+
+		return bloodCenters;
 	}
 
-	public List<ScheduleCalendar> searchAppointmentsAndSortBy(String startDate, String startTime, String sortBy) {
-		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-		LocalDate scheduleDate = LocalDate.parse(startDate, formatter);
+	public List<BloodCenter> freeBloodCentersAndSortBy(String startDate, String startTime, int duration) {
+		List<BloodCenter> bloodCenters = freeBloodCenters(startDate, startTime, duration);
+		// sort by rate
+		bloodCenters.sort((b1, b2) -> b1.getAverageRate().compareTo(b2.getAverageRate()));
 
-		LocalTime startTimeCnv = LocalTime.parse(startTime);
+		return bloodCenters;
+	}
 
-		return scheduleCalendarRepository.searchByScheduleDateAndTimeAndSortByRate(scheduleDate, startTimeCnv);
+	public ScheduleCalendar createAppointmentByUser(UserScheduleAppointmentDTO userScheduleAppointmentDTO) {
+		ScheduleCalendar scheduleCalendar = new ScheduleCalendar(userScheduleAppointmentDTO.getScheduleDate(),
+				userScheduleAppointmentDTO.getStartTime(), userScheduleAppointmentDTO.getDuration());
+
+		BloodCenter bloodCenter = bloodCenterRepository.findById(userScheduleAppointmentDTO.getBloodCenterId())
+				.orElseGet(null);
+		scheduleCalendar.setBloodCenter(bloodCenter);
+		BaseUser user = userRepository.findById(userScheduleAppointmentDTO.getUserId()).orElseGet(null);
+		scheduleCalendar.setUser(user);
+		return scheduleCalendarRepository.save(scheduleCalendar);
 	}
 }

@@ -72,6 +72,13 @@ public class ScheduleCalendar {
 		this.bloodCenter = bloodCenter;
 	}
 
+	public ScheduleCalendar(LocalDate scheduleDate, LocalTime startTime, int duration) {
+		super();
+		this.scheduleDate = scheduleDate;
+		this.startTime = startTime;
+		this.duration = duration;
+	}
+
 	public Long getId() {
 		return id;
 	}

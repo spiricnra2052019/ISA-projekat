@@ -24,14 +24,9 @@ public interface ScheduleCalendarRepository extends JpaRepository<ScheduleCalend
         public List<ScheduleCalendar> findAllByUserId(Long id);
 
         @Query("SELECT sc FROM ScheduleCalendar sc WHERE " +
-                        "sc.scheduleDate = :date AND sc.startTime = :startTime")
-        public List<ScheduleCalendar> searchByScheduleDateAndTime(LocalDate date, LocalTime startTime);
-
-        @Query("SELECT sc FROM ScheduleCalendar sc " +
-                        "JOIN sc.bloodCenter bc " +
-                        "WHERE sc.scheduleDate = :date AND sc.startTime = :startTime " +
-                        "ORDER BY bc.averageRate")
-        public List<ScheduleCalendar> searchByScheduleDateAndTimeAndSortByRate(LocalDate date, LocalTime startTime);
+                        "sc.scheduleDate = :date")
+        public List<ScheduleCalendar> searchByScheduleDate(
+                        @Param("date") LocalDate date);
 
         @Query("SELECT sc FROM ScheduleCalendar sc WHERE sc.id = :id")
         @Lock(LockModeType.PESSIMISTIC_WRITE)
