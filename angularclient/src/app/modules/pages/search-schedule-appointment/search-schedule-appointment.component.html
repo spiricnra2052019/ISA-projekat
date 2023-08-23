@@ -11,7 +11,11 @@
                 <input type="time" [(ngModel)]="searchAppointment.startTime" class="form-control" id="startTime"
                     name="startTime" required #startTime="ngModel">
                 <span class="validity"></span>
-
+            </div>
+            <div class="form-group">
+                <label for="duration">Duration</label>
+                <input type="number" [(ngModel)]="searchAppointment.duration" class="form-control" id="duration"
+                    name="duration" required #duration="ngModel">
             </div>
             <button (click)="searchAppointments(searchAppointment)" class="btn btn-info">Search
                 Appointments</button>
@@ -35,12 +39,12 @@
                 </tr>
             </thead>
             <tbody>
-                <tr *ngFor="let appointment of appointments">
-                    <td>{{ appointment.bloodCenter.name }}</td>
-                    <td>{{ appointment.bloodCenter.averageRate }}</td>
-                    <td>{{ appointment.bloodCenter.address.city }}</td>
+                <tr *ngFor="let bloodCenter of bloodCenters">
+                    <td>{{ bloodCenter.name }}</td>
+                    <td>{{ bloodCenter.averageRate }}</td>
+                    <td>{{ bloodCenter.address.city }}</td>
                     <td>
-                        <button class="btn btn-primary" (click)="scheduleAppointment(appointment.id)">Schedule
+                        <button class="btn btn-primary" (click)="scheduleAppointment(bloodCenter.id)">Schedule
                             Appointment</button>
                 </tr>
             </tbody>

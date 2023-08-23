@@ -9,6 +9,8 @@ import { SearchAppointmentDTO } from '../../blood-donation/dto/search-appointmen
 import { UserAppointmentDTO } from '../../blood-donation/dto/user-appointment';
 import { RegisteredUserService } from '../../blood-donation/services/registered-user.service';
 import { QueryService } from '../../blood-donation/services/query.service';
+import { BloodCenter } from '../../blood-donation/model/blood-center';
+import { UserScheduleAppointmentDTO } from '../../blood-donation/dto/user-schedule-appointment';
 
 @Component({
   selector: 'app-search-schedule-appointment',
@@ -17,9 +19,10 @@ import { QueryService } from '../../blood-donation/services/query.service';
 })
 export class SearchScheduleAppointmentComponent implements OnInit {
   searchAppointment: SearchAppointmentDTO = new SearchAppointmentDTO();
-  appointments: ScheduleCalendar[] = [];
+  bloodCenters: BloodCenter[] = [];
   user: UserToken;
   selectedColumn: string;
+  userScheduleAppointmentDTO: UserScheduleAppointmentDTO = new UserScheduleAppointmentDTO();
 
   columns = [
     { id: 1, name: "Average Rate", value: "averageRate" }
@@ -37,46 +40,59 @@ export class SearchScheduleAppointmentComponent implements OnInit {
 
   onChange(value) {
     this.selectedColumn = value;
-    this.scheduleCalendarService.sortByAndSearch(value, this.searchAppointment).subscribe(data => {
-      this.appointments = data;
+    this.scheduleCalendarService.sortByAndSearchFreeBloodCenters(this.searchAppointment).subscribe(data => {
+      this.bloodCenters = data;
     });
   }
 
   searchAppointments(searchAppointment) {
     this.searchAppointment = searchAppointment;
     if (this.selectedColumn != null) {
-      this.scheduleCalendarService.sortByAndSearch(this.selectedColumn, this.searchAppointment).subscribe(data => {
-        this.appointments = data;
-        this.appointments = this.appointments.filter(appointment => new Date(appointment.scheduleDate) >= new Date() && appointment.user == null);
+      this.scheduleCalendarService.sortByAndSearchFreeBloodCenters(this.searchAppointment).subscribe(data => {
+        this.bloodCenters = data;
       });
     } else {
-      this.scheduleCalendarService.searchAppointmentsByDateAndTime(searchAppointment).subscribe(data => {
-        this.appointments = data;
-        this.appointments = this.appointments.filter(appointment => new Date(appointment.scheduleDate) >= new Date() && appointment.user == null);
+      this.scheduleCalendarService.getFreeBloodCentersByDateAndTime(searchAppointment).subscribe(data => {
+        this.bloodCenters = data;
+        console.log(this.bloodCenters);
       });
     }
   }
 
-  scheduleAppointment(id: string) {
-    const userAppointment = new UserAppointmentDTO();
-    userAppointment.appointmentId = parseInt(id);
-    userAppointment.user = this.user;
-    this.queryService.check(this.user.id).subscribe(data => {
-      if (data == true) {
-        this.scheduleCalendarService.scheduleAppointment(userAppointment).subscribe(
-          data => {
-            alert("Appointment scheduled!");
-            this.router.navigate(['/user-appointments'])
-          },
-          error => {
-            alert("Appointment not scheduled!");
-          }
-        );
-      } else {
-        alert("You have to have query to schedule appointment!");
-        this.router.navigate(['/query']);
+  scheduleAppointment(id: number) {
+    this.userScheduleAppointmentDTO.bloodCenterId = id;
+    this.userScheduleAppointmentDTO.userId = parseInt(this.user.id);
+    this.userScheduleAppointmentDTO.scheduleDate = this.searchAppointment.scheduleDate;
+    this.userScheduleAppointmentDTO.startTime = this.searchAppointment.startTime;
+    this.userScheduleAppointmentDTO.duration = this.searchAppointment.duration;
+
+    this.scheduleCalendarService.userSchedule(this.userScheduleAppointmentDTO).subscribe(
+      data => {
+        alert("Appointment scheduled!");
+        this.router.navigate(['/user-appointments'])
       }
-    });
+    );
   }
+  // scheduleAppointment(id: string) {
+  //   const userAppointment = new UserAppointmentDTO();
+  //   userAppointment.appointmentId = parseInt(id);
+  //   userAppointment.user = this.user;
+  //   this.queryService.check(this.user.id).subscribe(data => {
+  //     if (data == true) {
+  //       this.scheduleCalendarService.scheduleAppointment(userAppointment).subscribe(
+  //         data => {
+  //           alert("Appointment scheduled!");
+  //           this.router.navigate(['/user-appointments'])
+  //         },
+  //         error => {
+  //           alert("Appointment not scheduled!");
+  //         }
+  //       );
+  //     } else {
+  //       alert("You have to have query to schedule appointment!");
+  //       this.router.navigate(['/query']);
+  //     }
+  //   });
+  // }
 
 }
