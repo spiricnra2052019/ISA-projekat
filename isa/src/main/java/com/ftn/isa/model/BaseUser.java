@@ -41,9 +41,6 @@ public class BaseUser {
 	@Column(name = "username", nullable = false)
 	private String username;
 
-	@Column(name = "email", nullable = false)
-	private String email;
-
 	@Column(name = "password", nullable = false)
 	private String password;
 
@@ -53,14 +50,13 @@ public class BaseUser {
 	@Column(name = "enabled", nullable = true)
 	private boolean enabled;
 
-	public BaseUser(Long id, String name, String lastname, String username, String email, String password,
+	public BaseUser(Long id, String name, String lastname, String username, String password,
 			LocalDate birthday, Address address) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.lastname = lastname;
 		this.username = username;
-		this.email = email;
 		this.password = password;
 		this.birthday = birthday;
 	}
@@ -99,14 +95,6 @@ public class BaseUser {
 
 	public void setUsername(String username) {
 		this.username = username;
-	}
-
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
 	}
 
 	public String getPassword() {

@@ -115,7 +115,7 @@ public class AuthService {
                                 "If you did not create this account, please ignore this email.";
 
                 SimpleMailMessage message = new SimpleMailMessage();
-                message.setTo(request.getEmail());
+                message.setTo(request.getUsername());
                 message.setSubject("Activate your account");
                 message.setText(content);
                 javaMailSender.send(message);

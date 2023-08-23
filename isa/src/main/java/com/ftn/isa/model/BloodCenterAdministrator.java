@@ -33,9 +33,9 @@ public class BloodCenterAdministrator extends BaseUser implements Serializable, 
 		// TODO Auto-generated constructor stub
 	}
 
-	public BloodCenterAdministrator(Long id, String name, String lastname, String username, String email,
+	public BloodCenterAdministrator(Long id, String name, String lastname, String username,
 			String password, LocalDate birthday, Address address, Boolean validated) {
-		super(id, name, lastname, username, email, password, birthday, address);
+		super(id, name, lastname, username, password, birthday, address);
 		// TODO Auto-generated constructor stub
 		this.validated = validated;
 

@@ -2,10 +2,9 @@ import { idText } from "typescript";
 import { Address } from "./address";
 
 export class EditRegisteredUser {
-    constructor(id: string, name: string, email: string, lastname: string, username: string, password: string, birthday: string, address: Address) {
+    constructor(id: string, name: string, lastname: string, username: string, password: string, birthday: string, address: Address) {
         this.id = id;
         this.name = name;
-        this.email = email;
         this.lastname = lastname;
         this.username = username;
         this.password = password;
@@ -15,7 +14,6 @@ export class EditRegisteredUser {
 
     id: string;
     name: string;
-    email: string;
     lastname: string;
     username: string;
     password: string;

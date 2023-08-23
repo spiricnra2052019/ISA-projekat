@@ -52,13 +52,14 @@ public class UserService {
 		return userRepository.findByNameAndLastnameAllIgnoringCase(firstName, lastName);
 	}
 
-	public RegisteredUser loginUser(String email, String password) throws Exception {
-		RegisteredUser registeredUser = userRepository.loginUser(email, password);
-		if (registeredUser == null) {
-			throw new Exception("Invalid login!");
-		}
-		return registeredUser;
-	}
+	// public RegisteredUser loginUser(String email, String password) throws
+	// Exception {
+	// RegisteredUser registeredUser = userRepository.loginUser(email, password);
+	// if (registeredUser == null) {
+	// throw new Exception("Invalid login!");
+	// }
+	// return registeredUser;
+	// }
 
 	public void activateUser(String token) throws Exception {
 		RegisteredUser registeredUser = userRepository.findOneByActivationToken(token);

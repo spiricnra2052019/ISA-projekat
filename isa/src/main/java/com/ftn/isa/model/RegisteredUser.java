@@ -41,9 +41,9 @@ public class RegisteredUser extends BaseUser implements Serializable, UserDetail
 		super();
 	}
 
-	public RegisteredUser(Long id, String name, String lastname, String username, String email, String password,
+	public RegisteredUser(Long id, String name, String lastname, String username, String password,
 			LocalDate birthday, Address address) {
-		super(id, name, lastname, username, email, password, birthday, address);
+		super(id, name, lastname, username, password, birthday, address);
 		// TODO Auto-generated constructor stub
 		this.address = address;
 	}

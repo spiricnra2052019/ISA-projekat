@@ -13,16 +13,15 @@ import javax.persistence.Id;
 @Entity
 @DiscriminatorValue("2")
 public class Employee extends BaseUser implements Serializable {
-	
-	public Employee () {
+
+	public Employee() {
 		super();
 	}
 
-	public Employee(Long id, String name, String lastname, String username, String email, String password,
+	public Employee(Long id, String name, String lastname, String username, String password,
 			LocalDate birthday, Address address) {
-		super(id, name, lastname, username, email, password, birthday, address);
+		super(id, name, lastname, username, password, birthday, address);
 		// TODO Auto-generated constructor stub
 	}
-	
-	
+
 }

@@ -24,6 +24,9 @@ import com.ftn.isa.repository.BloodCenterRepository;
 import com.ftn.isa.repository.ScheduleCalendarRepository;
 import com.ftn.isa.repository.UserRepository;
 
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
+
 @Service
 public class ScheduleCalendarService {
 	@Autowired
@@ -67,9 +70,10 @@ public class ScheduleCalendarService {
 		return scheduleCalendarRepository.findAllByBloodCenterId(id);
 	}
 
+	@Transactional(readOnly = false, propagation = Propagation.REQUIRES_NEW)
 	public ScheduleCalendar scheduleAppointmentForUser(Long id, Long userId) {
 
-		ScheduleCalendar scheduleCalendar = scheduleCalendarRepository.findById(id).orElseGet(null);
+		ScheduleCalendar scheduleCalendar = scheduleCalendarRepository.findByIdForUpdate(id).orElseGet(null);
 		List<ScheduleCalendar> userAppointments = scheduleCalendarRepository.findAllByUserId(userId);
 		BaseUser user = userRepository.findById(userId).orElseGet(null);
 

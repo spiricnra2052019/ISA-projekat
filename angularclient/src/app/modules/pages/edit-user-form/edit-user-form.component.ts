@@ -33,7 +33,7 @@ export class EditUserFormComponent implements OnInit {
   ngOnInit(): void {
     this.userToken = this.tokenService.getUser();
     this.userService.findById(this.userToken.id).subscribe(data => {
-      this.user = new EditRegisteredUser(data.id, data.name, data.email, data.lastname, data.username, data.password, data.birthday, data.address);
+      this.user = new EditRegisteredUser(data.id, data.name, data.lastname, data.username, data.password, data.birthday, data.address);
       this.address = this.user.address;
       console.log(this.user);
     })

@@ -94,23 +94,29 @@ public class UserController {
 		return ResponseEntity.ok(userService.searchUsers(query));
 	}
 
-	@Operation(summary = "Login RegisteredUser", description = "Login RegisteredUser", method = "POST")
-	@ApiResponses(value = {
-			@ApiResponse(responseCode = "200", description = "OK", content = {
-					@Content(mediaType = "application/json", schema = @Schema(implementation = RegisteredUser.class)) }),
-			@ApiResponse(responseCode = "400", description = "Not possible to login user.", content = @Content)
-	})
-	@PostMapping(value = "/login", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<RegisteredUser> validateUser(@RequestBody UserLoginDTO userLoginDTO) {
-		RegisteredUser validUser = null;
-		try {
-			validUser = userService.loginUser(userLoginDTO.getEmail(), userLoginDTO.getPassword());
-			return new ResponseEntity<RegisteredUser>(validUser, HttpStatus.OK);
-		} catch (Exception e) {
-			e.printStackTrace();
-			return new ResponseEntity<RegisteredUser>(validUser, HttpStatus.BAD_REQUEST);
-		}
-	}
+	// @Operation(summary = "Login RegisteredUser", description = "Login
+	// RegisteredUser", method = "POST")
+	// @ApiResponses(value = {
+	// @ApiResponse(responseCode = "200", description = "OK", content = {
+	// @Content(mediaType = "application/json", schema = @Schema(implementation =
+	// RegisteredUser.class)) }),
+	// @ApiResponse(responseCode = "400", description = "Not possible to login
+	// user.", content = @Content)
+	// })
+	// @PostMapping(value = "/login", consumes = MediaType.APPLICATION_JSON_VALUE,
+	// produces = MediaType.APPLICATION_JSON_VALUE)
+	// public ResponseEntity<RegisteredUser> validateUser(@RequestBody UserLoginDTO
+	// userLoginDTO) {
+	// RegisteredUser validUser = null;
+	// try {
+	// validUser = userService.loginUser(userLoginDTO.getEmail(),
+	// userLoginDTO.getPassword());
+	// return new ResponseEntity<RegisteredUser>(validUser, HttpStatus.OK);
+	// } catch (Exception e) {
+	// e.printStackTrace();
+	// return new ResponseEntity<RegisteredUser>(validUser, HttpStatus.BAD_REQUEST);
+	// }
+	// }
 
 	@Operation(summary = "Get user", description = "Get user", method = "GET")
 	@ApiResponses(value = {

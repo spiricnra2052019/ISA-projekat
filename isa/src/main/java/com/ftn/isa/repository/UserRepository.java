@@ -23,8 +23,9 @@ public interface UserRepository extends JpaRepository<RegisteredUser, Long> {
 			"Or UPPER(u.lastname) LIKE CONCAT('%' , :query, '%')")
 	public List<RegisteredUser> searchUsers(String query);
 
-	@Query("select u from RegisteredUser u where u.email = ?1 and u.password = ?2")
-	public RegisteredUser loginUser(String email, String password);
+	// @Query("select u from RegisteredUser u where u.email = ?1 and u.password =
+	// ?2")
+	// public RegisteredUser loginUser(String email, String password);
 
 	public RegisteredUser findOneByActivationToken(String token);
 

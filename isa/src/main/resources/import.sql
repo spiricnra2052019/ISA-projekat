@@ -5,24 +5,24 @@ insert into address (city, country, street, street_number) values ('Novi Sad', '
 insert into working_time (opening_time, closing_time) values ('08:00:00', '16:00:00');
 
 
-insert into base_user(name, lastname, username, password, birthday, email, role, enabled) values ('Sima', 'Simic', 'simaS', '$2a$10$hzBC8SL.Vqk1Fhz36ag7aOgDq4f1PEiNhF2bwjXjg6i9m4Gij7ZSS', '2000-08-30', 'sima@test.com', 4, true);
-insert into base_user(name, lastname, username, password, birthday, email, role, enabled) values ('Bora', 'Boroje', 'boraB', 'bora123', '2000-04-22', 'bora@test.com', 4, true);
+insert into base_user(name, lastname, username, password, birthday, role, enabled) values ('Sima', 'Simic', 'sima@test.com', '$2a$10$hzBC8SL.Vqk1Fhz36ag7aOgDq4f1PEiNhF2bwjXjg6i9m4Gij7ZSS', '2000-08-30',  4, true);
+insert into base_user(name, lastname, username, password, birthday, role, enabled) values ('Bora', 'Boroje', 'bora@test.com', 'bora123', '2000-04-22',  4, true);
 
 
-insert into base_user (name, lastname, username, password, birthday, email, address_id, role, enabled) values ('Pera', 'Peric', 'peraP', '$2a$10$hzBC8SL.Vqk1Fhz36ag7aOgDq4f1PEiNhF2bwjXjg6i9m4Gij7ZSS', '2000-03-19', 'pera@test.com', 1, 1, true);
+insert into base_user (name, lastname, username, password, birthday, address_id, role, enabled) values ('Pera', 'Peric', 'pera@test.com', '$2a$10$hzBC8SL.Vqk1Fhz36ag7aOgDq4f1PEiNhF2bwjXjg6i9m4Gij7ZSS', '2000-03-19',  1, 1, true);
 -- insert into base_user (name, lastname, username, password, birthday, email, address_id, role, enabled) values ('Marko', 'Markovic', 'markoM', '$2a$10$hzBC8SL.Vqk1Fhz36ag7aOgDq4f1PEiNhF2bwjXjg6i9m4Gij7ZSS', '2000-03-19', 'marko@test.com', 2, 1, true);
-insert into base_user (name, lastname, username, password, birthday, email, address_id, role, enabled) values ('Mika', 'Mikic', 'mikaM', '$2a$10$hzBC8SL.Vqk1Fhz36ag7aOgDq4f1PEiNhF2bwjXjg6i9m4Gij7ZSS', '2000-03-19', 'mika@test.com', 3, 1, true);
+insert into base_user (name, lastname, username, password, birthday, address_id, role, enabled) values ('Mika', 'Mikic', 'mika@test.com', '$2a$10$hzBC8SL.Vqk1Fhz36ag7aOgDq4f1PEiNhF2bwjXjg6i9m4Gij7ZSS', '2000-03-19',  3, 1, true);
 
 -- insert into base_user (name, lastname, username, email, password, birthday, role) values ('Pera', 'Peric', 'peraP', 'mika@test.com', '$2a$10$hzBC8SL.Vqk1Fhz36ag7aOgDq4f1PEiNhF2bwjXjg6i9m4Gij7ZSS', '2000-03-19', 3);
 -- insert into base_user (name, lastname, username, email, password, birthday, role) values ('Marko', 'Markovic', 'markoM', 'mika@test.com', '$2a$10$hzBC8SL.Vqk1Fhz36ag7aOgDq4f1PEiNhF2bwjXjg6i9m4Gij7ZSS', '2000-03-19', 3);
 -- insert into base_user (name, lastname, username, email, password, birthday, role) values ('Mika', 'Mikic', 'mikaM', 'mika@test.com', '$2a$10$hzBC8SL.Vqk1Fhz36ag7aOgDq4f1PEiNhF2bwjXjg6i9m4Gij7ZSS', '2000-03-19', 3);
 
 -- insert into base_user (name, lastname, username, email, password, birthday, role, validated, enabled) values ('Pera', 'Peric', 'peraP', 'mika@test.com', '$2a$10$hzBC8SL.Vqk1Fhz36ag7aOgDq4f1PEiNhF2bwjXjg6i9m4Gij7ZSS', '2000-03-19', 3, false, true);
-insert into base_user (name, lastname, username, email, password, birthday, role, validated, enabled) values ('Marko', 'Markovic', 'markoM', 'mika@test.com', '$2a$10$hzBC8SL.Vqk1Fhz36ag7aOgDq4f1PEiNhF2bwjXjg6i9m4Gij7ZSS', '2000-03-19', 3, true, true);
-insert into base_user (name, lastname, username, email, password, birthday, role, validated, enabled) values ('Mika', 'Mikic', 'mikaM', 'mika@test.com', '$2a$10$hzBC8SL.Vqk1Fhz36ag7aOgDq4f1PEiNhF2bwjXjg6i9m4Gij7ZSS', '2000-03-19', 3, true, true);
+insert into base_user (name, lastname, username, password, birthday, role, validated, enabled) values ('Marko', 'Markovic', 'mika@test.com', '$2a$10$hzBC8SL.Vqk1Fhz36ag7aOgDq4f1PEiNhF2bwjXjg6i9m4Gij7ZSS', '2000-03-19', 3, true, true);
+insert into base_user (name, lastname, username, password, birthday, role, validated, enabled) values ('Mika', 'Mikic', 'mika@test.com', '$2a$10$hzBC8SL.Vqk1Fhz36ag7aOgDq4f1PEiNhF2bwjXjg6i9m4Gij7ZSS', '2000-03-19', 3, true, true);
 
 
-insert into base_user (name, lastname, username, email, password, birthday, role, enabled) values ('Mile', 'Veliki', 'milecar','mile@gmail.com', '1312', '2000-05-03', 2, true);
+insert into base_user (name, lastname, username, password, birthday, role, enabled) values ('Mile', 'Veliki', 'mile@gmail.com', '1312', '2000-05-03', 2, true);
 
 insert into blood_amount(a, b, ab, zero) values (10, 11, 12, 9);
 insert into blood_amount(a, b, ab, zero) values (16, 21, 12, 9);
@@ -73,3 +73,22 @@ INSERT INTO user_visit_history (blood_type, quantity, number_of_equipment_used, 
 -- INSERT INTO user_visit_history (blood_type, quantity, number_of_equipment_used, description, user_id, date) VALUES ('A+', 5, 2, 'Regular checkup', 3, '2021-08-17');
 -- INSERT INTO user_visit_history (blood_type, quantity, number_of_equipment_used, description, user_id, date) VALUES ('O-', 3, 1, 'Emergency visit', 3, '2021-08-17');
 -- INSERT INTO user_visit_history (blood_type, quantity, number_of_equipment_used, description, user_id, date) VALUES ('B+', 7, 3, 'Routine examination', 3, '2021-08-17');
+
+
+insert into patient_answer(question_id, patient_id, answer) values (1, 3, true);
+insert into patient_answer(question_id, patient_id, answer) values (2, 3, true);
+insert into patient_answer(question_id, patient_id, answer) values (3, 3, true);
+insert into patient_answer(question_id, patient_id, answer) values (4, 3, true);
+insert into patient_answer(question_id, patient_id, answer) values (5, 3, true);
+insert into patient_answer(question_id, patient_id, answer) values (6, 3, true);
+insert into patient_answer(question_id, patient_id, answer) values (7, 3, true);
+insert into patient_answer(question_id, patient_id, answer) values (8, 3, true);
+
+insert into patient_answer(question_id, patient_id, answer) values (1, 4, true);
+insert into patient_answer(question_id, patient_id, answer) values (2, 4, true);
+insert into patient_answer(question_id, patient_id, answer) values (3, 4, true);
+insert into patient_answer(question_id, patient_id, answer) values (4, 4, true);
+insert into patient_answer(question_id, patient_id, answer) values (5, 4, true);
+insert into patient_answer(question_id, patient_id, answer) values (6, 4, true);
+insert into patient_answer(question_id, patient_id, answer) values (7, 4, true);
+insert into patient_answer(question_id, patient_id, answer) values (8, 4, true);

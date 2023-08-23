@@ -8,4 +8,5 @@ import com.ftn.isa.model.BloodCenterAdministrator;
 
 public interface BloodCenterAdministratorRepository extends JpaRepository<BloodCenterAdministrator, Long> {
     public Optional<BloodCenterAdministrator> findOneByUsername(String username);
+
 }
