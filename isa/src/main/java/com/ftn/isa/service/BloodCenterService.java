@@ -53,12 +53,9 @@ public class BloodCenterService {
 		WorkingTime workingTime = workingTimeRepository.save(bloodCenter.getWorkingTime());
 		Address address = addressRepository.save(bloodCenter.getAddress());
 		BloodAmount blood = bloodAmountRepository.save(bloodCenter.getBloodAmount());
-		BloodCenterAdministrator bloodCenterAdministrator = bloodCenterAdministratorRepository
-				.save(bloodCenter.getBloodCenterAdministrator());
 		bloodCenter.setWorkingTime(workingTime);
 		bloodCenter.setAddress(address);
 		bloodCenter.setBloodAmount(blood);
-		bloodCenter.setBloodCenterAdministrator(bloodCenterAdministrator);
 		return bloodCenterRepository.save(bloodCenter);
 	}
 

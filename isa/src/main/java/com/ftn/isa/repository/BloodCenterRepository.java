@@ -21,4 +21,5 @@ public interface BloodCenterRepository extends JpaRepository<BloodCenter, Long> 
 	public List<BloodCenter> filterCenters(String searchQuery, float filterQuery);
 
 	public BloodCenter findOneByBloodCenterAdministratorId(Long id);
+
 }

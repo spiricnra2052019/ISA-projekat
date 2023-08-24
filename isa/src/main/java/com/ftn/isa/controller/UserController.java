@@ -3,6 +3,7 @@ package com.ftn.isa.controller;
 import java.util.Collection;
 import java.util.List;
 
+import com.ftn.isa.dto.RegisterdUserDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -145,6 +146,13 @@ public class UserController {
 		AuthenticationResponse response = new AuthenticationResponse();
 		response.setToken("Activated");
 		return new ResponseEntity<AuthenticationResponse>(response, HttpStatus.OK);
+	}
+
+	@GetMapping("/visitedUsers")
+	public ResponseEntity<List<RegisterdUserDTO>> getVisitedUsers(@RequestParam("adminId") Long adminId,
+																  @RequestParam("sortType") String sortType){
+		List<RegisterdUserDTO> users = userService.getVisitedUsers(adminId, sortType);
+		return ResponseEntity.ok(users);
 	}
 
 }

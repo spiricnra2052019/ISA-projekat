@@ -1,25 +1,33 @@
 package com.ftn.isa.service;
 
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
+import com.ftn.isa.dto.RegisterdUserDTO;
+import com.ftn.isa.mapper.RegisteredUserMapper;
+import com.ftn.isa.model.*;
+import com.ftn.isa.repository.*;
+import org.hibernate.type.ListType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 
 import com.ftn.isa.auth.AuthenticationResponse;
-import com.ftn.isa.model.Address;
-import com.ftn.isa.model.RegisteredUser;
-import com.ftn.isa.repository.AddressRepository;
-import com.ftn.isa.repository.UserRepository;
 
 @Service
 public class UserService {
 	@Autowired
 	private UserRepository userRepository;
-
+	@Autowired
+	private BloodCenterRepository bloodCenterRepository;
 	@Autowired
 	private AddressRepository addressRepository;
+	@Autowired
+	private UserVisitHistoryRepository userVisitHistoryRepository;
 
 	public List<RegisteredUser> searchUsers(String query) {
 		List<RegisteredUser> users = userRepository.searchUsers(query);
@@ -68,6 +76,39 @@ public class UserService {
 		}
 		registeredUser.setEnabled(true);
 		userRepository.save(registeredUser);
+	}
+
+	public List<RegisterdUserDTO> getVisitedUsers(Long adminId, String sortType){
+		BloodCenter center = bloodCenterRepository.findOneByBloodCenterAdministratorId(adminId);
+		List<UserVisitHistory> histories = userVisitHistoryRepository.findAllByAppointmentBloodCenterId(center.getId())
+				.stream()
+				.filter(h -> h.getAppointment().getDate().isBefore(LocalDate.now()))
+				.collect(Collectors.toList());
+		if (sortType.equals("name")) {
+			histories = sortByName(histories);
+		} else if (sortType.equals("lastName")) {
+			histories = sortByLastName(histories);
+		} else if (sortType.equals("date")) {
+			histories = sortByDate(histories);
+		} else {
+			throw new RuntimeException("Invalid sort type.");
+		}
+		return RegisteredUserMapper.toDtoList(histories);
+	}
+
+	private List<UserVisitHistory> sortByName(List<UserVisitHistory> histories) {
+		histories.sort(Comparator.comparing(o -> o.getUser().getName()));
+		return histories;
+	}
+
+	private List<UserVisitHistory> sortByLastName(List<UserVisitHistory> histories) {
+		histories.sort(Comparator.comparing(o -> o.getUser().getLastname()));
+		return histories;
+	}
+
+	private List<UserVisitHistory> sortByDate(List<UserVisitHistory> histories) {
+		histories.sort(Comparator.comparing(o -> o.getAppointment().getDate()));
+		return histories;
 	}
 
 }
