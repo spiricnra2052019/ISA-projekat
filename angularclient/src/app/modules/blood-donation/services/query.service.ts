@@ -27,4 +27,8 @@ export class QueryService {
   public check(userId): Observable<any> {
     return this.http.get<any>(this.queryAnswersUrl + "/check/" + userId);
   }
+
+  public saveMultiple(patientAnswers: PatientAnswer[]) {
+    return this.http.post<PatientAnswer[]>(this.queryAnswersUrl + "/multiple", patientAnswers);
+  }
 }

@@ -6,7 +6,7 @@ insert into working_time (opening_time, closing_time) values ('08:00:00', '16:00
 
 
 insert into base_user(name, lastname, username, password, birthday, role, enabled) values ('Sima', 'Simic', 'sima@test.com', '$2a$10$hzBC8SL.Vqk1Fhz36ag7aOgDq4f1PEiNhF2bwjXjg6i9m4Gij7ZSS', '2000-08-30',  4, true);
-insert into base_user(name, lastname, username, password, birthday, role, enabled) values ('Bora', 'Boroje', 'bora@test.com', 'bora123', '2000-04-22',  4, true);
+insert into base_user(name, lastname, username, password, birthday, role, enabled) values ('Bora', 'Boroje', 'bora@test.com', '$2a$10$hzBC8SL.Vqk1Fhz36ag7aOgDq4f1PEiNhF2bwjXjg6i9m4Gij7ZSS', '2000-04-22',  4, true);
 
 
 insert into base_user (name, lastname, username, password, birthday, address_id, role, enabled) values ('Pera', 'Peric', 'pera@test.com', '$2a$10$hzBC8SL.Vqk1Fhz36ag7aOgDq4f1PEiNhF2bwjXjg6i9m4Gij7ZSS', '2000-03-19',  1, 1, true);

@@ -6,6 +6,7 @@ import com.ftn.isa.model.RegisteredUser;
 import com.ftn.isa.repository.PatientAnswerRepository;
 import com.ftn.isa.repository.UserRepository;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,6 +35,18 @@ public class PatientAnswerService {
         return patientAnswerRepository.save(patientAnswer);
     }
 
+    @Transactional
+    public List<PatientAnswer> saveMultiple(List<QueryAnswerDTO> patientAnswers) {
+        List<PatientAnswer> savedAnswers = new ArrayList<>();
+
+        for (QueryAnswerDTO patientAnswer : patientAnswers) {
+            savedAnswers.add(save(patientAnswer));
+        }
+
+        return savedAnswers;
+    }
+
+    @Transactional
     public boolean checkIfPatientHasAlreadyAnswered(Long userId) {
         List<PatientAnswer> patientAnswers = patientAnswerRepository.findAllByRegisteredUserId(userId);
         return patientAnswers.size() > 0;
