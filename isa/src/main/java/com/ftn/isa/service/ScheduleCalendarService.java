@@ -113,7 +113,7 @@ public class ScheduleCalendarService {
 		}
 		scheduleCalendar.setUser(user);
 
-		emailQRService.sendEmailWithQRCode(scheduleCalendar, "givemij506@bagonew.com");
+		emailQRService.sendEmailWithQRCode(scheduleCalendar, scheduleCalendar.getUser().getUsername());
 		return scheduleCalendarRepository.save(scheduleCalendar);
 	}
 
@@ -191,6 +191,8 @@ public class ScheduleCalendarService {
 		if (isOverlapping(scheduleCalendar)) {
 			throw new IllegalArgumentException("Overlapping time slots are not allowed.");
 		}
+
+		emailQRService.sendEmailWithQRCode(scheduleCalendar, scheduleCalendar.getUser().getUsername());
 
 		return scheduleCalendarRepository.save(scheduleCalendar);
 	}

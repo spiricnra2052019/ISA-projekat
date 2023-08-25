@@ -7,11 +7,8 @@ import org.springframework.dao.PessimisticLockingFailureException;
 import org.springframework.transaction.annotation.Transactional;
 import com.ftn.isa.service.ScheduleCalendarService;
 
-import groovyjarjarpicocli.CommandLine.ExecutionException;
-
 import com.ftn.isa.dto.ScheduleCalendarDTO;
 import com.ftn.isa.dto.UserScheduleAppointmentDTO;
-import com.ftn.isa.model.ScheduleCalendar;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
