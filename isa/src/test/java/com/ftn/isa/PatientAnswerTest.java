@@ -25,15 +25,9 @@ import java.util.concurrent.Future;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.anyList;
-import static org.mockito.Mockito.*;
 
 @SpringBootTest
 public class PatientAnswerTest {
-
-    @Autowired
-    private PatientAnswerRepository patientAnswerRepository;
 
     @Autowired
     private PatientAnswerService patientAnswerService;
@@ -136,7 +130,6 @@ public class PatientAnswerTest {
             assertThrows(PessimisticLockingFailureException.class, () -> {
                 patientAnswerService.checkIfPatientHasAlreadyAnswered(3L);
             });
-            // patientAnswerService.checkIfPatientHasAlreadyAnswered(3L);
             System.out.println("Thread 2 Finished");
         });
 
