@@ -133,12 +133,14 @@ public class ScheduleCalendarService {
 		return scheduleCalendarRepository.findAllByUserId(id);
 	}
 
+	@Transactional(readOnly = false, propagation = Propagation.REQUIRES_NEW)
 	public ScheduleCalendar declineAppointment(Long id) {
-		ScheduleCalendar scheduleCalendar = scheduleCalendarRepository.findById(id).orElseGet(null);
+		ScheduleCalendar scheduleCalendar = scheduleCalendarRepository.findByIdForUpdate(id).orElseGet(null);
 		scheduleCalendar.setUser(null);
 		return scheduleCalendarRepository.save(scheduleCalendar);
 	}
 
+	@Transactional(readOnly = false, propagation = Propagation.REQUIRES_NEW)
 	public List<BloodCenter> freeBloodCenters(String startDate, String startTime, int duration) {
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 		LocalDate scheduleDate = LocalDate.parse(startDate, formatter);

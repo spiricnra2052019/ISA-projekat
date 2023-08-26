@@ -25,6 +25,8 @@ public interface ScheduleCalendarRepository extends JpaRepository<ScheduleCalend
 
         @Query("SELECT sc FROM ScheduleCalendar sc WHERE " +
                         "sc.scheduleDate = :date")
+        @Lock(LockModeType.PESSIMISTIC_WRITE)
+        @QueryHints({ @QueryHint(name = "javax.persistence.lock.timeout", value = "0") })
         public List<ScheduleCalendar> searchByScheduleDate(
                         @Param("date") LocalDate date);
 
