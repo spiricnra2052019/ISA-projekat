@@ -12,6 +12,7 @@ export class RegisteredUserService {
   private usersUrl: string;
   private searchUrl: string;
   private apiHost = 'http://localhost:8080/';
+  private authRegisterUrl = this.apiHost + 'api/v1/auth/register';
 
   constructor(private http: HttpClient) {
     this.usersUrl = 'http://localhost:8080/users';
@@ -23,7 +24,7 @@ export class RegisteredUserService {
   }
 
   public save(user: RegisteredUser) {
-    return this.http.post<RegisteredUser>(this.usersUrl, user);
+    return this.http.post<RegisteredUser>(this.authRegisterUrl, user);
   }
 
   public findAllAndSearch(searchProperty): Observable<RegisteredUser[]> {

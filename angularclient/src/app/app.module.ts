@@ -3,12 +3,13 @@ import { AppComponent } from "./app.component";
 import { NavbarComponent } from "./modules/navbar/navbar.component";
 import { BrowserModule } from "@angular/platform-browser";
 import { AppRoutingModule } from "./app-routing.module";
-import { HttpClientModule } from "@angular/common/http";
+import { HTTP_INTERCEPTORS, HttpClientModule } from "@angular/common/http";
 import { MaterialModule } from "./material/material.module";
 import { FormsModule } from "@angular/forms";
 import { CommonModule } from "@angular/common";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { PagesModule } from "./modules/pages/pages.module";
+import { AuthInterceptor } from "./helpers/auth.interceptor";
 
 
 @NgModule(
@@ -27,7 +28,13 @@ import { PagesModule } from "./modules/pages/pages.module";
       FormsModule,
       CommonModule
     ],
-    providers: [],
+    providers: [
+      {
+        provide: HTTP_INTERCEPTORS,
+        useClass: AuthInterceptor,
+        multi: true
+      },
+    ],
     bootstrap: [AppComponent]
   }
 )

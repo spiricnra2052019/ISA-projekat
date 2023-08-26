@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -34,7 +35,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 
 @RestController
 @RequestMapping("/users")
-@CrossOrigin(origins = "http://localhost:4200")
+// @CrossOrigin(origins = "http://localhost:4200")
 public class UserController {
 
 	@Autowired
@@ -48,6 +49,7 @@ public class UserController {
 			@ApiResponse(responseCode = "200", description = "successful operation", content = @Content(mediaType = "application/json", array = @ArraySchema(schema = @Schema(implementation = RegisteredUser.class))))
 	})
 	@GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+	@PreAuthorize("hasAuthority('ROLE_ADMIN')")
 	public ResponseEntity<Collection<RegisteredUser>> getUsers() {
 		Collection<RegisteredUser> users = userService.findAll();
 		return new ResponseEntity<Collection<RegisteredUser>>(users, HttpStatus.OK);

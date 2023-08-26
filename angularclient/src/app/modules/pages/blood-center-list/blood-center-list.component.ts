@@ -8,6 +8,7 @@ import { FormBuilder, FormGroup } from "@angular/forms";
 import { BloodCenterService } from '../../blood-donation/services/blood-center.service';
 import { BloodCenterAdminService } from '../../blood-donation/services/blood-center-admin-service.service';
 import { Router } from '@angular/router';
+import { TokenStorageService } from '../../blood-donation/services/token-storage.service';
 
 @Component({
   selector: 'app-blood-center-list',
@@ -25,6 +26,7 @@ export class BloodCenterListComponent implements OnInit {
   showFilter = false;
   contactForm: FormGroup;
   selectedDevice: string;
+  role: any;
 
   columns = [
     { id: 1, name: "Average Rate", value: "averageRate" },
@@ -36,7 +38,9 @@ export class BloodCenterListComponent implements OnInit {
   ];
 
   constructor(private bloodCenterService: BloodCenterService, private _liveAnnouncer: LiveAnnouncer, private bloodCenterAdminService: BloodCenterAdminService,
-    private fb: FormBuilder, private router: Router) { }
+    private fb: FormBuilder, private router: Router, private tokenService: TokenStorageService) {
+    this.role = this.tokenService.getUser().role;
+  }
 
   ngOnInit(): void {
     this.bloodCenterService.findAll().subscribe(data => {
