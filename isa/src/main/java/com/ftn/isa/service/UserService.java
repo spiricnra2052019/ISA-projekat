@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.scheduling.annotation.Scheduled;
 
 import com.ftn.isa.auth.AuthenticationResponse;
 import com.ftn.isa.model.Address;
@@ -52,14 +53,11 @@ public class UserService {
 		return userRepository.findByNameAndLastnameAllIgnoringCase(firstName, lastName);
 	}
 
-	// public RegisteredUser loginUser(String email, String password) throws
-	// Exception {
-	// RegisteredUser registeredUser = userRepository.loginUser(email, password);
-	// if (registeredUser == null) {
-	// throw new Exception("Invalid login!");
-	// }
-	// return registeredUser;
-	// }
+	public Integer getPenaltyPointsById(Long id) {
+		RegisteredUser user = userRepository.findOneById(id).orElseGet(null);
+
+		return user.getPenalty();
+	}
 
 	public void activateUser(String token) throws Exception {
 		RegisteredUser registeredUser = userRepository.findOneByActivationToken(token);
@@ -70,4 +68,22 @@ public class UserService {
 		userRepository.save(registeredUser);
 	}
 
+	public RegisteredUser incrementPenaltyPoints(Long id) {
+		RegisteredUser user = userRepository.findOneById(id).orElseGet(null);
+		user.setPenalty(user.getPenalty() + 1);
+		return userRepository.save(user);
+	}
+
+	// schedule every 1st day of month at 00:00
+	// test schedule every 10 seconds
+	// @Scheduled(cron = "*/10 * * * * *")
+	@Scheduled(cron = "0 0 0 1 * ?")
+	public void setPenaltyPointsToZeroForAllUsers() {
+		List<RegisteredUser> users = userRepository.findAll();
+		for (RegisteredUser user : users) {
+			user.setPenalty(0);
+			System.out.println("User " + user.getUsername() + " has " + user.getPenalty() + " penalty points.");
+			userRepository.save(user);
+		}
+	}
 }

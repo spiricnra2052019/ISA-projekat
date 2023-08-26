@@ -42,5 +42,9 @@ export class RegisteredUserService {
   public authenticate(loginRequest: any): Observable<any> {
     return this.http.post<any>(this.apiHost + 'api/v1/auth/authenticate', loginRequest);
   }
+
+  public getPenaltyCount(id) {
+    return this.http.get<number>(this.usersUrl + '/penalty/' + id);
+  }
 }
 

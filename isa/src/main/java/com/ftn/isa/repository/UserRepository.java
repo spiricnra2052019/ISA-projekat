@@ -14,6 +14,8 @@ public interface UserRepository extends JpaRepository<RegisteredUser, Long> {
 
 	public Optional<RegisteredUser> findOneByUsername(String username);
 
+	public Optional<RegisteredUser> findOneById(Long id);
+
 	public List<RegisteredUser> findAllByLastname(String lastname);
 
 	public List<RegisteredUser> findByNameAndLastnameAllIgnoringCase(String firstname, String lastname);
@@ -22,10 +24,6 @@ public interface UserRepository extends JpaRepository<RegisteredUser, Long> {
 			"UPPER(u.name) LIKE CONCAT('%' , :query, '%')" +
 			"Or UPPER(u.lastname) LIKE CONCAT('%' , :query, '%')")
 	public List<RegisteredUser> searchUsers(String query);
-
-	// @Query("select u from RegisteredUser u where u.email = ?1 and u.password =
-	// ?2")
-	// public RegisteredUser loginUser(String email, String password);
 
 	public RegisteredUser findOneByActivationToken(String token);
 
