@@ -9,9 +9,9 @@ insert into base_user(name, lastname, username, password, birthday, role, enable
 insert into base_user(name, lastname, username, password, birthday, role, enabled) values ('Bora', 'Boroje', 'bora@test.com', '$2a$10$hzBC8SL.Vqk1Fhz36ag7aOgDq4f1PEiNhF2bwjXjg6i9m4Gij7ZSS', '2000-04-22',  4, true);
 
 
-insert into base_user (name, lastname, username, password, birthday, address_id, role, enabled) values ('Pera', 'Peric', 'pera@test.com', '$2a$10$hzBC8SL.Vqk1Fhz36ag7aOgDq4f1PEiNhF2bwjXjg6i9m4Gij7ZSS', '2000-03-19',  1, 1, true);
+insert into base_user (name, lastname, username, password, birthday, address_id, role, enabled, penalty) values ('Pera', 'Peric', 'pera@test.com', '$2a$10$hzBC8SL.Vqk1Fhz36ag7aOgDq4f1PEiNhF2bwjXjg6i9m4Gij7ZSS', '2000-03-19',  1, 1, true, 3);
 -- insert into base_user (name, lastname, username, password, birthday, email, address_id, role, enabled) values ('Marko', 'Markovic', 'markoM', '$2a$10$hzBC8SL.Vqk1Fhz36ag7aOgDq4f1PEiNhF2bwjXjg6i9m4Gij7ZSS', '2000-03-19', 'marko@test.com', 2, 1, true);
-insert into base_user (name, lastname, username, password, birthday, address_id, role, enabled) values ('Mika', 'Mikic', 'mika@test.com', '$2a$10$hzBC8SL.Vqk1Fhz36ag7aOgDq4f1PEiNhF2bwjXjg6i9m4Gij7ZSS', '2000-03-19',  3, 1, true);
+insert into base_user (name, lastname, username, password, birthday, address_id, role, enabled, penalty) values ('Mika', 'Mikic', 'mika@test.com', '$2a$10$hzBC8SL.Vqk1Fhz36ag7aOgDq4f1PEiNhF2bwjXjg6i9m4Gij7ZSS', '2000-03-19',  3, 1, true, 0);
 
 -- insert into base_user (name, lastname, username, email, password, birthday, role) values ('Pera', 'Peric', 'peraP', 'mika@test.com', '$2a$10$hzBC8SL.Vqk1Fhz36ag7aOgDq4f1PEiNhF2bwjXjg6i9m4Gij7ZSS', '2000-03-19', 3);
 -- insert into base_user (name, lastname, username, email, password, birthday, role) values ('Marko', 'Markovic', 'markoM', 'mika@test.com', '$2a$10$hzBC8SL.Vqk1Fhz36ag7aOgDq4f1PEiNhF2bwjXjg6i9m4Gij7ZSS', '2000-03-19', 3);
@@ -42,10 +42,10 @@ insert into patient_question(description, answer) values ('Do you regularly take
 
 insert into schedule_calendar(duration, schedule_date, start_time, blood_center_id, user_id) values (20, '2022-08-17', '10:00:00', 1, 3);
 insert into schedule_calendar(duration, schedule_date, start_time, blood_center_id, user_id) values (50, '2022-08-19', '18:10:00', 1, 3);
-insert into schedule_calendar(duration, schedule_date, start_time, blood_center_id) values (20, '2023-08-24', '15:10:00', 1);
-insert into schedule_calendar(duration, schedule_date, start_time, blood_center_id) values (20, '2023-08-24', '15:10:00', 2);
-insert into schedule_calendar(duration, schedule_date, start_time, blood_center_id) values (40, '2023-08-24', '14:10:00', 2);
-insert into schedule_calendar(duration, schedule_date, start_time, blood_center_id) values (60, '2023-08-24', '16:10:00', 1);
+insert into schedule_calendar(duration, schedule_date, start_time, blood_center_id) values (20, '2023-09-24', '15:10:00', 1);
+insert into schedule_calendar(duration, schedule_date, start_time, blood_center_id) values (20, '2023-09-24', '15:10:00', 2);
+insert into schedule_calendar(duration, schedule_date, start_time, blood_center_id) values (40, '2023-09-24', '14:10:00', 2);
+insert into schedule_calendar(duration, schedule_date, start_time, blood_center_id) values (60, '2023-09-24', '16:10:00', 1);
 insert into schedule_calendar(duration, schedule_date, start_time, blood_center_id, user_id) values (20, '2023-08-19', '15:10:00', 1, 3);
 insert into schedule_calendar(duration, schedule_date, start_time, blood_center_id, user_id) values (20, '2023-08-19', '23:40:00', 1, 3);
 

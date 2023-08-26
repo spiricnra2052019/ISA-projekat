@@ -37,15 +37,19 @@ public class RegisteredUser extends BaseUser implements Serializable, UserDetail
 	@Column(name = "activationToken", nullable = true)
 	private String activationToken;
 
+	@Column(name = "peanlty", nullable = false)
+	private Integer penalty;
+
 	public RegisteredUser() {
 		super();
 	}
 
 	public RegisteredUser(Long id, String name, String lastname, String username, String password,
-			LocalDate birthday, Address address) {
+			LocalDate birthday, Address address, Integer penalty) {
 		super(id, name, lastname, username, password, birthday, address);
 		// TODO Auto-generated constructor stub
 		this.address = address;
+		this.penalty = penalty;
 	}
 
 	public Address getAddress() {
@@ -89,4 +93,11 @@ public class RegisteredUser extends BaseUser implements Serializable, UserDetail
 		return this.getEnabled();
 	}
 
+	public Integer getPenalty() {
+		return penalty;
+	}
+
+	public void setPenalty(Integer penalty) {
+		this.penalty = penalty;
+	}
 }

@@ -147,4 +147,29 @@ public class UserController {
 		return new ResponseEntity<AuthenticationResponse>(response, HttpStatus.OK);
 	}
 
+	@Operation(summary = "Get penalty points", description = "Get penalty points", method = "GET")
+	@ApiResponses(value = {
+			@ApiResponse(responseCode = "200", description = "OK", content = {
+					@Content(mediaType = "application/json", schema = @Schema(implementation = RegisteredUser.class)) }),
+			@ApiResponse(responseCode = "400", description = "Not possible to get penalty points.", content = @Content)
+	})
+	@GetMapping(value = "/penalty/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<Integer> getPenaltyPointsById(
+			@Parameter(name = "id", description = "Id of user", required = true) @PathVariable("id") Long id) {
+		Integer penalty = userService.getPenaltyPointsById(id);
+		return new ResponseEntity<Integer>(penalty, HttpStatus.OK);
+	}
+
+	@Operation(summary = "Increment penalty points", description = "Increment penalty points", method = "GET")
+	@ApiResponses(value = {
+			@ApiResponse(responseCode = "200", description = "OK", content = {
+					@Content(mediaType = "application/json", schema = @Schema(implementation = RegisteredUser.class)) }),
+			@ApiResponse(responseCode = "400", description = "Not possible to increment penalty points.", content = @Content)
+	})
+	@GetMapping(value = "/penalty/increment/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<RegisteredUser> incrementPenaltyPoints(
+			@Parameter(name = "id", description = "Id of user", required = true) @PathVariable("id") Long id) {
+		RegisteredUser user = userService.incrementPenaltyPoints(id);
+		return new ResponseEntity<RegisteredUser>(user, HttpStatus.OK);
+	}
 }

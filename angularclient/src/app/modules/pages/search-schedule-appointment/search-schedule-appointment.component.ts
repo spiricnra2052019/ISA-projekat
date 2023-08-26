@@ -30,7 +30,8 @@ export class SearchScheduleAppointmentComponent implements OnInit {
 
   constructor(private route: ActivatedRoute, private scheduleCalendarService: ScheduleCalendarService, private tokenStorageService: TokenStorageService,
     private queryService: QueryService,
-    private router: Router) {
+    private router: Router,
+    private registeredUserService: RegisteredUserService) {
     this.user = this.tokenStorageService.getUser();
 
   }
@@ -60,39 +61,26 @@ export class SearchScheduleAppointmentComponent implements OnInit {
   }
 
   scheduleAppointment(id: number) {
-    this.userScheduleAppointmentDTO.bloodCenterId = id;
-    this.userScheduleAppointmentDTO.userId = parseInt(this.user.id);
-    this.userScheduleAppointmentDTO.scheduleDate = this.searchAppointment.scheduleDate;
-    this.userScheduleAppointmentDTO.startTime = this.searchAppointment.startTime;
-    this.userScheduleAppointmentDTO.duration = this.searchAppointment.duration;
-
-    this.scheduleCalendarService.userSchedule(this.userScheduleAppointmentDTO).subscribe(
+    // check number of penalty points
+    this.registeredUserService.getPenaltyCount(this.user.id).subscribe(
       data => {
-        alert("Appointment scheduled!");
-        this.router.navigate(['/user-appointments'])
-      }
-    );
+        if (data > 2) {
+          alert("You have more than 2 penalty points. You can't schedule appointment!");
+        } else {
+          this.userScheduleAppointmentDTO.bloodCenterId = id;
+          this.userScheduleAppointmentDTO.userId = parseInt(this.user.id);
+          this.userScheduleAppointmentDTO.scheduleDate = this.searchAppointment.scheduleDate;
+          this.userScheduleAppointmentDTO.startTime = this.searchAppointment.startTime;
+          this.userScheduleAppointmentDTO.duration = this.searchAppointment.duration;
+
+          this.scheduleCalendarService.userSchedule(this.userScheduleAppointmentDTO).subscribe(
+            data => {
+              alert("Appointment scheduled!");
+              this.router.navigate(['/user-appointments'])
+            }
+          );
+        }
+      },);
   }
-  // scheduleAppointment(id: string) {
-  //   const userAppointment = new UserAppointmentDTO();
-  //   userAppointment.appointmentId = parseInt(id);
-  //   userAppointment.user = this.user;
-  //   this.queryService.check(this.user.id).subscribe(data => {
-  //     if (data == true) {
-  //       this.scheduleCalendarService.scheduleAppointment(userAppointment).subscribe(
-  //         data => {
-  //           alert("Appointment scheduled!");
-  //           this.router.navigate(['/user-appointments'])
-  //         },
-  //         error => {
-  //           alert("Appointment not scheduled!");
-  //         }
-  //       );
-  //     } else {
-  //       alert("You have to have query to schedule appointment!");
-  //       this.router.navigate(['/query']);
-  //     }
-  //   });
-  // }
 
 }
