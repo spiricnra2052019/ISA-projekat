@@ -49,7 +49,6 @@ public class UserController {
 			@ApiResponse(responseCode = "200", description = "successful operation", content = @Content(mediaType = "application/json", array = @ArraySchema(schema = @Schema(implementation = RegisteredUser.class))))
 	})
 	@GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-	@PreAuthorize("hasAuthority('ROLE_ADMIN')")
 	public ResponseEntity<Collection<RegisteredUser>> getUsers() {
 		Collection<RegisteredUser> users = userService.findAll();
 		return new ResponseEntity<Collection<RegisteredUser>>(users, HttpStatus.OK);

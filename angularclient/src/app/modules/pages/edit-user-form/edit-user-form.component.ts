@@ -32,11 +32,24 @@ export class EditUserFormComponent implements OnInit {
 
   ngOnInit(): void {
     this.userToken = this.tokenService.getUser();
-    this.userService.findById(this.userToken.id).subscribe(data => {
-      this.user = new EditRegisteredUser(data.id, data.name, data.lastname, data.username, data.password, data.birthday, data.address);
-      this.address = this.user.address;
-      console.log(this.user);
-    })
+    if (this.userToken.role.toString() == "RegisteredUser")
+      this.userService.findPatientById(this.userToken.id).subscribe(data => {
+        this.user = new EditRegisteredUser(data.id, data.name, data.lastname, data.username, data.password, data.birthday, data.address);
+        this.address = this.user.address;
+        console.log(this.user);
+      })
+    else if (this.userToken.role.toString() == "Administrator")
+      this.userService.findAdminById(this.userToken.id).subscribe(data => {
+        this.user = new EditRegisteredUser(data.id, data.name, data.lastname, data.username, data.password, data.birthday, data.address);
+        this.address = this.user.address;
+        console.log(this.user);
+      })
+    else
+      this.userService.findBloodAdminById(this.userToken.id).subscribe(data => {
+        this.user = new EditRegisteredUser(data.id, data.name, data.lastname, data.username, data.password, data.birthday, data.address);
+        this.address = this.user.address;
+        console.log(this.user);
+      })
   }
 
   addAddress() {

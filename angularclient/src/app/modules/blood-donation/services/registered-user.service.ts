@@ -2,6 +2,9 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/internal/Observable';
 import { RegisteredUser } from '../model/registered-user';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { UserToken } from '../model/user-token';
+import { Administrator } from '../model/administrator';
+import { BloodCenterAdministrator } from '../model/blod-center-administrator';
 
 
 
@@ -13,6 +16,8 @@ export class RegisteredUserService {
   private searchUrl: string;
   private apiHost = 'http://localhost:8080/';
   private authRegisterUrl = this.apiHost + 'api/v1/auth/register';
+  private adminUrl = this.apiHost + 'administrators';
+  private bloodAdminUrl = this.apiHost + 'blood-center-administrators';
 
   constructor(private http: HttpClient) {
     this.usersUrl = 'http://localhost:8080/users';
@@ -31,8 +36,16 @@ export class RegisteredUserService {
     return this.http.get<RegisteredUser[]>(this.searchUrl.concat(searchProperty));
   }
 
-  public findById(id) {
+  public findPatientById(id) {
     return this.http.get<RegisteredUser>(this.usersUrl + "/" + id);
+  }
+
+  public findAdminById(id) {
+    return this.http.get<Administrator>(this.adminUrl + "/" + id);
+  }
+
+  public findBloodAdminById(id) {
+    return this.http.get<BloodCenterAdministrator>(this.bloodAdminUrl + "/" + id);
   }
 
   public update(user) {
