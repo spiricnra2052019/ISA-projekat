@@ -10,6 +10,7 @@ import org.springframework.scheduling.annotation.Scheduled;
 
 import com.ftn.isa.auth.AuthenticationResponse;
 import com.ftn.isa.model.Address;
+import com.ftn.isa.model.BaseUser;
 import com.ftn.isa.model.RegisteredUser;
 import com.ftn.isa.repository.AddressRepository;
 import com.ftn.isa.repository.UserRepository;

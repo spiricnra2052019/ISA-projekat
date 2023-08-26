@@ -9,7 +9,7 @@ insert into base_user(name, lastname, username, password, birthday, role, enable
 insert into base_user(name, lastname, username, password, birthday, role, enabled) values ('Bora', 'Boroje', 'bora@test.com', '$2a$10$hzBC8SL.Vqk1Fhz36ag7aOgDq4f1PEiNhF2bwjXjg6i9m4Gij7ZSS', '2000-04-22',  4, true);
 
 
-insert into base_user (name, lastname, username, password, birthday, address_id, role, enabled, penalty) values ('Pera', 'Peric', 'pera@test.com', '$2a$10$hzBC8SL.Vqk1Fhz36ag7aOgDq4f1PEiNhF2bwjXjg6i9m4Gij7ZSS', '2000-03-19',  1, 1, true, 3);
+insert into base_user (name, lastname, username, password, birthday, address_id, role, enabled, penalty) values ('Pera', 'Peric', 'pera@test.com', '$2a$10$vnfZ.0a0qxVVdl2C7islfOGFnMBYgI8189ze85XJm.7mktpgTzppu', '2000-03-19',  1, 1, true, 3);
 -- insert into base_user (name, lastname, username, password, birthday, email, address_id, role, enabled) values ('Marko', 'Markovic', 'markoM', '$2a$10$hzBC8SL.Vqk1Fhz36ag7aOgDq4f1PEiNhF2bwjXjg6i9m4Gij7ZSS', '2000-03-19', 'marko@test.com', 2, 1, true);
 insert into base_user (name, lastname, username, password, birthday, address_id, role, enabled, penalty) values ('Mika', 'Mikic', 'mika@test.com', '$2a$10$hzBC8SL.Vqk1Fhz36ag7aOgDq4f1PEiNhF2bwjXjg6i9m4Gij7ZSS', '2000-03-19',  3, 1, true, 0);
 
