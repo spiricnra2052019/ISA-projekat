@@ -30,7 +30,8 @@ export class SearchScheduleAppointmentComponent implements OnInit {
 
   constructor(private route: ActivatedRoute, private scheduleCalendarService: ScheduleCalendarService, private tokenStorageService: TokenStorageService,
     private queryService: QueryService,
-    private router: Router) {
+    private router: Router,
+    private registeredUserService: RegisteredUserService) {
     this.user = this.tokenStorageService.getUser();
 
   }
@@ -47,6 +48,10 @@ export class SearchScheduleAppointmentComponent implements OnInit {
 
   searchAppointments(searchAppointment) {
     this.searchAppointment = searchAppointment;
+    if (!this.isValidDate(this.searchAppointment.scheduleDate.toString())) {
+      alert("Invalid date!");
+      return;
+    }
     if (this.selectedColumn != null) {
       this.scheduleCalendarService.sortByAndSearchFreeBloodCenters(this.searchAppointment).subscribe(data => {
         this.bloodCenters = data;
@@ -59,40 +64,36 @@ export class SearchScheduleAppointmentComponent implements OnInit {
     }
   }
 
-  scheduleAppointment(id: number) {
-    this.userScheduleAppointmentDTO.bloodCenterId = id;
-    this.userScheduleAppointmentDTO.userId = parseInt(this.user.id);
-    this.userScheduleAppointmentDTO.scheduleDate = this.searchAppointment.scheduleDate;
-    this.userScheduleAppointmentDTO.startTime = this.searchAppointment.startTime;
-    this.userScheduleAppointmentDTO.duration = this.searchAppointment.duration;
-
-    this.scheduleCalendarService.userSchedule(this.userScheduleAppointmentDTO).subscribe(
-      data => {
-        alert("Appointment scheduled!");
-        this.router.navigate(['/user-appointments'])
-      }
-    );
+  isValidDate(scheduleDate: string): boolean {
+    const scheduledDate = new Date(scheduleDate);
+    const today = new Date();
+    if (scheduledDate < today) {
+      return false;
+    }
+    return true;
   }
-  // scheduleAppointment(id: string) {
-  //   const userAppointment = new UserAppointmentDTO();
-  //   userAppointment.appointmentId = parseInt(id);
-  //   userAppointment.user = this.user;
-  //   this.queryService.check(this.user.id).subscribe(data => {
-  //     if (data == true) {
-  //       this.scheduleCalendarService.scheduleAppointment(userAppointment).subscribe(
-  //         data => {
-  //           alert("Appointment scheduled!");
-  //           this.router.navigate(['/user-appointments'])
-  //         },
-  //         error => {
-  //           alert("Appointment not scheduled!");
-  //         }
-  //       );
-  //     } else {
-  //       alert("You have to have query to schedule appointment!");
-  //       this.router.navigate(['/query']);
-  //     }
-  //   });
-  // }
+
+  scheduleAppointment(id: number) {
+    // check number of penalty points
+    this.registeredUserService.getPenaltyCount(this.user.id).subscribe(
+      data => {
+        if (data > 2) {
+          alert("You have more than 2 penalty points. You can't schedule appointment!");
+        } else {
+          this.userScheduleAppointmentDTO.bloodCenterId = id;
+          this.userScheduleAppointmentDTO.userId = parseInt(this.user.id);
+          this.userScheduleAppointmentDTO.scheduleDate = this.searchAppointment.scheduleDate;
+          this.userScheduleAppointmentDTO.startTime = this.searchAppointment.startTime;
+          this.userScheduleAppointmentDTO.duration = this.searchAppointment.duration;
+
+          this.scheduleCalendarService.userSchedule(this.userScheduleAppointmentDTO).subscribe(
+            data => {
+              alert("Appointment scheduled!");
+              this.router.navigate(['/user-appointments'])
+            }
+          );
+        }
+      },);
+  }
 
 }

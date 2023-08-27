@@ -1,3 +1,6 @@
+<div *ngIf="role === 'RegisteredUser'" class="alert alert-info">
+    You have {{ penaltyCount }} penalties this month.
+</div>
 <a href="/report-list" *ngIf="role == 'Administrator'">Reports</a>
 <form class="form-inline md-form mr-auto mb-4">
   <input

@@ -6,6 +6,7 @@ import { UserToken } from '../../blood-donation/model/user-token';
 import { TokenStorageService } from '../../blood-donation/services/token-storage.service';
 import { RegisteredUser } from '../../blood-donation/model/registered-user';
 import { UserAppointmentDTO } from '../../blood-donation/dto/user-appointment';
+import { RegisteredUserService } from '../../blood-donation/services/registered-user.service';
 
 @Component({
   selector: 'app-user-schedule-appointment',
@@ -17,7 +18,8 @@ export class UserScheduleAppointmentComponent implements OnInit {
   appointments: ScheduleCalendar[] = [];
   user: UserToken;
 
-  constructor(private route: ActivatedRoute, private scheduleCalendarService: ScheduleCalendarService, private tokenStorageService: TokenStorageService) { }
+  constructor(private route: ActivatedRoute, private scheduleCalendarService: ScheduleCalendarService, private tokenStorageService: TokenStorageService,
+    private registeredUserService: RegisteredUserService) { }
 
   ngOnInit() {
     this.route.paramMap.subscribe(params => {
@@ -35,16 +37,24 @@ export class UserScheduleAppointmentComponent implements OnInit {
     const userAppointment = new UserAppointmentDTO();
     userAppointment.appointmentId = parseInt(id);
     userAppointment.user = this.user;
-    console.log("User appointment: ", userAppointment);
-    this.scheduleCalendarService.scheduleAppointment(userAppointment).subscribe(
-      data => {
-        alert("Appointment scheduled!");
-        this.ngOnInit();
-      },
-      error => {
-        alert("Appointment not scheduled!");
-      }
-    );
 
+
+    console.log("User appointment: ", userAppointment);
+    this.registeredUserService.getPenaltyCount(this.user.id).subscribe(
+      data => {
+        if (data > 2) {
+          alert("You have more than 2 penalties. You can't schedule an appointment!");
+          return;
+        }
+        this.scheduleCalendarService.scheduleAppointment(userAppointment).subscribe(
+          data => {
+            alert("Appointment scheduled!");
+            this.ngOnInit();
+          },
+          error => {
+            alert("Appointment not scheduled!");
+          }
+        );
+      });
   }
 }

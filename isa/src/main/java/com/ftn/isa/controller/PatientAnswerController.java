@@ -13,6 +13,8 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import jakarta.websocket.server.PathParam;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -43,6 +45,22 @@ public class PatientAnswerController {
         } catch (Exception e) {
             e.printStackTrace();
             return new ResponseEntity<PatientAnswer>(savedPatientAnswer, HttpStatus.CONFLICT);
+        }
+    }
+
+    @Operation(summary = "Save multiple answers", description = "Save multiple answers", method = "POST")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "201", description = "Answers saved successfully", content = @Content(mediaType = "application/json", array = @ArraySchema(schema = @Schema(implementation = PatientAnswer.class)))),
+            @ApiResponse(responseCode = "409", description = "Conflict, unable to save answers", content = @Content)
+    })
+    @PostMapping(value = "/multiple", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<String> saveMultipleAnswers(@RequestBody List<QueryAnswerDTO> patientAnswers) {
+        try {
+            List<PatientAnswer> savedAnswers = patientAnswerService.saveMultiple(patientAnswers);
+            return new ResponseEntity<>(HttpStatus.CREATED);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ResponseEntity<>(HttpStatus.CONFLICT);
         }
     }
 

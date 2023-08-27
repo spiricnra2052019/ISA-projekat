@@ -1,17 +1,10 @@
 package com.ftn.isa.service;
 
-import java.sql.Time;
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
-
-import org.springframework.data.domain.Sort;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,7 +13,6 @@ import com.ftn.isa.dto.ScheduleCalendarDTO;
 import com.ftn.isa.dto.UserScheduleAppointmentDTO;
 import com.ftn.isa.model.BaseUser;
 import com.ftn.isa.model.BloodCenter;
-import com.ftn.isa.model.BloodCenterAdministrator;
 import com.ftn.isa.model.ScheduleCalendar;
 import com.ftn.isa.repository.BloodCenterRepository;
 import com.ftn.isa.repository.ScheduleCalendarRepository;
@@ -57,11 +49,43 @@ public class ScheduleCalendarService {
 		return scheduleCalendarRepository.findAll();
 	}
 
+	@Transactional(readOnly = false, propagation = Propagation.REQUIRES_NEW)
 	public ScheduleCalendar save(ScheduleCalendarDTO schedule) {
+		BloodCenter bloodCenter = bloodCenterRepository.findByIdForSchedule(schedule.getBloodCenterId())
+				.orElseGet(null);
 		ScheduleCalendar scheduleCalendar = new ScheduleCalendar(schedule);
-		BloodCenter bloodCenter = bloodCenterRepository.findById(schedule.getBloodCenterId()).orElseGet(null);
 		scheduleCalendar.setBloodCenter(bloodCenter);
+
+		if (isOverlapping(scheduleCalendar)) {
+			throw new IllegalArgumentException("Overlapping time slots are not allowed.");
+		}
+
 		return scheduleCalendarRepository.save(scheduleCalendar);
+	}
+
+	private boolean isOverlapping(ScheduleCalendar schedule) {
+		LocalDate scheduleDate = schedule.getDate();
+		LocalTime startTimeCnv = schedule.getStartTime();
+		LocalTime endTimeCnv = startTimeCnv.plusMinutes(schedule.getDuration());
+
+		List<ScheduleCalendar> schedules = scheduleCalendarRepository.searchByScheduleDate(scheduleDate);
+
+		for (ScheduleCalendar existingSchedule : schedules) {
+			LocalTime scheduleStartTime = existingSchedule.getStartTime();
+			LocalTime scheduleEndTime = scheduleStartTime.plusMinutes(existingSchedule.getDuration());
+
+			if ((scheduleStartTime.isBefore(endTimeCnv) &&
+					scheduleEndTime.isAfter(startTimeCnv)) ||
+					(startTimeCnv.equals(scheduleStartTime) &&
+							endTimeCnv.equals(scheduleEndTime))
+					||
+					(startTimeCnv.isBefore(scheduleEndTime) &&
+							endTimeCnv.isAfter(scheduleStartTime))) {
+				return true; // Overlapping schedules found
+			}
+		}
+
+		return false; // No overlapping schedules found
 	}
 
 	public void remove(Long id) {
@@ -74,23 +98,22 @@ public class ScheduleCalendarService {
 
 	@Transactional(readOnly = false, propagation = Propagation.REQUIRES_NEW)
 	public ScheduleCalendar scheduleAppointmentForUser(Long id, Long userId) {
-
 		ScheduleCalendar scheduleCalendar = scheduleCalendarRepository.findByIdForUpdate(id).orElseGet(null);
 		List<ScheduleCalendar> userAppointments = scheduleCalendarRepository.findAllByUserId(userId);
 		BaseUser user = userRepository.findById(userId).orElseGet(null);
 
-		if (checkIfAppointmentIsAlreadyScheduled(scheduleCalendar, userAppointments)) {
-			throw new IllegalArgumentException("Patient already has scheduled appointment for this date and time.");
-		}
 		if (!patientAnswerService.checkIfPatientHasAlreadyAnswered(userId)) {
 			throw new IllegalArgumentException("Patient has not answered questions yet.");
+		}
+		if (checkIfAppointmentIsAlreadyScheduled(scheduleCalendar, userAppointments)) {
+			throw new IllegalArgumentException("Patient already has scheduled appointment for this date and time.");
 		}
 		if (userVisitHistoryService.checkIfUserVisitedIn6Months(userId)) {
 			throw new IllegalArgumentException("Patient has already visited blood center in last 6 months.");
 		}
 		scheduleCalendar.setUser(user);
 
-		emailQRService.sendEmailWithQRCode(scheduleCalendar, "givemij506@bagonew.com");
+		emailQRService.sendEmailWithQRCode(scheduleCalendar, scheduleCalendar.getUser().getUsername());
 		return scheduleCalendarRepository.save(scheduleCalendar);
 	}
 
@@ -110,12 +133,14 @@ public class ScheduleCalendarService {
 		return scheduleCalendarRepository.findAllByUserId(id);
 	}
 
+	@Transactional(readOnly = false, propagation = Propagation.REQUIRES_NEW)
 	public ScheduleCalendar declineAppointment(Long id) {
-		ScheduleCalendar scheduleCalendar = scheduleCalendarRepository.findById(id).orElseGet(null);
+		ScheduleCalendar scheduleCalendar = scheduleCalendarRepository.findByIdForUpdate(id).orElseGet(null);
 		scheduleCalendar.setUser(null);
 		return scheduleCalendarRepository.save(scheduleCalendar);
 	}
 
+	@Transactional(readOnly = false, propagation = Propagation.REQUIRES_NEW)
 	public List<BloodCenter> freeBloodCenters(String startDate, String startTime, int duration) {
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 		LocalDate scheduleDate = LocalDate.parse(startDate, formatter);
@@ -142,9 +167,23 @@ public class ScheduleCalendarService {
 		// remove overlapping centers
 		bloodCenters.removeAll(overlappingCenters);
 
+		List<BloodCenter> bloodCenterToRemove = new ArrayList<>();
+		// check working time of bloodCenters
+		for (BloodCenter bloodCenter : bloodCenters) {
+			if (startTimeCnv.isBefore(bloodCenter.getWorkingTime().getOpeningTime())
+					|| endTimeCnv.isAfter(bloodCenter.getWorkingTime().getClosingTime())
+					|| startTimeCnv.isAfter(bloodCenter.getWorkingTime().getClosingTime())
+					|| endTimeCnv.isBefore(bloodCenter.getWorkingTime().getOpeningTime())) {
+				bloodCenterToRemove.add(bloodCenter);
+			}
+		}
+
+		bloodCenters.removeAll(bloodCenterToRemove);
+
 		return bloodCenters;
 	}
 
+	@Transactional(readOnly = false, propagation = Propagation.REQUIRES_NEW)
 	public List<BloodCenter> freeBloodCentersAndSortBy(String startDate, String startTime, int duration) {
 		List<BloodCenter> bloodCenters = freeBloodCenters(startDate, startTime, duration);
 		// sort by rate
@@ -153,15 +192,24 @@ public class ScheduleCalendarService {
 		return bloodCenters;
 	}
 
+	@Transactional(readOnly = false, propagation = Propagation.REQUIRES_NEW)
 	public ScheduleCalendar createAppointmentByUser(UserScheduleAppointmentDTO userScheduleAppointmentDTO) {
+		BloodCenter bloodCenter = bloodCenterRepository
+				.findByIdForSchedule(userScheduleAppointmentDTO.getBloodCenterId())
+				.orElseGet(null);
 		ScheduleCalendar scheduleCalendar = new ScheduleCalendar(userScheduleAppointmentDTO.getScheduleDate(),
 				userScheduleAppointmentDTO.getStartTime(), userScheduleAppointmentDTO.getDuration());
 
-		BloodCenter bloodCenter = bloodCenterRepository.findById(userScheduleAppointmentDTO.getBloodCenterId())
-				.orElseGet(null);
 		scheduleCalendar.setBloodCenter(bloodCenter);
 		BaseUser user = userRepository.findById(userScheduleAppointmentDTO.getUserId()).orElseGet(null);
 		scheduleCalendar.setUser(user);
+
+		if (isOverlapping(scheduleCalendar)) {
+			throw new IllegalArgumentException("Overlapping time slots are not allowed.");
+		}
+
+		emailQRService.sendEmailWithQRCode(scheduleCalendar, scheduleCalendar.getUser().getUsername());
+
 		return scheduleCalendarRepository.save(scheduleCalendar);
 	}
 }
