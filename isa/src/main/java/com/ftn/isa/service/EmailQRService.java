@@ -28,6 +28,7 @@ public class EmailQRService {
 
     public void sendEmailWithQRCode(ScheduleCalendar scheduleCalendar, String recipientEmail) {
         String qrCodeText = generateQRCodeText(scheduleCalendar);
+        // System.out.println(qrCodeText);
         byte[] qrCodeImageBytes = generateQRCodeImage(qrCodeText);
 
         try {
@@ -42,8 +43,7 @@ public class EmailQRService {
     private String generateQRCodeText(ScheduleCalendar scheduleCalendar) {
         return "Schedule Date: " + scheduleCalendar.getDate().toString() + "\n"
                 + "Schedule Time: " + scheduleCalendar.getStartTime().toString() + "\n"
-                + "Schedule Duration: " + scheduleCalendar.getDuration() + "\n"
-                + "Username: " + scheduleCalendar.getUser().getUsername() + "\n";
+                + "Schedule Duration: " + scheduleCalendar.getDuration();
     }
 
     private byte[] generateQRCodeImage(String qrCodeText) {

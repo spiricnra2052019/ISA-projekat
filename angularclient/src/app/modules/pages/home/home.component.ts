@@ -38,7 +38,8 @@ export class HomeComponent implements OnInit {
   penaltyCount: number;
 
 
-  constructor(private tokenStorageService: TokenStorageService, private router: Router, private registeredUserService: RegisteredUserService) {
+  constructor(private tokenStorageService: TokenStorageService, private router: Router, private registeredUserService: RegisteredUserService,
+    private bloodCenterService: BloodCenterService, private fb: FormBuilder) {
     this.user = this.tokenStorageService.getUser()
     this.isLoggedIn = this.tokenStorageService.isLoggedIn()
     this.role = this.user.role
