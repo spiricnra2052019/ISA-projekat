@@ -18,4 +18,6 @@ public interface UserVisitHistoryRepository extends JpaRepository<UserVisitHisto
     public List<UserVisitHistory> findAllByUserId(Long id);
 
     public List<UserVisitHistory> findAllByUserId(Long id, Sort by);
+
+    List<UserVisitHistory> findAllByAppointmentBloodCenterId(Long id);
 }

@@ -33,4 +33,5 @@ public interface BloodCenterRepository extends JpaRepository<BloodCenter, Long> 
 	Optional<BloodCenter> findByIdForSchedule(Long id);
 
 	public BloodCenter findOneByBloodCenterAdministratorId(Long id);
+
 }

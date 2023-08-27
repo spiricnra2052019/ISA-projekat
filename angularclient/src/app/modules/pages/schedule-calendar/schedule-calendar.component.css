@@ -1,25 +1,28 @@
 .demo-inline-calendar-card {
-    width: 300px;
-    height: 350px;
-    margin-right: 10px;
-    background-color: rgba(13, 167, 227, 0.473);
-    color: white;
+  width: 300px;
+  height: 350px;
+  margin-right: 10px;
+  background-color: rgba(13, 167, 227, 0.473);
+  color: white;
 }
 
 .positioning {
-    display: flex;
-    margin-top: 50px;
-    margin-bottom: 50px;
+  display: flex;
+  margin-top: 50px;
+  margin-bottom: 50px;
 }
 
-
 .terminsTable {
-    margin-left: 100px;
-    border-radius: 8px;
-    background-color: rgba(13, 167, 227, 0.473);
-    color: white;
-    padding-right: 50px;
-    overflow-y: auto;
-    height: 320px;
-    color: white;
+  margin-left: 10px;
+  border-radius: 8px;
+  background-color: rgba(13, 167, 227, 0.473);
+  color: white;
+  padding-right: 0px;
+  overflow-y: auto;
+  height: 320px;
+  color: white;
+}
+.table-row:hover {
+  background-color: brown;
+  cursor: pointer;
 }
