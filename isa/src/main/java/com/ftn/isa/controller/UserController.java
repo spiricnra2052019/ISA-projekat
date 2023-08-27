@@ -21,6 +21,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.ftn.isa.auth.AuthService;
 import com.ftn.isa.auth.AuthenticationResponse;
+import com.ftn.isa.model.Administrator;
+import com.ftn.isa.model.BloodCenterAdministrator;
 import com.ftn.isa.model.RegisteredUser;
 import com.ftn.isa.service.UserService;
 
@@ -89,6 +91,42 @@ public class UserController {
 		}
 	}
 
+	@Operation(summary = "Edit BloodCenterAdming", description = "Edit BloodCenterAdming", method = "POST")
+	@ApiResponses(value = {
+			@ApiResponse(responseCode = "204", description = "Edited", content = {
+					@Content(mediaType = "application/json", schema = @Schema(implementation = RegisteredUser.class)) }),
+			@ApiResponse(responseCode = "400", description = "Bad request", content = @Content)
+	})
+	@PutMapping(value = "/bloodCenterAdmin", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<AuthenticationResponse> editBloodCenterAdmin(@RequestBody BloodCenterAdministrator user) {
+		AuthenticationResponse editedUser = null;
+		try {
+			editedUser = authService.editBloodAdmin(user);
+			return new ResponseEntity<AuthenticationResponse>(editedUser, HttpStatus.OK);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return new ResponseEntity<AuthenticationResponse>(editedUser, HttpStatus.BAD_REQUEST);
+		}
+	}
+
+	@Operation(summary = "Edit Administrator", description = "Edit Administrator", method = "POST")
+	@ApiResponses(value = {
+			@ApiResponse(responseCode = "204", description = "Edited", content = {
+					@Content(mediaType = "application/json", schema = @Schema(implementation = RegisteredUser.class)) }),
+			@ApiResponse(responseCode = "400", description = "Bad request", content = @Content)
+	})
+	@PutMapping(value = "/admin", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<AuthenticationResponse> editAdmin(@RequestBody Administrator user) {
+		AuthenticationResponse editedUser = null;
+		try {
+			editedUser = authService.editAdmin(user);
+			return new ResponseEntity<AuthenticationResponse>(editedUser, HttpStatus.OK);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return new ResponseEntity<AuthenticationResponse>(editedUser, HttpStatus.BAD_REQUEST);
+		}
+	}
+
 	@GetMapping("/search")
 	public ResponseEntity<List<RegisteredUser>> searchUsers(@RequestParam("query") String query) {
 		return ResponseEntity.ok(userService.searchUsers(query));
@@ -149,9 +187,8 @@ public class UserController {
 
 	@GetMapping("/visitedUsers")
 	public ResponseEntity<List<RegisteredUserDTO>> getVisitedUsers(@RequestParam("adminId") Long adminId,
-																   @RequestParam("sortType") String sortType,
-																	@RequestParam("sortDirection") boolean sortDirection
-	){
+			@RequestParam("sortType") String sortType,
+			@RequestParam("sortDirection") boolean sortDirection) {
 		List<RegisteredUserDTO> users = userService.getVisitedUsers(adminId, sortType, sortDirection);
 		return ResponseEntity.ok(users);
 	}

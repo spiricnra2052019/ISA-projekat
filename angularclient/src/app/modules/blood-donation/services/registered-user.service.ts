@@ -53,6 +53,19 @@ export class RegisteredUserService {
     return this.http.put<RegisteredUser>(this.usersUrl, user);
   }
 
+  public updateRegisteredUser(user) {
+    console.log(user);
+    return this.http.put<RegisteredUser>(this.usersUrl, user);
+  }
+
+  public updateAdmin(user) {
+    return this.http.put<Administrator>(this.usersUrl.concat("/admin"), user);
+  }
+
+  public updateBloodAdmin(user) {
+    return this.http.put<BloodCenterAdministrator>(this.usersUrl.concat("/bloodCenterAdmin"), user);
+  }
+
   public authenticate(loginRequest: any): Observable<any> {
     return this.http.post<any>(this.apiHost + 'api/v1/auth/authenticate', loginRequest);
   }

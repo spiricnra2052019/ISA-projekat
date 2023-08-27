@@ -108,6 +108,28 @@ public class AuthService {
                                 .build();
         }
 
+        public AuthenticationResponse editBloodAdmin(BloodCenterAdministrator request) {
+                request.setPassword(passwordEncoder.encode(request.getPassword()));
+                request.setEnabled(true);
+                bloodCenterAdministratorRepository.save(request);
+                var jwtToken = jwtService.generateTokenBloodAdmin(request);
+                return AuthenticationResponse.builder()
+                                .token(jwtToken)
+                                .build();
+        }
+
+        public AuthenticationResponse editAdmin(Administrator request) {
+                request.setPassword(passwordEncoder.encode(request.getPassword()));
+                request.setEnabled(true);
+                administratorRepository.save(request);
+                var jwtToken = jwtService.generateTokenAdmin(request);
+                return AuthenticationResponse.builder()
+                                .token(jwtToken)
+                                .build();
+        }
+
+        // public AuthenticationResponse edit()
+
         public void sendEmail(RegisteredUser request) {
                 // Send email to user to activate their account
                 String activationToken = UUID.randomUUID().toString();

@@ -60,7 +60,12 @@ export class EditUserFormComponent implements OnInit {
     if (this.confirmPassword == this.user.password && this.user.password != "") {
       this.user.address = this.address;
       console.log(this.user)
-      this.userService.update(this.user).subscribe(result => this.gotoUserList());
+      if (this.userToken.role.toString() == "RegisteredUser")
+        this.userService.updateRegisteredUser(this.user).subscribe(result => this.gotoUserList());
+      else if (this.userToken.role.toString() == "Administrator")
+        this.userService.updateAdmin(this.user).subscribe(result => this.gotoUserList());
+      else
+        this.userService.updateBloodAdmin(this.user).subscribe(result => this.gotoUserList());
     } else {
       this.confirmPassword = "";
       this.user.password = "";
