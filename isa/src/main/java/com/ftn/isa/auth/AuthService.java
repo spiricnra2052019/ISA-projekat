@@ -89,6 +89,7 @@ public class AuthService {
                 Address address = addressRepository.save(request.getAddress());
                 request.setAddress(address);
                 request.setEnabled(false);
+                request.setPenalty(0);
                 sendEmail(request);
                 repository.save(request);
                 var jwtToken = jwtService.generateTokenRegisteredUser(request);
@@ -99,6 +100,7 @@ public class AuthService {
 
         public AuthenticationResponse edit(RegisteredUser request) {
                 request.setPassword(passwordEncoder.encode(request.getPassword()));
+                request.setEnabled(true);
                 repository.save(request);
                 var jwtToken = jwtService.generateTokenRegisteredUser(request);
                 return AuthenticationResponse.builder()
