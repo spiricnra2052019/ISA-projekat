@@ -48,6 +48,10 @@ export class SearchScheduleAppointmentComponent implements OnInit {
 
   searchAppointments(searchAppointment) {
     this.searchAppointment = searchAppointment;
+    if (!this.isValidDate(this.searchAppointment.scheduleDate.toString())) {
+      alert("Invalid date!");
+      return;
+    }
     if (this.selectedColumn != null) {
       this.scheduleCalendarService.sortByAndSearchFreeBloodCenters(this.searchAppointment).subscribe(data => {
         this.bloodCenters = data;
@@ -58,6 +62,15 @@ export class SearchScheduleAppointmentComponent implements OnInit {
         console.log(this.bloodCenters);
       });
     }
+  }
+
+  isValidDate(scheduleDate: string): boolean {
+    const scheduledDate = new Date(scheduleDate);
+    const today = new Date();
+    if (scheduledDate < today) {
+      return false;
+    }
+    return true;
   }
 
   scheduleAppointment(id: number) {

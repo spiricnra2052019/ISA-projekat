@@ -39,6 +39,7 @@ public class UserService {
 	public RegisteredUser save(RegisteredUser RegisteredUser) {
 		Address address = addressRepository.save(RegisteredUser.getAddress());
 		RegisteredUser.setAddress(address);
+		RegisteredUser.setPenalty(0);
 		return userRepository.save(RegisteredUser);
 	}
 

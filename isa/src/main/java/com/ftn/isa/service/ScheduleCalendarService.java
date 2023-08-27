@@ -167,9 +167,23 @@ public class ScheduleCalendarService {
 		// remove overlapping centers
 		bloodCenters.removeAll(overlappingCenters);
 
+		List<BloodCenter> bloodCenterToRemove = new ArrayList<>();
+		// check working time of bloodCenters
+		for (BloodCenter bloodCenter : bloodCenters) {
+			if (startTimeCnv.isBefore(bloodCenter.getWorkingTime().getOpeningTime())
+					|| endTimeCnv.isAfter(bloodCenter.getWorkingTime().getClosingTime())
+					|| startTimeCnv.isAfter(bloodCenter.getWorkingTime().getClosingTime())
+					|| endTimeCnv.isBefore(bloodCenter.getWorkingTime().getOpeningTime())) {
+				bloodCenterToRemove.add(bloodCenter);
+			}
+		}
+
+		bloodCenters.removeAll(bloodCenterToRemove);
+
 		return bloodCenters;
 	}
 
+	@Transactional(readOnly = false, propagation = Propagation.REQUIRES_NEW)
 	public List<BloodCenter> freeBloodCentersAndSortBy(String startDate, String startTime, int duration) {
 		List<BloodCenter> bloodCenters = freeBloodCenters(startDate, startTime, duration);
 		// sort by rate

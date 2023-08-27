@@ -31,7 +31,8 @@ public class SecurityConfig {
                 .antMatchers(HttpMethod.GET, "/blood-centers").permitAll()
                 .antMatchers("/blood-centers/search").permitAll()
                 .antMatchers("/blood-centers/filter").permitAll()
-                .antMatchers("/blood-centers/sort").permitAll()// "/api/v1/auth/**"
+                .antMatchers("/blood-centers/sort").permitAll()
+                .antMatchers("/users/activate/**").permitAll()// "/api/v1/auth/**"
                 // .antMatchers("/users/**").permitAll()// "/api/v1/auth/**"
                 .anyRequest()
                 .authenticated()
