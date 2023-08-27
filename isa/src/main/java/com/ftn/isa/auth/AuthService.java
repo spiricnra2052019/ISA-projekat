@@ -15,6 +15,7 @@ import lombok.RequiredArgsConstructor;
 
 import java.util.UUID;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.kafka.KafkaProperties.Admin;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -27,11 +28,14 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class AuthService {
 
+        @Autowired
         private final UserRepository repository;
+
         private final AdministratorRepository administratorRepository;
         private final BloodCenterAdministratorRepository bloodCenterAdministratorRepository;
         private final PasswordEncoder passwordEncoder;
         private final JwtService jwtService;
+        @Autowired
         private final AuthenticationManager authenticationManager;
         private final AddressRepository addressRepository;
         private final JavaMailSender javaMailSender;
