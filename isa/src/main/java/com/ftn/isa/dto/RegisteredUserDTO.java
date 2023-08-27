@@ -1,6 +1,5 @@
 package com.ftn.isa.dto;
 
-import com.ftn.isa.model.RegisteredUser;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
@@ -11,7 +10,7 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Builder
-public class RegisterdUserDTO {
+public class RegisteredUserDTO {
     Long id;
 
     String name;
@@ -24,16 +23,18 @@ public class RegisterdUserDTO {
 
     @Override
     public boolean equals(Object obj) {
-        if (obj == this) {
+        if (obj == this)
             return true;
-        }
 
-        if (!(obj instanceof RegisterdUserDTO)) {
+        if (!(obj instanceof RegisteredUserDTO))
             return false;
-        }
 
-        RegisterdUserDTO user = (RegisterdUserDTO) obj;
+        RegisteredUserDTO user = (RegisteredUserDTO) obj;
+        return this.getId().equals(user.getId());
+    }
 
-        return user.getId() == getId();
+    @Override
+    public int hashCode() {
+        return super.hashCode();
     }
 }

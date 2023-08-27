@@ -3,7 +3,7 @@ package com.ftn.isa.controller;
 import java.util.Collection;
 import java.util.List;
 
-import com.ftn.isa.dto.RegisterdUserDTO;
+import com.ftn.isa.dto.RegisteredUserDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -20,8 +20,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.ftn.isa.auth.AuthService;
 import com.ftn.isa.auth.AuthenticationResponse;
-import com.ftn.isa.dto.UserLoginDTO;
-import com.ftn.isa.enums.Role;
 import com.ftn.isa.model.RegisteredUser;
 import com.ftn.isa.service.UserService;
 
@@ -149,9 +147,11 @@ public class UserController {
 	}
 
 	@GetMapping("/visitedUsers")
-	public ResponseEntity<List<RegisterdUserDTO>> getVisitedUsers(@RequestParam("adminId") Long adminId,
-																  @RequestParam("sortType") String sortType){
-		List<RegisterdUserDTO> users = userService.getVisitedUsers(adminId, sortType);
+	public ResponseEntity<List<RegisteredUserDTO>> getVisitedUsers(@RequestParam("adminId") Long adminId,
+																   @RequestParam("sortType") String sortType,
+																	@RequestParam("sortDirection") boolean sortDirection
+	){
+		List<RegisteredUserDTO> users = userService.getVisitedUsers(adminId, sortType, sortDirection);
 		return ResponseEntity.ok(users);
 	}
 

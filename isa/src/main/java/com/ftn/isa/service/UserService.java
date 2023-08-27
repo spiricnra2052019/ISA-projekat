@@ -1,22 +1,17 @@
 package com.ftn.isa.service;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import com.ftn.isa.dto.RegisterdUserDTO;
+import com.ftn.isa.dto.RegisteredUserDTO;
 import com.ftn.isa.mapper.RegisteredUserMapper;
 import com.ftn.isa.model.*;
 import com.ftn.isa.repository.*;
-import org.hibernate.type.ListType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.mail.SimpleMailMessage;
-import org.springframework.mail.javamail.JavaMailSender;
-
-import com.ftn.isa.auth.AuthenticationResponse;
 
 @Service
 public class UserService {
@@ -78,36 +73,52 @@ public class UserService {
 		userRepository.save(registeredUser);
 	}
 
-	public List<RegisterdUserDTO> getVisitedUsers(Long adminId, String sortType){
+	public List<RegisteredUserDTO> getVisitedUsers(Long adminId, String sortType, boolean direction){
 		BloodCenter center = bloodCenterRepository.findOneByBloodCenterAdministratorId(adminId);
 		List<UserVisitHistory> histories = userVisitHistoryRepository.findAllByAppointmentBloodCenterId(center.getId())
 				.stream()
 				.filter(h -> h.getAppointment().getDate().isBefore(LocalDate.now()))
 				.collect(Collectors.toList());
 		if (sortType.equals("name")) {
-			histories = sortByName(histories);
+			histories = sortByName(histories, direction);
 		} else if (sortType.equals("lastName")) {
-			histories = sortByLastName(histories);
+			histories = sortByLastName(histories, direction);
 		} else if (sortType.equals("date")) {
-			histories = sortByDate(histories);
-		} else {
+			histories = sortByDate(histories, direction);
+		} else if (!sortType.equals("")) {
 			throw new RuntimeException("Invalid sort type.");
 		}
-		return RegisteredUserMapper.toDtoList(histories);
+		List<RegisteredUserDTO> users = RegisteredUserMapper.toDtoList(histories);
+		return users;
 	}
 
-	private List<UserVisitHistory> sortByName(List<UserVisitHistory> histories) {
-		histories.sort(Comparator.comparing(o -> o.getUser().getName()));
+	private List<UserVisitHistory> sortByName(List<UserVisitHistory> histories, boolean direction) {
+		if (!direction) {
+			Comparator<UserVisitHistory> nameComparator = Comparator.comparing(h -> h.getUser().getName());
+			Collections.sort(histories, nameComparator.reversed());
+		} else {
+			Collections.sort(histories, Comparator.comparing(h -> h.getUser().getName()));
+		}
 		return histories;
 	}
 
-	private List<UserVisitHistory> sortByLastName(List<UserVisitHistory> histories) {
-		histories.sort(Comparator.comparing(o -> o.getUser().getLastname()));
+	private List<UserVisitHistory> sortByLastName(List<UserVisitHistory> histories, boolean direction) {
+		if (!direction) {
+			Comparator<UserVisitHistory> lastNameComparator = Comparator.comparing(h -> h.getUser().getLastname());
+			Collections.sort(histories, lastNameComparator.reversed());
+		} else {
+			Collections.sort(histories, Comparator.comparing(h -> h.getUser().getLastname()));
+		}
 		return histories;
 	}
 
-	private List<UserVisitHistory> sortByDate(List<UserVisitHistory> histories) {
-		histories.sort(Comparator.comparing(o -> o.getAppointment().getDate()));
+	private List<UserVisitHistory> sortByDate(List<UserVisitHistory> histories, boolean direction) {
+		if (!direction) {
+			Comparator<UserVisitHistory> dateComparator = Comparator.comparing(h -> h.getAppointment().getDate());
+			Collections.sort(histories, dateComparator.reversed());
+		} else {
+			Collections.sort(histories, Comparator.comparing(h -> h.getAppointment().getDate()));
+		}
 		return histories;
 	}
 
