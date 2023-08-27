@@ -35,18 +35,41 @@ export class ScheduleAppointmentComponent {
   scheduleAppointment() {
     this.appointment.bloodCenterId = this.bloodCenter.id;
     console.log("Appointment: ", this.appointment);
-    if (this.isValidTime(this.appointment.startTime)) {
+    if (this.isValidTime(this.appointment.startTime, this.appointment.duration) && this.isValidDate(this.appointment.scheduleDate)) {
       this.scheduleCalendarService.save(this.appointment).subscribe(result => this.gotoAppointmentList());
     } else {
       alert("Invalid time!");
     }
   }
 
-  isValidTime(time: string): boolean {
+  isValidTime(time: string, duration: number): boolean {
     const scheduledTime = this.convertToTime(time);
+    const scheduledEndTime = this.convertToTime(time);
+    scheduledEndTime.setMinutes(scheduledTime.getMinutes() + duration);
     const startTime = this.convertToTime(this.bloodCenter.workingTime.openingTime);
     const endTime = this.convertToTime(this.bloodCenter.workingTime.closingTime);
-    return scheduledTime >= startTime && scheduledTime <= endTime;
+    if (scheduledTime > endTime) {
+      return false;
+    }
+    if (scheduledTime < startTime) {
+      return false;
+    }
+    if (scheduledEndTime > endTime) {
+      return false;
+    }
+    if (scheduledEndTime < startTime) {
+      return false;
+    }
+    return true;
+  }
+
+  isValidDate(date: string): boolean {
+    const scheduledDate = new Date(date);
+    const today = new Date();
+    if (scheduledDate < today) {
+      return false;
+    }
+    return true;
   }
 
   gotoAppointmentList() {
