@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -30,12 +31,10 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 public class PatientQuestionController {
 	@Autowired
 	private PatientQuestionService patientQuestionService;
-	
-	@Operation(summary = "Get all questions", description = "Get all questions", method="GET")
+
+	@Operation(summary = "Get all questions", description = "Get all questions", method = "GET")
 	@ApiResponses(value = {
-			@ApiResponse(responseCode = "200", description = "successful operation",
-					     content = @Content(mediaType = "application/json", 
-					     array = @ArraySchema(schema = @Schema(implementation = Employee.class))))
+			@ApiResponse(responseCode = "200", description = "successful operation", content = @Content(mediaType = "application/json", array = @ArraySchema(schema = @Schema(implementation = Employee.class))))
 	})
 	@GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Collection<PatientQuestion>> getEmployers() {

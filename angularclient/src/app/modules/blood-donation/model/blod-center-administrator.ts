@@ -1,3 +1,5 @@
+import { Address } from "./address";
+
 export class BloodCenterAdministrator {
     id: string;
     name: string;
@@ -6,4 +8,5 @@ export class BloodCenterAdministrator {
     email: string;
     password: string;
     birthday: string;
+    address: Address;
 }

@@ -34,13 +34,30 @@ export class QueryFormComponent implements OnInit {
   }
 
   addQuery() {
-    this.questions.forEach((x, i) => {
-      this.queryAnswer = new PatientAnswer();
-      this.queryAnswer.userId = parseInt(this.userToken.id);
-      this.queryAnswer.question = x;
-      this.queryAnswer.answer = x.answer;
-      this.queryService.save(this.queryAnswer).subscribe(result => this.gotoUserList());
-    })
+    //   this.questions.forEach((x, i) => {
+    //     this.queryAnswer = new PatientAnswer();
+    //     this.queryAnswer.userId = parseInt(this.userToken.id);
+    //     this.queryAnswer.question = x;
+    //     this.queryAnswer.answer = x.answer;
+    //     this.queryService.save(this.queryAnswer).subscribe(result => this.gotoUserList());
+    //   })
+    // }
+    const patientAnswers: PatientAnswer[] = [];
+
+    this.questions.forEach(question => {
+      const patientAnswer: PatientAnswer = {
+        userId: parseInt(this.userToken.id),
+        question: question,
+        answer: question.answer
+      };
+
+      patientAnswers.push(patientAnswer);
+    });
+    console.log(patientAnswers);
+    this.queryService.saveMultiple(patientAnswers).subscribe(results => {
+      // Assuming that the saveMultiple method returns a result
+      this.gotoUserList();
+    });
   }
 
   gotoUserList() {
