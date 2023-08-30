@@ -81,7 +81,8 @@ public class ScheduleCalendarService {
 					||
 					(startTimeCnv.isBefore(scheduleEndTime) &&
 							endTimeCnv.isAfter(scheduleStartTime))) {
-				return true; // Overlapping schedules found
+				if (existingSchedule.getBloodCenter().getId() == schedule.getBloodCenter().getId())
+					return true; // Overlapping schedules found
 			}
 		}
 
@@ -206,6 +207,14 @@ public class ScheduleCalendarService {
 
 		if (isOverlapping(scheduleCalendar)) {
 			throw new IllegalArgumentException("Overlapping time slots are not allowed.");
+		}
+
+		if (!patientAnswerService.checkIfPatientHasAlreadyAnswered(userScheduleAppointmentDTO.getUserId())) {
+			throw new IllegalArgumentException("Patient has not answered questions yet.");
+		}
+
+		if (userVisitHistoryService.checkIfUserVisitedIn6Months(userScheduleAppointmentDTO.getUserId())) {
+			throw new IllegalArgumentException("Patient has already visited blood center in last 6 months.");
 		}
 
 		emailQRService.sendEmailWithQRCode(scheduleCalendar, scheduleCalendar.getUser().getUsername());
