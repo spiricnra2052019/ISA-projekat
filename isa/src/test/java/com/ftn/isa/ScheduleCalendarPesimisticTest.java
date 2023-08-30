@@ -27,7 +27,7 @@ public class ScheduleCalendarPesimisticTest {
         ExecutorService executor = Executors.newFixedThreadPool(2);
         Future<?> future1 = executor.submit(() -> {
             System.out.println("Thread 1 Started");
-            scheduleCalendarService.scheduleAppointmentForUser(3L, 3L);
+            scheduleCalendarService.scheduleAppointmentForUser(4L, 3L);
             System.out.println("Thread 1 Finished");
         });
 
@@ -38,7 +38,7 @@ public class ScheduleCalendarPesimisticTest {
             } catch (InterruptedException e) {
             }
             assertThrows(PessimisticLockingFailureException.class, () -> {
-                scheduleCalendarService.scheduleAppointmentForUser(3L, 4L);
+                scheduleCalendarService.scheduleAppointmentForUser(4L, 4L);
             });
             System.out.println("Thread 2 Finished");
         });

@@ -24,7 +24,8 @@ import { ScheduleAppointmentComponent } from './modules/pages/schedule-appointme
 import { UserScheduleAppointmentComponent } from './modules/pages/user-schedule-appointment/user-schedule-appointment.component';
 import { UserAppointmentsComponent } from './modules/pages/user-appointments/user-appointments.component';
 import { SearchScheduleAppointmentComponent } from './modules/pages/search-schedule-appointment/search-schedule-appointment.component';
-
+import { CheckForAppointmentComponent } from './modules/pages/check-for-appointment/check-for-appointment.component';
+import { AppointmentComponent } from './modules/pages/appointment/appointment.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -48,13 +49,27 @@ const routes: Routes = [
   { path: 'report-list', component: ReportsListComponent },
   { path: 'user-history', component: UserHistoryComponent },
   { path: 'schedule-appointment', component: ScheduleAppointmentComponent },
-  { path: 'user-schedule-appointment/:id', component: UserScheduleAppointmentComponent },
+  {
+    path: 'user-schedule-appointment/:id',
+    component: UserScheduleAppointmentComponent,
+  },
   { path: 'user-appointments', component: UserAppointmentsComponent },
-  { path: 'search-schedule-appointment', component: SearchScheduleAppointmentComponent }
+  {
+    path: 'search-schedule-appointment',
+    component: SearchScheduleAppointmentComponent,
+  },
+  {
+    path: 'check-for-appointment/:patientId/:scheduleId',
+    component: CheckForAppointmentComponent,
+  },
+  {
+    path: 'appointment/:patientId/:scheduleId',
+    component: AppointmentComponent,
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

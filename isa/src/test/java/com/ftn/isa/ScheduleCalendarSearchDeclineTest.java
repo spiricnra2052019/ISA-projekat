@@ -65,7 +65,7 @@ public class ScheduleCalendarSearchDeclineTest {
             } catch (InterruptedException e) {
             }
             assertThrows(PessimisticLockingFailureException.class, () -> {
-                scheduleCalendarService.declineAppointment(9L);
+                scheduleCalendarService.declineAppointment(10L);
             });
 
             System.out.println("Thread 2 Finished");

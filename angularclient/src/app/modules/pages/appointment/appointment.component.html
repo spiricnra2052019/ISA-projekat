@@ -1,0 +1,31 @@
+<div class="form">
+  <div>
+    <label for="Blood type">Blood Type:</label>
+    <select name="Blood type" [(ngModel)]="appointment.bloodType">
+      <option value="A">A</option>
+      <option value="B">B</option>
+      <option value="0">0</option>
+      <option value="AB">AB</option>
+    </select>
+  </div>
+  <div>
+    <label>Quantity:</label>
+    <input type="number" step="1" min="0" [(ngModel)]="appointment.quantity" />
+  </div>
+  <label>Description:</label>
+  <input
+    type="text"
+    class="description"
+    [(ngModel)]="appointment.description"
+  />
+  <label>Number of used equipment:</label>
+  <input
+    type="number"
+    step="1"
+    min="0"
+    [(ngModel)]="appointment.numberOfEquipments"
+  />
+  <div class="button">
+    <button class="btn btn-primary" (click)="finish()">End appointment</button>
+  </div>
+</div>

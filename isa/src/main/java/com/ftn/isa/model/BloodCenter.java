@@ -1,19 +1,14 @@
 package com.ftn.isa.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
+import lombok.Builder;
 
 // list of employees is missing
 
 @Entity
+@Table(name = "BloodCenter")
 public class BloodCenter {
 
 	@Id
@@ -26,6 +21,9 @@ public class BloodCenter {
 
 	@Column(name = "description", nullable = false)
 	private String description;
+
+	@Column(name = "equipment", nullable = false)
+	private int equipment;
 
 	@Column(name = "averageRate", nullable = false)
 	private float averageRate;
@@ -51,7 +49,7 @@ public class BloodCenter {
 	}
 
 	public BloodCenter(Long id, String name, String description, float averageRate, Address address,
-			BloodAmount bloodAmount, BloodCenterAdministrator bloodCenterAdministrator, WorkingTime workingTime) {
+			BloodAmount bloodAmount, BloodCenterAdministrator bloodCenterAdministrator, WorkingTime workingTime, int equipment) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -61,6 +59,7 @@ public class BloodCenter {
 		this.bloodAmount = bloodAmount;
 		this.bloodCenterAdministrator = bloodCenterAdministrator;
 		this.workingTime = workingTime;
+		this.equipment = equipment;
 	}
 
 	public Long getId() {
@@ -109,6 +108,14 @@ public class BloodCenter {
 
 	public void setBloodCenterAdministrator(BloodCenterAdministrator bloodCenterAdministrator) {
 		this.bloodCenterAdministrator = bloodCenterAdministrator;
+	}
+
+	public int getEquipment() {
+		return equipment;
+	}
+
+	public void setEquipment(int equipment) {
+		this.equipment = equipment;
 	}
 
 	public BloodAmount getBloodAmount() {

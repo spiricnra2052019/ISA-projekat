@@ -90,6 +90,9 @@ export class SearchScheduleAppointmentComponent implements OnInit {
             data => {
               alert("Appointment scheduled!");
               this.router.navigate(['/user-appointments'])
+            },
+            error => {
+              this.router.navigate(['query'])
             }
           );
         }

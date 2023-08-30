@@ -218,4 +218,5 @@ public class UserController {
 		RegisteredUser user = userService.incrementPenaltyPoints(id);
 		return new ResponseEntity<RegisteredUser>(user, HttpStatus.OK);
 	}
+
 }
