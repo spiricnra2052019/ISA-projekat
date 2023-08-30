@@ -50,7 +50,7 @@ const routes: Routes = [
   { path: 'user-history', component: UserHistoryComponent },
   { path: 'schedule-appointment', component: ScheduleAppointmentComponent },
   {
-    path: 'user-schedule-appointment',
+    path: 'user-schedule-appointment/:id',
     component: UserScheduleAppointmentComponent,
   },
   { path: 'user-appointments', component: UserAppointmentsComponent },
