@@ -116,7 +116,8 @@ export class ScheduleCalendarComponent implements OnInit {
     this.monthly = false;
     this.yearly = true;
   }
-  startAppointment(username) {
-    if (username != '') this.router.navigate(['']);
+  startAppointment(patinetId, scheduleId) {
+    if (patinetId != '')
+      this.router.navigate(['check-for-appointment', patinetId, scheduleId]);
   }
 }

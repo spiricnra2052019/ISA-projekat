@@ -1,0 +1,56 @@
+<div clas="form">
+  <h2 class="h2">POLL</h2>
+  <div class="checkbox">
+    <label> <input type="checkbox" [(ngModel)]="option1" />Manje od 50kg</label>
+  </div>
+  <div class="checkbox">
+    <label>
+      <input type="checkbox" [(ngModel)]="option2" />Simptomi prehlade, neke
+      bolesti ili se jednostavno ne osećaju dobro</label
+    >
+  </div>
+  <div class="checkbox">
+    <label>
+      <input type="checkbox" [(ngModel)]="option3" />promene na koži (infekcije,
+      osip, gljivična oboljenja…)
+    </label>
+  </div>
+  <div class="checkbox">
+    <label>
+      <input type="checkbox" [(ngModel)]="option4" />Suviše visok ili suviše
+      nizak pritisak</label
+    >
+  </div>
+  <div class="checkbox">
+    <label>
+      <input type="checkbox" [(ngModel)]="option5" />Pod terapijom ili nije
+      prošlo najmanje 7 dana od terapije antibioticima</label
+    >
+  </div>
+  <div class="checkbox">
+    <label>
+      <input type="checkbox" [(ngModel)]="option6" />Nalaze u fazi redovnog
+      mesečnog ciklusa (za osobe ženskog pola)</label
+    >
+  </div>
+  <div class="checkbox">
+    <label>
+      <input type="checkbox" [(ngModel)]="option7" />Nije prošlo 7 dana od
+      vađenja zuba i manjih stomatoloških intervencija
+    </label>
+  </div>
+  <div class="checkbox">
+    <label>
+      <input type="checkbox" [(ngModel)]="option8" />Nije prošlo 6 meseci od
+      probadanja tela i kože (pirsing), tetoviranja ili pojedinih hirurških
+      intervencija i transfuzije krvi.</label
+    >
+  </div>
+</div>
+
+<div>
+  <button class="btn btn-primary" (click)="didntCome()">Nije dosao</button>
+  <button class="btn btn-primary" (click)="startAppointment()">
+    Zapocni pregled
+  </button>
+</div>

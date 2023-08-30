@@ -27,8 +27,8 @@ insert into base_user (name, lastname, username, password, birthday, role, enabl
 insert into blood_amount(a, b, ab, zero) values (10, 11, 12, 9);
 insert into blood_amount(a, b, ab, zero) values (16, 21, 12, 9);
 
-insert into blood_center(average_rate, description, name, address_id, blood_amount_id, blood_center_administrator_id, working_time_id) values (9.5, 'asdadsdasdasd', 'Klinika BG', 1, 1, 1, 1);
-insert into blood_center(average_rate, description, name, address_id, blood_amount_id, blood_center_administrator_id, working_time_id) values (9.1, 'asdadsdasdasd', 'Klinika NS', 2, 2, 2, 1);
+insert into blood_center(average_rate, description, name, address_id, blood_amount_id, blood_center_administrator_id, working_time_id, equipment) values (9.5, 'asdadsdasdasd', 'Klinika BG', 1, 1, 1, 1, 50);
+insert into blood_center(average_rate, description, name, address_id, blood_amount_id, blood_center_administrator_id, working_time_id, equipment) values (9.1, 'asdadsdasdasd', 'Klinika NS', 2, 2, 2, 1, 40);
 
 insert into patient_question(description, answer) values ('Have you ever donated blood or blood components voluntarily?', false);
 insert into patient_question(description, answer) values ('Have you ever been rejected as a blood or blood component donor?', false);
@@ -41,7 +41,8 @@ insert into patient_question(description, answer) values ('Do you regularly take
 
 
 insert into schedule_calendar(duration, schedule_date, start_time, blood_center_id, user_id) values (20, '2022-08-17', '10:00:00', 1, 3);
-insert into schedule_calendar(duration, schedule_date, start_time, blood_center_id, user_id) values (50, '2022-08-19', '18:10:00', 1, 3);
+insert into schedule_calendar(duration, schedule_date, start_time, blood_center_id, user_id) values (30, '2022-08-19', '18:00:00', 1, 4);
+insert into schedule_calendar(duration, schedule_date, start_time, blood_center_id, user_id) values (30, '2022-08-19', '18:00:00', 1, 3);
 insert into schedule_calendar(duration, schedule_date, start_time, blood_center_id) values (20, '2023-09-24', '15:10:00', 1);
 insert into schedule_calendar(duration, schedule_date, start_time, blood_center_id) values (20, '2023-09-24', '15:10:00', 2);
 insert into schedule_calendar(duration, schedule_date, start_time, blood_center_id) values (40, '2023-09-24', '14:10:00', 2);
@@ -68,8 +69,8 @@ insert into send_appeal(to_username, subject, text) values ('mikaM', 'Zalba na o
 insert into send_appeal(to_username, subject, text) values ('markoM', 'Zalba na objekat 12', 'Mnogo vam je neuredno....');
 
 
-INSERT INTO user_visit_history (blood_type, quantity, number_of_equipment_used, description, user_id, appointment_id, price) VALUES ('A+', 5, 2, 'Regular checkup', 3, 1, 2000.00);
-INSERT INTO user_visit_history (blood_type, quantity, number_of_equipment_used, description, user_id, appointment_id, price) VALUES ('B+', 10, 8, 'Checkup', 3, 2, 5000.00);
+INSERT INTO user_visit_history (blood_type, quantity, number_of_equipment_used, description, user_id, appointment_id, price, admin_id) VALUES ('A+', 5, 2, 'Regular checkup', 3, 1, 2000.00, 1);
+INSERT INTO user_visit_history (blood_type, quantity, number_of_equipment_used, description, user_id, appointment_id, price, admin_id) VALUES ('B+', 10, 8, 'Checkup', 3, 2, 5000.00, 1);
 -- INSERT INTO user_visit_history (blood_type, quantity, number_of_equipment_used, description, user_id, date) VALUES ('A+', 5, 2, 'Regular checkup', 3, '2021-08-17');
 -- INSERT INTO user_visit_history (blood_type, quantity, number_of_equipment_used, description, user_id, date) VALUES ('O-', 3, 1, 'Emergency visit', 3, '2021-08-17');
 -- INSERT INTO user_visit_history (blood_type, quantity, number_of_equipment_used, description, user_id, date) VALUES ('B+', 7, 3, 'Routine examination', 3, '2021-08-17');

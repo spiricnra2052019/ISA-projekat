@@ -5,8 +5,12 @@ import java.time.LocalDate;
 import javax.persistence.*;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import lombok.Builder;
 
 @Entity(name = "UserVisitHistory")
+@Builder
+
+@Table(name = "UserVisitHistory")
 public class UserVisitHistory {
 
     @Id
@@ -34,11 +38,15 @@ public class UserVisitHistory {
     @JoinColumn(name = "appointment_id", nullable = false)
     private ScheduleCalendar appointment;
 
-    @Column(name = "price", nullable = false)
+    @Column(name = "price", nullable = true)
     private float price;
 
+    @OneToOne
+    @JoinColumn(name = "admin_id", nullable = false)
+    private BloodCenterAdministrator administrator;
+
     public UserVisitHistory(Long id, String bloodType, int quantity, int numberOfEquipmentUsed, String description,
-            RegisteredUser user, ScheduleCalendar appointment, float price) {
+            RegisteredUser user, ScheduleCalendar appointment, float price, BloodCenterAdministrator administrator) {
         this.id = id;
         this.bloodType = bloodType;
         this.quantity = quantity;
@@ -47,6 +55,7 @@ public class UserVisitHistory {
         this.user = user;
         this.appointment = appointment;
         this.price = price;
+        this.administrator = administrator;
     }
 
     public UserVisitHistory(Long id, String bloodType, int quantity, int numberOfEquipmentUsed, String description,
@@ -100,6 +109,14 @@ public class UserVisitHistory {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public BloodCenterAdministrator getAdministrator() {
+        return administrator;
+    }
+
+    public void setAdministrator(BloodCenterAdministrator administrator) {
+        this.administrator = administrator;
     }
 
     public RegisteredUser getUser() {

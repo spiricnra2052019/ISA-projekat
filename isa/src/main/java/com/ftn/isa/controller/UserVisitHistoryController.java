@@ -1,5 +1,6 @@
 package com.ftn.isa.controller;
 
+import com.ftn.isa.dto.UserVisitHistoryDTO;
 import com.ftn.isa.model.RegisteredUser;
 import com.ftn.isa.model.SendAppeal;
 import com.ftn.isa.model.UserVisitHistory;
@@ -81,6 +82,11 @@ public class UserVisitHistoryController {
                                                                             @RequestParam("sortBy") String field) {
         Collection<UserVisitHistory> reports = userVisitHistoryService.findAllByUserId(id, Sort.by(Sort.Direction.ASC, field));
         return new ResponseEntity<Collection<UserVisitHistory>>(reports, HttpStatus.OK);
+    }
+
+    @PostMapping("/add-report")
+    public ResponseEntity<UserVisitHistory> addReport(@RequestBody UserVisitHistoryDTO reportDto){
+        return ResponseEntity.ok(userVisitHistoryService.addReport(reportDto));
     }
 
 }

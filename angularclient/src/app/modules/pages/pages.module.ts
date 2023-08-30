@@ -28,6 +28,8 @@ import { ScheduleAppointmentComponent } from './schedule-appointment/schedule-ap
 import { UserScheduleAppointmentComponent } from './user-schedule-appointment/user-schedule-appointment.component';
 import { UserAppointmentsComponent } from './user-appointments/user-appointments.component';
 import { SearchScheduleAppointmentComponent } from './search-schedule-appointment/search-schedule-appointment.component';
+import { CheckForAppointmentComponent } from './check-for-appointment/check-for-appointment.component';
+import { AppointmentComponent } from './appointment/appointment.component';
 
 @NgModule(
     {
@@ -58,6 +60,8 @@ import { SearchScheduleAppointmentComponent } from './search-schedule-appointmen
             UserScheduleAppointmentComponent,
             UserAppointmentsComponent,
             SearchScheduleAppointmentComponent,
+            CheckForAppointmentComponent,
+            AppointmentComponent,
         ],
         imports: [
             CommonModule,
